@@ -9,6 +9,7 @@ class Question extends Model
     protected $fillable = [
         'test_id',
         'content',
+        'number_of_answer',
     ];
 
     public function answers()
