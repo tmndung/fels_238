@@ -1,0 +1,234 @@
+* {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+.row {
+    margin: 0 !important;
+}
+.wrapper {
+    position: relative;
+}
+body {
+    margin: 0;
+    padding: 0;
+    color: #666;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 13px;
+    line-height: 2.4em;
+    background-color: #FFFFFF !important;
+    margin-left: 30px !important;
+}
+h4.username {
+    height: 60px;
+    line-height: 60px;
+    font-size: 20px;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 0 0 20px;
+    border-bottom: 2px solid #dddddd;
+    margin-right: 10px;
+}
+.clr {
+    clear: both;
+}
+.left {
+    padding: 0 !important;
+    position: fixed;
+    z-index: 1000;
+    width: 18%;
+}
+.right {
+    background: #e7e7e7;
+    padding: 0px !important;
+    margin-left: 18%;
+}
+.header{
+    height: 60px;
+    border-bottom: 2px solid #dddddd;
+}
+.right .content {
+    background: #FFFFFF;
+    border: 20px solid #e7e7e7;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+.content .add {
+    height: 35px;
+    line-height: 35px;
+    background: #ffbc42;
+    display: inline-block;
+    width: 80px;
+    text-align: center;
+    border-radius: 10px;
+}
+.title-manage {
+    line-height: 56px;
+    margin: 0;
+    padding-left: 50px !important;
+}
+.title-manage > a {
+    color: #333;
+    font-weight: bold;
+    font-size: 20px;
+}
+li.li-user-log {
+    display: inline-block;
+    padding: 0px 10px;
+}
+
+ul.ul-user-log {
+    line-height: 60px;
+    margin: 0;
+}
+li.li-list-manage {
+    line-height: 60px;
+    border-bottom: 1px solid#cacaca;
+    margin-right: 6px;
+}
+li.li-list-manage > a {
+    display:block;
+    line-height: 60px;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: black;
+}
+.li-list-manage-selected > a {
+    color: #ffa80b !important;
+}
+.li-list-manage > a:hover .visited {
+    height:0px;
+    width:0px;
+    float:right;
+    border-right: 30px solid #e7e7e7;
+    border-top: 30px solid transparent;
+    border-bottom: 30px solid transparent;
+    clear: both;
+}
+ul.ul-list-manage {
+    padding: 10px 0 0 10px;
+}
+.icon-cat {
+    padding-right: 20px;
+}
+.footer {
+    line-height: 40px;
+    padding:0 !important;
+    border-top: 1px solid #98bd99;
+    background: #f4f3ef;
+}
+.footer .source > p {
+    margin: 0 !important;
+}
+.tb-admin tr th {
+    line-height: 50px;
+    text-align: center;
+    font-size: 16px;
+    color: #22a290;
+    border-bottom: 1px solid #257d69;
+}
+.tb-admin tr td {
+    text-align: center;
+    line-height: 50px;
+    font-size: 15px;
+    color: #22bf1f;
+    border-bottom: 1px solid #06ee63;
+}
+.tb-admin tr td > a {
+    font-size: 15px;
+    color: #061206;
+}
+
+.content {
+    padding:0 50px 0 10px;
+}
+
+.content .left-content {
+    background: #EBEBEB;
+}
+h2.tit {
+    line-height: 40px;
+    padding-left: 30px;
+    font-size:16px;
+}
+.left-login {
+    margin-left: 50px;
+    float: left;
+    width: 250px;
+    height:  40px;
+    line-height:  30px;
+    padding-left:  20px;
+    font-size: 15px;
+    font-weight: normal;
+}
+.right-login {
+    float: left;
+    padding-bottom: 5px;
+}
+.input-right {
+    width: 400px;
+    height:  35px;
+    border-radius: 10px;
+}
+label.error {
+    display: block;
+    color: red;
+    font-size: 12px;
+    margin-bottom:  10px;
+}
+.button {
+    width: 80px;
+    height:  30px;
+    border-radius:  5px;
+    margin-left: 440px;
+    margin-bottom: 30px;
+}
+.pagination .numbers a.current {
+  background: none repeat scroll 0 0 #263C78;
+  color: #FFFFFF;
+  padding: 3px;
+  text-decoration: none;
+}
+
+.header-content .select-sort-new {
+    width: 33%;
+    float:right;
+    height: 30px;
+}
+
+.header-content .select-sort-new ul li {
+    padding: 0;
+    width: 85px;
+    text-align: center; 
+    margin: 0 5px;
+    display: inline-block;
+}
+
+.header-content .select-sort-new ul li:first-child, .header-content .select-sort-new ul li:nth-child(2) {
+    width: 55px;
+}
+
+.header-content .select-sort-new ul li a {
+    line-height: 30px;
+    font-size: 15px;
+    color:  #5c5c3d;
+    border-bottom: 1px solid gray;
+    border-top: 1px solid gray;
+    border-radius: 8px;
+}
+
+.header-content .select-sort-new ul li:hover a {
+    font-weight: bold;
+    color: #000;
+    text-decoration: none !important;
+
+}
+.sort-active {
+    color: #ff0000 !important;
+    font-weight: bold;
+    border-top: 3px solid #0066ff !important;
+    border-bottom: 3px solid #0066ff !important; 
+}
+.li-user-log > a {
+    color: #9A9A9A;
+}
