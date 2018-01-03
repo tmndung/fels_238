@@ -19,7 +19,7 @@ class Study extends Model
 
     public function lessons()
     {
-        return $this->belongsToMany(Lesson::class);
+        return $this->belongsToMany(Lesson::class, 'study_lesson', 'study_id', 'lesson_id')->withPivot('is_finish')->withTimestamps();
     }
 
     public function user()

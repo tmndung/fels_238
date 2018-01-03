@@ -26,7 +26,7 @@ class Lesson extends Model
 
     public function studies()
     {
-    	return $this->belongsToMany(Study::class);
+    	return $this->belongsToMany(Study::class, 'study_lesson', 'study_id', 'lesson_id')->withPivot('is_finish')->withTimestamps();
     }
 
     public function course()
