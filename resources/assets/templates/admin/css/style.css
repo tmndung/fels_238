@@ -122,6 +122,10 @@ ul.ul-list-manage {
     padding:0 !important;
     border-top: 1px solid #98bd99;
     background: #f4f3ef;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    z-index: 2000;
 }
 .footer .source > p {
     margin: 0 !important;
@@ -147,6 +151,7 @@ ul.ul-list-manage {
 
 .content {
     padding:0 50px 0 10px;
+    min-height: 700px;
 }
 
 .content .left-content {
@@ -216,7 +221,19 @@ ul.ul-list-manage {
     font-weight: bold;
     font-size: 18px;
     background-color: #ccff99;
-    color: #333; 
+    color: #333;
+}
+
+.edit:hover, .delete:hover  {
+    background: #00aaff !important;
+    font-weight: bold;
+    color: #fff;
+}
+
+.button:hover {
+    background: #00aaff !important;
+    font-weight: bold;
+    color: #fff;
 }
 
 .edit:hover, .delete:hover  {
@@ -246,7 +263,7 @@ ul.ul-list-manage {
 
 .header-content .select-sort-new ul li {
     padding: 0;
-    width: 85px;
+    width: 100px !important;
     text-align: center; 
     margin: 0 5px;
     display: inline-block;
@@ -263,6 +280,7 @@ ul.ul-list-manage {
     border-bottom: 1px solid gray;
     border-top: 1px solid gray;
     border-radius: 8px;
+    padding: 0 5px;
 }
 
 .header-content .select-sort-new ul li:hover a {
@@ -289,4 +307,30 @@ ul.ul-list-manage {
 
 .text-area {
     height: 100px !important;
+}
+
+.sort-select {
+    width: 170px !important;
+}
+
+.right-select {
+    float: right;
+}
+
+.left-select {
+    float: left;
+}
+
+.form-select {
+    width:  250px !important;
+    margin-top: 20px;
+}
+
+.btn-select {
+    height: 24px !important;
+    line-height: 20px;
+}
+
+.bg-gray {
+    background: #e7e7e7;
 }
