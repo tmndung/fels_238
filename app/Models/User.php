@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Hash;
 
 class User extends Authenticatable
 {
@@ -32,7 +33,13 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 
+        'remember_token',
+    ];
+
+    protected $appends = [
+        'avatar_path',
+        'background_path',
     ];
 
     public function studies()
@@ -43,5 +50,30 @@ class User extends Authenticatable
     public function follows()
     {
         return $this->hasMany(Follow::class);
+    }
+
+    public function setPasswordAttribute($value)
+    {
+        return $this->attributes['password'] = Hash::make($value);
+    }
+
+    public function getAvatarPathAttribute()
+    {
+        if (empty($this->attributes['avatar'])) {
+
+            return config('setting.userAvatarDefault');
+        }
+
+        return config('setting.pathUpload') . $this->attributes['avatar']; 
+    }
+
+    public function getBackgroundPathAttribute()
+    {
+        if (empty($this->attributes['background'])) {
+
+            return config('setting.userBackgroundDefault');
+        }
+
+        return config('setting.pathUpload') . $this->attributes['background']; 
     }
 }

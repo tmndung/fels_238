@@ -50,18 +50,24 @@ h4.username {
 .right .content {
     background: #FFFFFF;
     border: 20px solid #e7e7e7;
-    padding-left: 10px;
-    padding-top: 10px;
+    padding: 20px;
 }
 .content .add {
     height: 35px;
-    line-height: 35px;
+    line-height: 32px;
     background: #ffbc42;
     display: inline-block;
     width: 80px;
     text-align: center;
     border-radius: 10px;
 }
+
+.content .add:hover {
+    background: #00aaff !important;
+    font-weight: bold;
+    color: #fff;
+}
+
 .title-manage {
     line-height: 56px;
     margin: 0;
@@ -146,10 +152,14 @@ ul.ul-list-manage {
 .content .left-content {
     background: #EBEBEB;
 }
-h2.tit {
+.tit {
     line-height: 40px;
     padding-left: 30px;
-    font-size:16px;
+    padding-bottom: 10px;
+    font-size: 25px;
+    color: #333; 
+    border-bottom: 1px solid #99ff99;
+    margin-bottom: 30px; 
 }
 .left-login {
     margin-left: 50px;
@@ -170,19 +180,57 @@ h2.tit {
     height:  35px;
     border-radius: 10px;
 }
-label.error {
-    display: block;
-    color: red;
-    font-size: 12px;
-    margin-bottom:  10px;
+
+.button-form {
+    display: inline-block;
 }
+
+.edit {
+    height: 35px;
+    line-height: 32px;
+    background: #ff884d;
+    display: inline-block;
+    width: 70px;
+    text-align: center;
+    border-radius: 10px;
+    color: #333;
+}
+
+.delete {
+    height: 35px;
+    line-height: 32px;
+    background: #ff884d;
+    display: inline-block;
+    width: 70px;
+    text-align: center;
+    border-radius: 10px;
+    color: #333;
+}
+
 .button {
     width: 80px;
-    height:  30px;
+    height:  40px;
     border-radius:  5px;
     margin-left: 440px;
     margin-bottom: 30px;
+    font-weight: bold;
+    font-size: 18px;
+    background-color: #ccff99;
+    color: #333; 
 }
+
+.edit:hover, .delete:hover  {
+    background: #00aaff !important;
+    font-weight: bold;
+    color: #fff;
+}
+
+.button:hover {
+    background: #00aaff !important;
+    font-weight: bold;
+    color: #fff;
+}
+
 .pagination .numbers a.current {
   background: none repeat scroll 0 0 #263C78;
   color: #FFFFFF;
@@ -223,12 +271,22 @@ label.error {
     text-decoration: none !important;
 
 }
+
 .sort-active {
     color: #ff0000 !important;
     font-weight: bold;
     border-top: 3px solid #0066ff !important;
     border-bottom: 3px solid #0066ff !important; 
 }
+
 .li-user-log > a {
     color: #9A9A9A;
+}
+
+.picture {
+    height: 50px;
+}
+
+.text-area {
+    height: 100px !important;
 }
