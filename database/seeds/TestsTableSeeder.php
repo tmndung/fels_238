@@ -11,9 +11,7 @@ class TestsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\Test::class, 10)->create([
-            'lesson_id' => App\Models\Lesson::all()->random()->id,
-        ])->each(function ($test) {
+        factory(App\Models\Test::class, 10)->create()->each(function ($test) {
             $test->questions()->saveMany(
                 factory(App\Models\Question::class, $test->time)->create([
                     'test_id' => $test->id,

@@ -21,4 +21,10 @@ Route::group(['prefix'=>'/admin'], function () {
 	Route::resource('/category', 'CategoryController', [
 		'as' => 'admin'
 	]);
+    Route::resource('/users', 'UsersController', [
+        'as' => 'admin'
+    ]);
+    Route::resource('/courses', 'CoursesController', [
+        'as' => 'admin'
+    ]);
 });

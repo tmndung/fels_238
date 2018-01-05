@@ -16,6 +16,7 @@
             <th width="13%">@lang('lang.facebook')</th>
             <th width="13%">@lang('lang.twitter')</th>
             <th width="10%">@lang('lang.avatar')</th>
+            <th width="10%">@lang('lang.coursesLearn')</th>
             <th width="16%">@lang('lang.function')</th>
         </tr>
         @if (count($users))
@@ -27,6 +28,7 @@
                     <td>{{ $user->facebook }}</td>
                     <td>{{ $user->twitter }}</td>
                     <td><img src="{{ $user->avatar_path }}" class="picture"></td>
+                    <td>{{ count($user->studies()) }}</td>
                     <td >
                         {{ Form::open(['route' => ['admin.users.edit', $user->id], 'method' => 'GET', 'class' => 'button-form']) }}
                             {{ Form::button('<i class="fa fa-pencil"></i> ' . trans('lang.editBtn'), ['type' => 'submit', 'class' => 'edit']) }}

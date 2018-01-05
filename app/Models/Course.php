@@ -9,10 +9,14 @@ class Course extends Model
     protected $fillable = [
         'category_id',
         'name',
-        'infomation',
+        'information',
         'rank',
         'picture',
         'number_of_lesson',
+    ];
+
+    protected $appends = [
+        'picture_path'
     ];
 
     public function category()
@@ -28,5 +32,15 @@ class Course extends Model
     public function studies()
     {
         return $this->hasMany(Study::class);
+    }
+
+    public function getPicturePathAttribute()
+    {
+        if (empty($this->attributes['picture'])) {
+
+            return config('setting.lessonPictureDefault');
+        }
+        
+        return config('setting.pathUpload') . $this->attributes['picture']; 
     }
 }
