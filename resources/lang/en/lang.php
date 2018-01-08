@@ -104,5 +104,6 @@
         'totalLessonIntegerVali' => 'Total Lesson field must be integer number',
         'totalLessonMinVali' => 'Total Lesson field must be positive',
         'informationRequiredVali' => 'Infomation field do not empty',
+        'type_to_search' => 'Type anywhere to <b>Search</b> ',
     ];
 ?>
