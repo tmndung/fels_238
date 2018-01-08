@@ -11,4 +11,14 @@
 |
 */
 
-Route::resource('/admin/users', 'UsersController', ['as' => 'admin']);
+Route::group(['prefix'=>'/admin'], function () {
+	Route::resource('/users', 'UsersController', [
+		'as' => 'admin'
+	]);
+	Route::resource('/wordlist', 'WordlistController', [
+		'as' => 'admin'
+	]);
+	Route::resource('/category', 'CategoryController', [
+		'as' => 'admin'
+	]);
+});
