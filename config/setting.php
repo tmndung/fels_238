@@ -9,4 +9,6 @@ return [
     'userBackgroundDefault' => '/templates/admin/images/background_user_default.jpg',
     'paginate' => 10,
     'default_parent_id' =>0,
+    'lessonPictureDefault' => '/templates/admin/images/lesson_picture_default.png',
+    'picture' => 'picture',
 ];
