@@ -3,6 +3,7 @@
     <head>
         <title>@lang('lang.title')</title>
         <meta charset="utf-8">
+        {{ Html::favicon('templates/admin/images/favicon.ico') }}
         {{ Html::style('css/app.css') }}
         {{ Html::script('js/app.js') }}
         {{ Html::script('templates/elearning/js/script.js') }}
@@ -56,7 +57,30 @@
                                         {!! Form::select('select-language', ['English' => trans('lang.english'), 'Vietnamese' => trans('lang.vietnamese')], null, array('id' => 'select-language', 'class' => 'select-language')); !!}
                                     {!! Form::close() !!}
                                 </li>
-                                <li><i class="fa fa-unlock-alt bg-color-5" aria-hidden="true"></i> <a href='#loginModal' data-toggle="modal" >@lang('lang.login')</a><span>|</span><a href='#createAccount' data-toggle="modal">@lang('lang.register')</a></li>
+                                    @auth
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                                                <span><img src="{{ Auth::user()->avatar_path }}" class="avatar"></span>
+                                                {{ str_limit(Auth::user()->name, 10) }} <span class="caret"></span>
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li>
+                                                    <a href="{{ route('logout') }}"
+                                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                        @lang('lang.logout')
+                                                    </a>
+                                                    {{ Form::open(['route' => 'logout', 'id' => 'logout-form']) }}
+                                                    {{ Form::close() }}
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    @else
+                                        <li class="login-register"><i class="fa fa-unlock-alt bg-color-5" aria-hidden="true"></i>
+                                        <a href="{{ route('login') }}">@lang('lang.login')</a>
+                                        /
+                                        <a href="{{ route('register') }}">@lang('lang.register')</a>
+                                    @endauth
+                                </li>
                             </ul>
                         </div>
                     </div>

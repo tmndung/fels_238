@@ -28,3 +28,7 @@ Route::group(['prefix'=>'/admin'], function () {
         'as' => 'admin'
     ]);
 });
+
+Route::get('/', 'HomeController@index')->name('home');
+
+Auth::routes();
