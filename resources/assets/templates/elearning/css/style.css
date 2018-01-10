@@ -296,3 +296,497 @@ body {
     padding-top: 15px;
     color: #7c7c7c;
 }
+
+/*====Login/Register====*/
+
+.login-content {
+    background: #00C6D7;
+    position: relative;
+    padding: 11em 0;
+    width: 100%
+}
+.login-top {
+    text-align: center;
+    margin: 7em auto;
+    background: #fff;
+    padding: 2em 2em;
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    -o-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    -moz-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    border: 1px solid rgba(213, 213, 214, 0.85);
+    width: 30%;
+    padding: 2em 2em;
+    position: absolute;
+    left: 35%;
+    top: 13%;
+}
+
+.login-top h3{
+    font-size: 9em;
+    font-weight: bold;
+    margin: 0;
+    color: #052963;
+}
+.login-top h3 i{
+    font-size: 113px;
+    color: #00c6d7;
+}
+.login-top span {
+  font-size: 1.5em;
+  color:#333;
+}
+.login-top p{
+    font-size: 0.95em;
+    font-weight: 400;
+    color: #777;
+    margin: 10px 0;
+}
+
+.login input[type="email"],.login input[type="password"], .login input[type="text"]{
+    width: 100%;
+    padding: 0.9em 1em 0.9em 4em;
+    color: #777;
+    font-size: 15px;
+    outline: none;
+    font-weight: 400;
+    border: 1px solid #ddd;
+    background: url("../images/icons.png") no-repeat 14px 17px;
+    margin: 0.3em 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+.login input[type="password"]{
+   background: url("../images/icons.png") no-repeat 13px -33px ;
+}
+
+.login input[type="text"] {
+    background: url("../images/user-icon.png") no-repeat 9px 9px;
+}
+
+.submit {
+  margin: 1em 0;
+}
+
+.login input[type="submit"]{
+    font-size: 20px;
+    font-weight: 400;
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+    padding: 10px 15px;
+    width: 100%;
+    border:2px solid #ea4c89;
+    background: #ea4c89;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -ms-transition: 0.5s all;
+}
+
+.login input[type="submit"]:hover{
+  background:none;
+  border:2px solid #ea4c89;
+  color: #ea4c89;
+
+}
+
+.buttons {
+    margin: 1em 0 0em 0;
+}
+
+.buttons ul{
+    padding:0;
+}
+
+.buttons ul li {
+    display: inline-block;
+    width: 38%;
+    margin-right: 8%;
+    float: left;
+}
+
+.buttons ul li.or{
+    width: 3%;
+    margin-top: 8px;
+    color: #777;
+}
+
+.buttons ul li.lost {
+    margin-right: 0;
+    float: right;
+}
+
+/* Sweep To Right */
+a.hvr-sweep-to-right {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    position: relative;
+    -webkit-transition-property: color;
+    transition-property: color;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    background: url("../images/fb.png") no-repeat 20px 9px #3b5998;
+    width:100%;
+    font-family: 'Roboto', sans-serif;
+    padding:0.7em 1em;
+    font-size: 1em;
+    color: #fff;
+}
+
+a.hvr-sweep-to-right:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:#354d7d;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transform-origin: 0 50%;
+    transform-origin: 0 50%;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+}
+
+a.hvr-sweep-to-right:hover, a.hvr-sweep-to-right:focus, a.hvr-sweep-to-right:active {
+    color: white;
+}
+a.hvr-sweep-to-right:hover:before, a.hvr-sweep-to-right:focus:before, a.hvr-sweep-to-right:active:before {
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+}
+
+/* Sweep To Left */
+a.hvr-sweep-to-left {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    position: relative;
+    -webkit-transition-property: color;
+    transition-property: color;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    width:100%;
+    padding:0.7em 1em;
+    font-size: 1em;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    background:url("../images/tw.png") no-repeat 20px 13px  #1ab2e8;
+
+}
+
+a.hvr-sweep-to-left:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #1499c8;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transform-origin: 100% 50%;
+    transform-origin: 100% 50%;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+}
+
+a.hvr-sweep-to-left:hover, a.hvr-sweep-to-left:focus, a.hvr-sweep-to-left:active {
+    color: white;
+}
+
+a.hvr-sweep-to-left:hover:before, a.hvr-sweep-to-left:focus:before, a.hvr-sweep-to-left:active:before {
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+}
+
+a.hvr-sweep-to-right {
+    background: url("../images/fb.png") no-repeat 7px 6px #3b5998;
+    width: 100%;
+    padding: 0.7em 0;
+    padding-left: 1.6em;
+    font-size: 0.9em;
+}
+
+a.hvr-sweep-to-left {
+    width: 100%;
+    padding: 0.7em 0;
+    padding-left: 1.7em;
+    font-size: 0.9em;
+    background: url("../images/tw.png") no-repeat 10px 11px #1ab2e8;
+}
+
+.new {
+    margin: 1em 0 0em 0;
+}
+
+.new p a,.new p.sign a,.new p.sign {
+    color: #777;
+    font-weight: 400;
+    font-size: 1em;
+}
+
+.new p a:hover,.new p.sign a:hover {
+    text-decoration: underline;
+}
+
+.new p.sign a, .new a {
+    color: #00C6D7;
+}
+
+h2.inner-tittle.page {
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+    position: absolute;
+    top: -22%;
+    left: 10%;
+    font-size: 3em;
+    color: #fff;
+}
+
+p.sign.up {
+    text-align: center;
+    float: none;
+    padding: 0;
+}
+
+/*--/login--*/
+.buttons.login ul li {
+    display: inline-block;
+    width: 50%;
+    margin-right: 0;
+    float: left;
+}
+
+.checkbox11 {
+    padding-left: 27px;
+    font-size: 1em;
+    line-height: 27px;
+    cursor: pointer;
+    position: relative;
+    color: #777;
+}
+
+.checkbox11:last-child {
+    margin-bottom: 0;
+}
+
+.news-letter {
+    color: #555;
+    font-size: 0.8em;
+    margin-bottom: 1em;
+    display: block;
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    clear: both;
+    font-family: 'Roboto', sans-serif;
+}
+
+.checkbox11 i {
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    display: block;
+    width: 18px;
+    height: 18px;
+    outline: none;
+    border: 2px solid #ccc;
+}
+
+.checkbox11 input + i:after {
+    content: '';
+    background: url("../images/tick1.png") no-repeat 1px 2px;
+    top: -1px;
+    left: -1px;
+    width: 15px;
+    height: 15px;
+    font: normal 12px/16px FontAwesome;
+    text-align: center;
+}
+
+.checkbox11 input + i:after {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.1s;
+    -o-transition: opacity 0.1s;
+    -ms-transition: opacity 0.1s;
+    -moz-transition: opacity 0.1s;
+    -webkit-transition: opacity 0.1s;
+}
+
+.checkbox11 input {
+    position: absolute;
+    left: -9999px;
+}
+
+.checkbox11 input:checked + i:after {
+    opacity: 1;
+}
+
+h3.inner-tittle.t-inner {
+    font-size: 1.8em;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 0.7em;
+    color: #333;
+}
+
+.sign-up input[type="submit"]{
+    float: right;
+    width:30%;
+    font-size:17px;
+    font-weight: 400;
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+    padding:6px 19px;
+    border: 2px solid #00C6D7;
+    background: #00C6D7;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -ms-transition: 0.5s all;
+}
+
+.sign-up input[type="submit"]:hover{
+    border: 2px solid #052963;
+    background: #052963;
+    color: #fff;
+}
+
+.sign-up input[type="reset"]{
+    font-size: 17px;
+    font-weight: 400;
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+    padding: 4px 19px;
+    float: left;
+    border: 2px solid #052963;
+    background: #052963;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -ms-transition: 0.5s all;          
+}
+
+.sign-up input[type="reset"]:hover{
+    border: 2px solid #00C6D7;
+    background: #00C6D7;
+    color: #fff;
+}
+
+.sign-up {
+    margin-top:0.8em;
+}
+
+.checkbox11 {
+    padding-left: 27px;
+    font-size: 1em;
+    line-height: 27px;
+    cursor: pointer;
+    position: relative;
+    color: #777;
+}
+
+.checkbox11:last-child {
+    margin-bottom: 0;
+}
+
+.login-register {
+    margin-left: 20px;
+}
+
+.dropdown {
+    bottom: 4px;
+    margin-left: 20px;
+}
+
+.logout-form {
+    display: none;
+}
+
+.dropdown a:hover, .dropdown-menu li a:hover {
+    text-decoration: none;
+}
+
+.dropdown-menu {
+    background: #303c43;
+    color: #f1f1f1;
+    min-width: 125px;
+    left: 35px;
+}
+
+.avatar {
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+/*===reset password*/
+.reset-content {
+    padding: 9em 0;
+}
+
+.reset-title {
+    top: -38% !important;
+}
+
+.reset-top {
+    margin: 8em auto !important;
+}
+
+.vali-msg {
+    font-size: 15px;
+}
+
+.return-home {
+    color: #777 !important;
+}
+
+.return-home:hover {
+    color: #00C6D7 !important;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.new-pass-content {
+    padding: 12em 0;
+}
+
+.new-pass-title {
+    top: -25% !important;
+}
