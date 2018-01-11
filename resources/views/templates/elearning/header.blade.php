@@ -3,16 +3,21 @@
     <head>
         <title>@lang('lang.title')</title>
         <meta charset="utf-8">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         {{ Html::favicon('templates/admin/images/favicon.ico') }}
         {{ Html::style('css/app.css') }}
         {{ Html::script('js/app.js') }}
+
         {{ Html::script('templates/elearning/js/script.js') }}
+        {{ Html::script('templates/elearning/js/custom.js') }}
         {{ Html::style('templates/elearning/css/style.css') }}
+        {{ Html::style('templates/elearning/css/style2.css') }}
+        {{ Html::style('templates/elearning/css/default.css') }}
     </head>
     <body>
         <header id="pageTop" class="header-wrapper">
             <!-- COLOR BAR -->
-            <div class="color-bar top-fixed">
+            <div class="container-fluid color-bar top-fixed">
                 <div class="row">
                     <div class="col-sm-1 col-xs-2 bg-color-1"></div>
                     <div class="col-sm-1 col-xs-2 bg-color-2"></div>
@@ -28,7 +33,7 @@
                     <div class="col-sm-1 bg-color-6 hidden-xs"></div>
                 </div>
             </div>
-            <div class="top-info-bar">
+            <div class="top-info-bar bg-color-7 hidden-xs">
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-4">
@@ -44,7 +49,7 @@
                                 <div class="input-group button-search">
                                     {!! Form::text('text', '', array('class' => 'form-control')) !!}
                                     <span class="input-group-btn">
-                                        {!! Form::button('<i class="fa fa-search" aria-hidden="true"></i>', array('class' => 'btn btn-default', 'type' => 'submit')) !!}
+                                        {!! Form::button('<i class="fa fa-search" aria-hidden="true"></i>', array('class' => 'btn btn-search', 'type' => 'submit')) !!}
                                     </span>
                                 </div>
                             {!! Form::close() !!}
@@ -64,6 +69,9 @@
                                                 {{ str_limit(Auth::user()->name, 10) }} <span class="caret"></span>
                                             </a>
                                             <ul class="dropdown-menu">
+                                                <li>
+                                                    <a href="{{ route('elearning.profile.index') }}">@lang('lang.my_profile')</a>
+                                                </li>
                                                 <li>
                                                     <a href="{{ route('logout') }}"
                                                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -88,10 +96,10 @@
             </div>
             <div class="clr"></div>
             <div>
-                <nav id="menuBar" class="navbar navbar-default" role="navigation">
+                <nav id="menuBar" class="navbar navbar-default lightHeader" role="navigation">
                     <div class="row">
                         <div class="col-sm-4 img-logo">
-                            <a href=""><img src="templates/elearning/images/logo.png"></a>
+                            <a href=""><img src="/templates/elearning/images/logo.png"></a>
                         </div>
                         <div class="col-sm-6 menuBar-header">
                             <ul class="category-menu">
