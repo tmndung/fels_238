@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Hash;
+use File;
 
 class User extends Authenticatable
 {
@@ -59,7 +60,8 @@ class User extends Authenticatable
 
     public function getAvatarPathAttribute()
     {
-        if (empty($this->attributes['avatar'])) {
+        $pathFile = config('setting.folderUpload') . $this->attributes['avatar'];
+        if (!File::exists(public_path($pathFile)) || empty($this->attributes['avatar'])) {
 
             return config('setting.userAvatarDefault');
         }
@@ -69,7 +71,8 @@ class User extends Authenticatable
 
     public function getBackgroundPathAttribute()
     {
-        if (empty($this->attributes['background'])) {
+        $pathFile = config('setting.folderUpload') . $this->attributes['background'];
+        if (!File::exists(public_path($pathFile)) || empty($this->attributes['background'])) {
 
             return config('setting.userBackgroundDefault');
         }

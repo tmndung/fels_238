@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['prefix'=>'/admin'], function () {
+Route::group(['prefix' => '/admin'], function () {
 	Route::resource('/users', 'UsersController', [
 		'as' => 'admin'
 	]);
@@ -30,5 +30,26 @@ Route::group(['prefix'=>'/admin'], function () {
 });
 
 Route::get('/', 'HomeController@index')->name('home');
+
+Route::group(['namespace' => 'Elearning'], function () {
+	Route::resource('/profile', 'ProfileController', [
+		'as' => 'elearning'
+	]);
+	Route::post('/profile/editpassword', [
+		'uses' => 'ProfileController@updatePassword',
+		'as' => 'elearning.profile.updatepassword'
+	]);
+});
+
+Route::group(['prefix' => '/profile'], function () {
+	Route::post('/blockfollow', [
+		'uses' => 'AjaxController@blockFollow',
+		'as' => 'follow.blockfollow',
+	]);
+	Route::post('/unfollow', [
+		'uses' => 'AjaxController@unFollow',
+		'as' => 'follow.blockfollow',
+	]);
+});
 
 Auth::routes();

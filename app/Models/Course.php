@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use File;
 
 class Course extends Model
 {
@@ -36,7 +37,8 @@ class Course extends Model
 
     public function getPicturePathAttribute()
     {
-        if (empty($this->attributes['picture'])) {
+        $pathFile = config('setting.folderUpload') . $this->attributes['picture'];
+        if (!File::exists(public_path($pathFile))) {
 
             return config('setting.lessonPictureDefault');
         }
