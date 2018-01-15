@@ -37,4 +37,12 @@ return [
     'filterAlphabet' => 2,
     'filterLearned' => 3,
     'filterUnlearn' => 4,
+    'offset_get_question_default_0' => 0,
+    'offset_get_question_1' => 1,
+    'increase_question' => 1,
+    'score_default' => 0,
+    'is_correct_answer' => 1,
+    'increase_score' => 10,
+    'url_image_right' => '/templates/elearning/images/right.png',
+    'url_image_wrong' => '/templates/elearning/images/wrong.png',
 ];

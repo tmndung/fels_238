@@ -60,7 +60,7 @@ class User extends Authenticatable
 
     public function getAvatarPathAttribute()
     {
-        $pathFile = config('setting.folderUpload') . $this->attributes['avatar'];
+        $pathFile = config('setting.pathUpload') . $this->attributes['avatar'];
         if (!File::exists(public_path($pathFile)) || empty($this->attributes['avatar'])) {
 
             return config('setting.userAvatarDefault');
@@ -71,7 +71,7 @@ class User extends Authenticatable
 
     public function getBackgroundPathAttribute()
     {
-        $pathFile = config('setting.folderUpload') . $this->attributes['background'];
+        $pathFile = config('setting.pathUpload') . $this->attributes['background'];
         if (!File::exists(public_path($pathFile)) || empty($this->attributes['background'])) {
 
             return config('setting.userBackgroundDefault');

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Follow;
 use Exception;
+use App\Models\Test;
+use App\Models\Question;
+use App\Models\Answer;
 
 class AjaxController extends Controller
 {
@@ -34,5 +37,19 @@ class AjaxController extends Controller
         }
 
         return response()->json($messages); 
+    }
+
+    public function answerCorrect(Request $request)
+    {
+        try {
+            $messages['correctId'] = Answer::where('question_id', $request->id)->where('is_correct', config('setting.is_correct_answer'))->first()->id;
+            if ($request->answerId == $messages['correctId']) {
+                $request->session()->put('score', $request->session()->get('score') + config('setting.increase_score'));
+            }
+        } catch (Exception $e) {
+            $messages['error'] = trans('lang.error');
+        }
+
+        return response()->json($messages);
     }
 }
