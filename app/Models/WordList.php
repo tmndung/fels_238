@@ -19,4 +19,9 @@ class WordList extends Model
     {
     	return $this->belongsTo(Lesson::class);
     }
+
+    public function scopeWordlistOfLesson($query, $idLessons)
+    {
+        return is_array($idLessons) ? $query->whereIn('lesson_id', $idLessons) : $query->where('lesson_id', $idLessons);
+    }
 }

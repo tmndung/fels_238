@@ -38,7 +38,7 @@ class Course extends Model
     public function getPicturePathAttribute()
     {
         $pathFile = config('setting.folderUpload') . $this->attributes['picture'];
-        if (!File::exists(public_path($pathFile))) {
+        if (!File::exists(public_path($pathFile)) || empty($this->attributes['picture'])) {
 
             return config('setting.lessonPictureDefault');
         }

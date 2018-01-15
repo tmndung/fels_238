@@ -13,7 +13,7 @@
         'categories' => 'CATEGORIES',
         'profile' => 'PROFILE',
         'rank' => 'RANK',
-        'follow_us' => 'Followed us',
+        'follow_by_us' => 'Followed us',
         'catalog' => 'Catalog',
         'address' => 'Nguyen Luong Bang, Da Nang',
         'title' => 'E - Learning',
@@ -150,6 +150,17 @@
         'changeUsername' => 'Change Username',
         'changePassword' => 'Change Password',
         'confirmPassword' => 'Confirm Password',
-
+        'btnLearn' => 'Start Learning',
+        'wordList' => 'Word List',
+        'review' => 'Review',
+        'learn' => 'Learn',
+        'more' => 'More',
+        'leaderboard' => 'LeaderBoard',
+        'homeLow' => 'Home',
+        'learned' => 'Learned',
+        'all' => 'All',
+        'alphabet' => 'Alphabet',
+        'allLesson' => 'All Lesson',
+        'unLearn' => 'UnLearn',
     ];
 ?>

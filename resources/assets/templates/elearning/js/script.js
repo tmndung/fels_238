@@ -137,3 +137,51 @@ $( document ).ready(function() {
         })
     });
 });
+
+$(document).ready(function () {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+}); 
+
+$(document).ready(function () {
+    $('.filter-word').click(function () {
+        var role = $(this).attr('role');
+        var course_id = $(this).attr('courseId');
+        var lesson_id = $('#select-filter-word option:selected').val();
+        
+        $.ajax({
+            method: 'POST',
+            url: route('filterWordlist'),
+            data: {
+                course_id: course_id, 
+                role: role, 
+                lesson_id: lesson_id
+            },
+            success: function (data) {
+                $('#wordlist-content').html(data);
+            },
+        });
+    });
+
+    $('#select-filter-word').change(function () {
+        var lesson_id = $(this).children('option:selected').val();
+        var role = $('.filter-wordlist ul .active .filter-word').attr('role');
+        var course_id = $('.filter-wordlist ul .active .filter-word').attr('courseId');
+
+        $.ajax({
+            method: 'POST',
+            url: route('filterWordlist'),
+            data: {
+                course_id: course_id, 
+                role: role, 
+                lesson_id: lesson_id
+            },
+            success: function (data) {
+                $('#wordlist-content').html(data);
+            },
+        });
+    });
+});

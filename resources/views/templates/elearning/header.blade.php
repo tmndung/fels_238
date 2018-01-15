@@ -3,16 +3,16 @@
     <head>
         <title>@lang('lang.title')</title>
         <meta charset="utf-8">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+        @routes
         {{ Html::favicon('templates/admin/images/favicon.ico') }}
         {{ Html::style('css/app.css') }}
         {{ Html::script('js/app.js') }}
 
         {{ Html::script('templates/elearning/js/script.js') }}
-        {{ Html::script('templates/elearning/js/custom.js') }}
-        {{ Html::style('templates/elearning/css/style.css') }}
-        {{ Html::style('templates/elearning/css/style2.css') }}
         {{ Html::style('templates/elearning/css/default.css') }}
+        {{ Html::style('templates/elearning/css/style2.css') }}
+        {{ Html::style('templates/elearning/css/style.css') }}
+        <meta name="csrf-token" content="{{ csrf_token() }}">
     </head>
     <body>
         <header id="pageTop" class="header-wrapper">

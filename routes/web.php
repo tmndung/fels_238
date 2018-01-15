@@ -39,6 +39,16 @@ Route::group(['namespace' => 'Elearning'], function () {
 		'uses' => 'ProfileController@updatePassword',
 		'as' => 'elearning.profile.updatepassword'
 	]);
+    Route::resource('/courses', 'CoursesController', [
+        'as' => 'elearning',
+    ]);
+    Route::resource('courses.wordlist', 'WordListController', [
+        'as' => 'elearning',
+    ]);
+    Route::post('/ajax/wordlist/filter', [
+        'uses' => 'WordListController@ajaxFilterWordlist',
+        'as' => 'filterWordlist',
+    ]);
 });
 
 Route::group(['prefix' => '/profile'], function () {
