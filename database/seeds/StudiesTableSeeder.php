@@ -14,6 +14,7 @@ class StudiesTableSeeder extends Seeder
         factory(App\Models\Study::class, 20)->create()->each(function ($study) {
             $lessonId = App\Models\Lesson::all()->random()->id;
             $study->lessons()->attach($lessonId, [
+                'is_learned' => (bool)rand(0, 1),
                 'is_finish' => (bool)rand(0, 1),
             ]);
         });

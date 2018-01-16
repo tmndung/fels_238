@@ -16,6 +16,7 @@
         {{ Html::style('templates/elearning/css/style2.css') }}
         {{ Html::style('templates/elearning/css/style.css') }}
         {{ Html::style('templates/elearning/css/jquery.bxslider.min.css') }}
+        {{ Html::style('/templates/admin/css/animate.min.css') }}
     </head>
     <body>
         <header id="pageTop" class="header-wrapper">

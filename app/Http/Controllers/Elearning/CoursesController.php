@@ -40,7 +40,7 @@ class CoursesController extends Controller
      */
     public function store(Request $request)
     {
-        
+        // 
     }
 
     /**
@@ -53,12 +53,12 @@ class CoursesController extends Controller
     {
         try {
             $data['course'] = $course;
-            $data['categoriesParentName'] = $this->getCategoriesParentName($course);
+            $data['categoriesParent'] = $this->getCategoriesParent($course);
 
             // get top 10 user by score
             $data['studies'] = $course->studies()->orderBy('score', 'desc')->take(config('setting.topUser'))->get();
 
-            $idLessons = $course->lessons->pluck('id');
+            $idLessons = $course->lessons->pluck('id')->all();
             $data['wordLists'] = WordList::wordlistOfLesson($idLessons)->get();
             $data['isActiveCourse'] = false;
              
@@ -66,8 +66,7 @@ class CoursesController extends Controller
             
             return view('elearning.course-detail', compact('data'));
         } catch (Exception $e) {
-
-            return redirect()->route('404error');
+            return redirect()->route('404');
         }
     }
 

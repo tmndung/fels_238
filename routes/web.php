@@ -59,6 +59,10 @@ Route::group(['namespace' => 'Elearning'], function () {
         'uses' => 'WordListController@ajaxFilterWordlist',
         'as' => 'filterWordlist',
     ]);
+    Route::resource('courses.lesson', 'LessonController', [
+        'as' => 'elearning',
+        'middleware' => 'auth',
+    ]);
     Route::resource('/profile', 'ProfileController', [
         'as' => 'elearning',
     ]);
@@ -81,6 +85,18 @@ Route::group(['namespace' => 'Elearning'], function () {
     Route::resource('/category', 'CategoryController', [
         'as' => 'elearning',
     ]);
+    Route::post('/ajax/lesson/changeLesson', [
+        'uses' => 'LessonController@ajaxChangeLesson',
+        'as' => 'changeLesson',
+    ]);
+    Route::resource('courses.lesson.learn', 'LearnController', [
+        'middleware' => 'auth',
+        'as' => 'elearning'
+    ]);
+    Route::post('/ajax/learning', [
+        'uses' => 'LearnController@ajaxLearning',
+        'as' => 'learning',
+    ]);
 });
 Route::post('/search', [
     'uses' => 'AjaxController@search',
@@ -97,8 +113,6 @@ Route::group(['prefix' => '/profile'], function () {
         'as' => 'profile.follow.unfollow',
     ]);
 });
-
-Route::get('/', 'HomeController@index')->name('home');
 
 Route::post('/answercorrect', [
     'uses' => 'AjaxController@answerCorrect',

@@ -14,7 +14,7 @@
         </div>
     </li>
     @foreach ($data['wordLists'] as $word)
-        <li class="full-width clearfix">
+        <li class="full-width clearfix animated fadeInDown">
             <div class="col-sm-3 col-xs-12">{{ $word->name }}</div>
             <div class="col-sm-4 col-xs-12">{{ $word->pronunciation }}</div>
             <div class="col-sm-4 col-xs-12">{{ $word->explain }}</div>

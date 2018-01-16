@@ -1170,7 +1170,7 @@ h3.title-edit-profile {
     transition: all .3s ease-in-out;
     background-color: #5cb85c;
     margin: 5% 25%;
-    opacity: 0.7;
+    opacity: 0.9;
 }
 .btn-learn:hover {
     border: 1px solid transparent;
@@ -1870,4 +1870,220 @@ p.information-search {
 h3.h3-item-search {
     font-size: 22px;
     color: #333;
+}
+
+/*===lesson-detail===*/
+
+.lesson-detail {
+    overflow: hidden;
+    background-color: #f1efef;
+}
+
+.lesson-content {
+    margin: 5% 2% 0 2%;
+}
+
+.lesson-content .btn-lesson {
+    display: block;
+    height: 100px;
+    background-color: #fff;
+    padding: 0 1%;
+    border-radius: 20px;
+    margin-top: 40%;
+    text-align: center;
+    font-size: 20px;
+    padding: 22% 0;
+    color: #666;
+    cursor: pointer;
+    border: 1px solid #e4e4e4;
+}
+
+.lesson-content .btn-lesson:hover {
+    color: #666;
+}
+
+
+.lesson-content .activeLessonBtn {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.lesson-content .lesson-center-content {
+    background-color: #fff;
+    padding: 0 1%;
+    border-radius: 20px;
+    border: 1px solid #e4e4e4;
+}
+
+.lesson-center-content .lesson-img {
+    margin: 4% 0;
+}
+
+.lesson-center-content .lesson-img div {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.lesson-center-content .lesson-img .learn-icon-lesson {
+    height: 150px;
+    padding: 2%;
+    width: 150px;
+    margin-left: 8%;
+}
+
+.lesson-center-content .lesson-img .unlearn-icon-lesson {
+    height: 150px;
+    padding: 2%;
+    margin-left: 11%;
+    width: 140px;
+    opacity: 0.3;
+}
+
+.lesson-center-content .lesson-img .check-icon-lesson {
+    height: 35px;
+    width: 35px;
+    margin-left: 38.5%;
+}
+
+.lesson-center-content .lesson-img .lock-icon-lesson {
+    font-size: 30px;
+    opacity: 0.6;
+}
+
+.lesson-center-main {
+    padding: 0 2% 0 0;
+    margin: 4% 0;
+} 
+
+.lesson-center-main a {
+    margin: 0;
+    margin-left: 2%;
+}
+
+/*===learning====*/
+
+.learning-wrap, .learning-container {
+    background-color: #f1efef;
+}
+
+.learning-header {
+    margin: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    background-color: #d0e8b0;
+    top: 0;
+}
+
+.learning-header .progress-learning {
+    margin: 2% 0 0 0;
+    padding: 0;
+}
+
+.learning-header .exit-learning {
+    height: 50px;
+    margin-left: 50%;
+    font-size: 25px;
+    line-height: 25px;
+    background-color: #f0624b;
+}
+
+.learning-content {
+    padding: 5% 20% 5% 20%;
+    height: 80%;
+}
+
+.learning-content .learning-word {
+    margin-bottom: 2.5%;
+}
+
+.learning-content .learning-word:first-child {
+    margin-bottom: 5%;
+}
+
+.learning-content .learning-title{
+    font-size: 16px;
+    color: #666;
+    margin: 2% 0;
+}
+
+.learning-content .learning-word-content{
+    font-family: Times-new-Roman;
+    font-size: 90px;
+    color: #333;
+    font-weight: bold;
+    margin-top: 25px;
+    padding-left: 50px;
+}
+
+.learning-content .learning-pronunciation-content {
+    margin-top: 24px;
+    font-size: 50px;
+    padding-left: 50px;
+    color: #333;
+}
+
+.learning-content .learning-explain-content {
+    margin-top: 15px;
+    font-size: 30px;
+    padding-left: 50px;
+    line-height: 25px;
+    color: #333;  
+    font-family: Times-new-Roman;  
+}
+
+.learning-footer {
+    width: 100%;
+    margin: 0;
+    height: 100px;
+    background-color: #d0e8b0;
+    position: fixed;
+    bottom: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.action-test {
+    text-align: center;
+}
+
+.action-test a {
+    display: inline-block;
+    line-height: 40px;
+    width: 30%;
+    border: 2px solid #539a2f;
+    border-radius: 2em;
+    color: #fff;
+    font-size: 18px;
+    background-color: #8dd232;
+    font-weight: bold;
+    opacity: 0.8;
+}
+
+.action-test a:hover {
+    opacity: 1;
+}
+
+.learning-container {
+    overflow: hidden;
+}
+
+.btn-learning-next {
+    margin-top: 1%;
+}
+
+.endlearning-header {
+    height: 100px;
+}
+
+.endlearning-title {
+    text-align: center;
+}
+
+.endlearning-totalword, .endlearning-message {
+    font-family: Times-new-Roman;
+    font-size: 40px;
+    color: #545454;
+    text-align: center;
+    padding: 3%;
 }

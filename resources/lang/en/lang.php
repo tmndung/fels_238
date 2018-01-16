@@ -177,5 +177,14 @@
         'students' => 'STUDENTS',
         'people_to_follow' => 'People To Follow',
         'not_fount' => 'Not found',
+        'status' => 'Status',
+        'preLesson' => ' Prev Lesson',
+        'nextLesson' => 'Next Lesson ',
+        'newWord' => 'New Word',
+        'messageLearned' => 'You have learned this lesson',
+        'ok' => 'OK',
+        'learning' => 'Learning',
+        'wordlist' => 'Word list',
+        'totalWord' => 'Total word:',
     ];
 ?>
