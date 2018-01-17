@@ -8,6 +8,7 @@ use Exception;
 use App\Models\Test;
 use App\Models\Question;
 use App\Models\Answer;
+use App\Models\Course;
 
 class AjaxController extends Controller
 {
@@ -51,5 +52,20 @@ class AjaxController extends Controller
         }
 
         return response()->json($messages);
+    }
+    public function search(Request $request)
+    {
+        try {
+            if (!$request->search) {
+                throw new Exception();
+            }
+            $courses = Course::where('name', 'LIKE', '%' . $request->search . '%')->limit(config('setting.number_course_search'))->get();
+
+            return view('elearning.search', compact('courses'));
+        } catch (Exception $e) {
+            $error['error'] = trans('lang.not_found');
+
+            return response()->json($error);
+        }
     }
 }

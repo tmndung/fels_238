@@ -45,4 +45,7 @@ return [
     'increase_score' => 10,
     'url_image_right' => '/templates/elearning/images/right.png',
     'url_image_wrong' => '/templates/elearning/images/wrong.png',
+    'paginate_course' => 8,
+    'top8User' => 8,
+    'number_course_search' => 6,
 ];

@@ -172,6 +172,10 @@
         'score_end' => 'Score : ',
         'past_test' => 'Congratulations! You passed the test.',
         'not_past_test' => 'Oh! You have not passed the test.',
-
+        'all_category' => 'Detail Categories',
+        'all_course' => 'All Courses',
+        'students' => 'STUDENTS',
+        'people_to_follow' => 'People To Follow',
+        'not_fount' => 'Not found',
     ];
 ?>
