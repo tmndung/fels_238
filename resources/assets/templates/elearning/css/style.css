@@ -1765,8 +1765,22 @@ a.btn-start {
 }
 
 .progress-bar-test {
-    padding: 26px 200px;
+    padding: 1% 12%;
     background: #d2d2d2;
+    min-height: 100px;
+}
+
+.progress-bar-test .exit-learning {
+    height: 50px;
+    margin-left: 50%;
+    font-size: 25px;
+    line-height: 25px;
+    background-color: #f0624b;
+}
+
+.progress-test {
+    margin-top: 2%;
+    padding: 0;
 }
 
 h2.title-end-test {
@@ -2086,4 +2100,68 @@ h3.h3-item-search {
     color: #545454;
     text-align: center;
     padding: 3%;
+}
+
+.custom-time {
+    color: #000000;
+    font-size: 20px;
+    text-align: center;
+}
+
+.custom-linkSection {
+    width: 80%;
+    margin: -100px auto;
+}
+
+.bx-pager {
+    display: none !important;
+}
+
+.bg-index-fixed {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    z-index: -1;
+    top: 0;
+}
+
+.top-user a.a-top-user {
+    color: #fff;
+    display: block;
+    font-size: 22px;
+    font-weight: bold;
+    padding: 10px 0
+}
+
+h2.title-follow-user {
+    color: #fff;
+}
+
+.user-rank {
+    padding: 0 !important;
+    line-height: 30px;
+}
+
+.margin-bottom-50 {
+    margin-bottom: 100px;
+}
+
+.pd-page-top {
+    padding: 50px 0px 0px 0px; 
+}
+
+.pd-page-top-100 {
+    padding: 100px 0px 0px 0px; 
+}
+
+.title-course-slider {
+    color: #FFF !important;
+}
+
+.img-course-slider {
+    background: #44a3a2;
+}
+
+.bg-index {
+    background: #f1efef !important;
 }

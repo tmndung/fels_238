@@ -133,6 +133,21 @@ trait ElearningProcessDatabase
         }
     }
 
+    public function checkPassTest(Lesson $lesson) 
+    {
+        try {
+            $studyOfUser = $lesson->course->studies()->where('user_id', Auth::user()->id)->first();
+            $isFinish = $studyOfUser->lessons()->where('lesson_id', $lesson->id)->first()->pivot->is_finish;
+            if ($isFinish) {
+                return true;
+            }
+
+            return false;
+        } catch (Exception $e) {
+            return redirect()->route('404');
+        }
+    }
+
     public function updateStudyLesson(Course $course, Lesson $lesson)
     {
         try {

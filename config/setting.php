@@ -54,4 +54,7 @@ return [
     'congratIcon' => '/templates/elearning/images/congrat.png',
     'dontHaveLessonVal' => 0,
     'learnTimes' => 2,
+    'is_finish' => true,
+    'is_learned' => true,
+    'top_category' => 3,
 ];

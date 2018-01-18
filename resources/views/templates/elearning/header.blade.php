@@ -9,14 +9,17 @@
         {{ Html::style('css/app.css') }}
         {{ Html::script('js/app.js') }}
 
+        {{ Html::script('templates/elearning/js/jquery-min.js') }}
+        {{ Html::script('templates/elearning/js/jquery.selectbox-0.1.3.min.js') }}
+        {{ Html::script('templates/elearning/js/jquery.themepunch.tools.min.js') }}
+        {{ Html::script('templates/elearning/js/jquery.themepunch.revolution.min.js') }}
         {{ Html::script('templates/elearning/js/script.js') }}
-        {{ Html::script('templates/elearning/js/jquery.bxslider.min.js') }}
+        {{ Html::script('templates/elearning/js/custom.js') }}
         
         {{ Html::style('templates/elearning/css/default.css') }}
         {{ Html::style('templates/elearning/css/style2.css') }}
         {{ Html::style('templates/elearning/css/style.css') }}
-        {{ Html::style('templates/elearning/css/jquery.bxslider.min.css') }}
-        {{ Html::style('/templates/admin/css/animate.min.css') }}
+        {{ Html::style('templates/elearning/css/settings.css') }}
     </head>
     <body>
         <header id="pageTop" class="header-wrapper">

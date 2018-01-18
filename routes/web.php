@@ -71,14 +71,17 @@ Route::group(['namespace' => 'Elearning'], function () {
         'as' => 'elearning.profile.updatepassword',
     ]);
     Route::get('/test/{id}', [
+        'middleware' => 'auth',
         'uses' => 'TestController@index',
         'as' => 'elearning.test.index',
     ]);
-    Route::get('/show/{id}', [
+    Route::post('/show/{id}', [
+        'middleware' => 'auth',
         'uses' => 'TestController@show',
         'as' => 'elearning.test.show',
     ]);
     Route::get('test/result/{id}', [
+        'middleware' => 'auth',
         'uses' => 'TestController@result',
         'as' => 'elearning.test.result',
     ]);
