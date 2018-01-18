@@ -304,3 +304,50 @@ $(document).ready(function() {
         $('.content-search').html('');
     });
 });
+
+$(document).ready(function () {
+    $('.btn-lesson').click(function () {
+        var lessonId = $(this).attr('lesson');
+        var courseId = $(this).attr('course');
+        var animate = $(this).attr('animate');
+        $.ajax({
+            method: 'POST',
+            url: route('changeLesson'),
+            data: {
+                lesson_id: lessonId,
+                course_id: courseId,
+                animate: animate,
+            },
+            success: function (data) {
+                $('.lesson-content').html(data);
+            },
+        });
+
+        return false;
+    });
+});
+
+
+$(document).ready(function () {
+    $('#next-lesson').click(function () {
+        var lessonId = $(this).attr('lesson');
+        var courseId = $(this).attr('course');
+        var progress = $('#progress-learning').attr('progress') 
+        var offsetProgress = $(this).attr('offsetProgress');
+        $.ajax({
+            method: 'POST',
+            url: route('learning'),
+            data: {
+                course_id: courseId,
+                lesson_id: lessonId,
+                progress: progress,
+                offsetProgress: offsetProgress,
+            },
+            success: function (data) {
+                $('.learning-container').html(data);
+            },
+        });
+        
+        return false;
+    });
+});

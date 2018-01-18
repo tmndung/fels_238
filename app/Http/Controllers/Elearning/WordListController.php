@@ -18,18 +18,9 @@ class WordListController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Course $course)
+    public function index()
     {
-        $data['course'] = $course;
-        $data['categoriesParentName'] = $this->getCategoriesParentName($course);
-
-        $idLessons = $course->lessons->pluck('id');
-        $data['wordLists'] = WordList::wordlistOfLesson($idLessons)->orderBy('lesson_id')->get();                
-        $data['isActiveCourse'] = false;
-
-        $data = $this->processUserLogin($course, $data);
-
-        return view('elearning.wordlist', compact('data'));
+        //
     }
 
     /**
@@ -59,9 +50,30 @@ class WordListController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show(Course $course, $idLessonFilter)
+    {   
+        try {
+            $data['course'] = $course;
+            $data['categoriesParent'] = $this->getCategoriesParent($course);
+            $data['idLessonFilter'] = $idLessonFilter;
 
+            // if $idLessonFilter = 0 then filter all lesson
+            if ($idLessonFilter == config('setting.filterSelectAllLessons')) {
+                $idLessons = $course->lessons->pluck('id')->all();
+            } else {
+                $idLessons = $idLessonFilter;
+            }
+
+
+            $data['wordLists'] = WordList::wordlistOfLesson($idLessons)->orderBy('lesson_id')->get();                
+            $data['isActiveCourse'] = false;
+
+            $data = $this->processUserLogin($course, $data);
+
+            return view('elearning.wordlist', compact('data'));
+        } catch (Exception $e) {
+            return redirect()->route('404');
+        }
     }
 
     /**
@@ -141,8 +153,7 @@ class WordListController extends Controller
             
             return view('templates.ajax.wordlist-filter', compact('data'));
         } catch (Exception $e) {
-
-            return redirect()->route('404error');
+            return redirect()->route('404');
         }
     }
 }

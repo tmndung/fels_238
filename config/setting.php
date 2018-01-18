@@ -48,4 +48,10 @@ return [
     'paginate_course' => 8,
     'top8User' => 8,
     'number_course_search' => 6,
+    'finishedLesson' => 1, 
+    'learnedButNotFinished' => 2,
+    'notFinished' => 3,
+    'congratIcon' => '/templates/elearning/images/congrat.png',
+    'dontHaveLessonVal' => 0,
+    'learnTimes' => 2,
 ];
