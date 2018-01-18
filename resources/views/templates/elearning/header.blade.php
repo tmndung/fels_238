@@ -10,9 +10,12 @@
         {{ Html::script('js/app.js') }}
 
         {{ Html::script('templates/elearning/js/script.js') }}
+        {{ Html::script('templates/elearning/js/jquery.bxslider.min.js') }}
+        
         {{ Html::style('templates/elearning/css/default.css') }}
         {{ Html::style('templates/elearning/css/style2.css') }}
         {{ Html::style('templates/elearning/css/style.css') }}
+        {{ Html::style('templates/elearning/css/jquery.bxslider.min.css') }}
     </head>
     <body>
         <header id="pageTop" class="header-wrapper">
@@ -45,14 +48,15 @@
                             </ul>
                         </div>
                         <div class="col-sm-4">
-                            {!! Form::open(array('url' => '')) !!}
+                            {!! Form::open() !!}
                                 <div class="input-group button-search">
-                                    {!! Form::text('text', '', array('class' => 'form-control')) !!}
+                                    {!! Form::text('text', '', ['class' => 'form-control', 'id' => 'search-text']) !!}
                                     <span class="input-group-btn">
-                                        {!! Form::button('<i class="fa fa-search" aria-hidden="true"></i>', array('class' => 'btn btn-search', 'type' => 'submit')) !!}
+                                        <i class="fa fa-search btn btn-search" aria-hidden="true"></i>
                                     </span>
                                 </div>
                             {!! Form::close() !!}
+                            <div class="content-search"></div>
                         </div>
                         <div class="col-sm-4">
                             <ul class="list-inline functionList">
@@ -96,15 +100,15 @@
             </div>
             <div class="clr"></div>
             <div>
-                <nav id="menuBar" class="navbar navbar-default lightHeader" role="navigation">
+                <nav id="menuBar" class="menuBar-fix navbar navbar-default lightHeader" role="navigation">
                     <div class="row">
                         <div class="col-sm-4 img-logo">
-                            <a href=""><img src="/templates/elearning/images/logo.png"></a>
+                            <a href="{{ route('home') }}"><img src="/templates/elearning/images/logo.png"></a>
                         </div>
                         <div class="col-sm-6 menuBar-header">
                             <ul class="category-menu">
                                 <li>
-                                    <a href="">
+                                    <a href="{{ route('home') }}">
                                         <i class="fa fa-home home-icon orange-background" aria-hidden="true"></i>
                                         <span class="orange-text">@lang('lang.home')</span>
                                     </a>

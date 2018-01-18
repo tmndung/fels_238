@@ -280,3 +280,27 @@ $(document).ready(function () {
         });
     });
 });
+
+$(document).ready(function() {
+    $('#search-text').keyup(function(event) {
+        var search = $(this).val();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: route('elearning.search'),
+            type: 'POST',
+            data: {
+                search:search
+            },
+            success: function( data ) {
+                $('.content-search').html(data);
+            }
+        });
+    });
+    $('.content-search').mouseleave(function(event) {
+        $('.content-search').html('');
+    });
+});

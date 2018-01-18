@@ -78,7 +78,14 @@ Route::group(['namespace' => 'Elearning'], function () {
         'uses' => 'TestController@result',
         'as' => 'elearning.test.result',
     ]);
+    Route::resource('/category', 'CategoryController', [
+        'as' => 'elearning',
+    ]);
 });
+Route::post('/search', [
+    'uses' => 'AjaxController@search',
+    'as' => 'elearning.search',
+]);
 
 Route::group(['prefix' => '/profile'], function () {
     Route::post('/blockfollow', [
@@ -93,36 +100,6 @@ Route::group(['prefix' => '/profile'], function () {
 
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::group(['namespace' => 'Elearning'], function () {
-	Route::resource('/profile', 'ProfileController', [
-		'as' => 'elearning'
-	]);
-	Route::post('/profile/editpassword', [
-		'uses' => 'ProfileController@updatePassword',
-		'as' => 'elearning.profile.updatepassword'
-	]);
-    Route::resource('/courses', 'CoursesController', [
-        'as' => 'elearning',
-    ]);
-    Route::resource('courses.wordlist', 'WordListController', [
-        'as' => 'elearning',
-    ]);
-    Route::post('/ajax/wordlist/filter', [
-        'uses' => 'WordListController@ajaxFilterWordlist',
-        'as' => 'filterWordlist',
-    ]);
-});
-
-Route::group(['prefix' => '/profile'], function () {
-	Route::post('/blockfollow', [
-		'uses' => 'AjaxController@blockFollow',
-		'as' => 'follow.blockfollow',
-	]);
-	Route::post('/unfollow', [
-		'uses' => 'AjaxController@unFollow',
-		'as' => 'follow.blockfollow',
-	]);
-});
 Route::post('/answercorrect', [
     'uses' => 'AjaxController@answerCorrect',
     'as' => 'elearning.test.answercorrect',
