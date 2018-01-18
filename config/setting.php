@@ -57,4 +57,10 @@ return [
     'is_finish' => true,
     'is_learned' => true,
     'top_category' => 3,
+    'fileListenDefault' => '/templates/elearning/audio/example.mp3',
+    'easyMode' => 10,
+    'mediumMode' => 15,
+    'hardMode' => 30,
+    'scoreDefaultVal' => 0,
+    'lessonStart' => 1,
 ];

@@ -1,5 +1,7 @@
 @extends ('templates.elearning.test')
 
+@section ('title', trans('lang.learning'))
+
 @section ('content')
     <div class="learning-container">
         <div class="progress-content learning-header full-width clearfix">
@@ -21,6 +23,12 @@
                 </div>
                 <div class="learning-word-content col-sm-10 col-xs-12">
                     {{ ucfirst($word->name) }}
+                    <div class="listen-word">
+                        <i class="fa fa-volume-up" aria-hidden="true" id="play-word-audio"></i>
+                    </div>
+                    <audio id="listent-audio" controls">
+                        <source src="{{ $word->file_listen_path }}" type="audio/mpeg">
+                    </audio>
                 </div>
             </div>
             <div class="learning-word full-width clearfix">
@@ -48,4 +56,4 @@
             </div>
         </div>
     </div>
-$endsection
+@endsection

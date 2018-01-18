@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\WordList;
 use App\Traits\ElearningProcessDatabase;
+use Illuminate\Support\Facades\Auth;
+use DB;
 
 class CoursesController extends Controller
 {
@@ -63,7 +65,7 @@ class CoursesController extends Controller
             $data['isActiveCourse'] = false;
              
             $data = $this->processUserLogin($course, $data);
-            
+
             return view('elearning.course-detail', compact('data'));
         } catch (Exception $e) {
             return redirect()->route('404');
@@ -88,9 +90,22 @@ class CoursesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Course $course)
     {
-        //
+        try {
+            // restart course
+            DB::transaction(function () use ($course) {
+                $studyOfUser = $course->studies()->where('user_id', Auth::user()->id)->first();
+                $studyOfUser->lessons()->detach();
+                $studyOfUser->update([
+                    'score' => config('setting.scoreDefaultVal'),
+                ]);
+            });
+
+            return redirect()->route('elearning.courses.show', $course->id);
+        } catch (Exception $e) {
+            return redirect()->route('404');
+        }
     }
 
     /**
@@ -99,8 +114,20 @@ class CoursesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Course $course)
     {
-        //
+        try {
+            // quit course
+            DB::transaction(function () use ($course) {
+                $studyOfUser = $course->studies()->where('user_id', Auth::user()->id)->first();
+                $studyOfUser->lessons()->detach();
+                $studyOfUser->delete();
+                $this->updateRankOfCourses();
+            });
+
+            return redirect()->route('elearning.courses.show', $course->id);
+        } catch (Exception $e) {
+            return redirect()->route('404');
+        }
     }
 }

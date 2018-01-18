@@ -1,5 +1,7 @@
 @extends ('templates.elearning.test')
 
+@section ('title', trans('lang.test'))
+
 @section ('init')
     {{ Html::script('templates/elearning/js/countdown.js') }}
 @endsection

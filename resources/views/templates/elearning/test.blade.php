@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html style="overflow: hidden;">
 <head>
-    <title>@lang('lang.test')</title>
+    <title>@yield('title')</title>
     <meta charset="utf-8">
-    @routes
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    @routes
     {{ Html::favicon('templates/admin/images/favicon.ico') }}
     {{ Html::style('css/app.css') }}
     {{ Html::script('js/app.js') }}

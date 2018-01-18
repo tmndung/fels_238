@@ -46,6 +46,10 @@ trait ElearningProcessDatabase
                     $data['progressVal'] = round(($data['learnedWord'] / $data['totalWord']) * config('setting.percent'));
                 }
 
+                // get my rank and my score
+                $data['myRank'] = count($course->studies()->where('score', '>=', $studyOfUser->score)->get());
+                $data['myScore'] = $studyOfUser->score;
+
                 $data = $this->getLessonLearnedRecentOrCreate($data, $studyOfUser, $data['idLessonsFinished']);
             }
         }
@@ -162,6 +166,17 @@ trait ElearningProcessDatabase
             ]));
         } catch (Exception $e) {
             return redirect()->route('404');
+        }
+    }
+
+    public function updateRankOfCourses()
+    {
+        $rankCourses = Course::withCount('studies')->orderBy('studies_count', 'desc')->get();
+
+        foreach ($rankCourses as $rank => $course) {
+            $course->update([
+                'rank' => $rank + 1,
+            ]);
         }
     }
 } 

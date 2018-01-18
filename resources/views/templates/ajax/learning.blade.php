@@ -5,7 +5,8 @@
         </div>
     </div>
     <div class="col-sm-2 col-xs-12">
-        <a href="{{ route('elearning.courses.lesson.show', [$course->id, $lesson->id]) }}" class="btn-learn exit-learning"><i class="fa fa-times" aria-hidden="true"></i>
+        <a href="{{ route('elearning.courses.lesson.show', [$course->id, $lesson->id]) }}" class="btn-learn exit-learning" onclick="return confirm('{{ trans('lang.msgDel') }}')">
+            <i class="fa fa-times" aria-hidden="true"></i>
         </a>
     </div>
 </div>
@@ -15,6 +16,12 @@
         <div class="learning-title col-sm-2 col-xs-12">@lang('lang.newWord')</div>
         <div class="learning-word-content col-sm-10 col-xs-12">
             {{ ucfirst($word->name) }}
+            <div class="listen-word">
+                <i class="fa fa-volume-up" aria-hidden="true" id="play-word-audio"></i>
+            </div>
+            <audio id="listent-audio" controls">
+                <source src="{{ $word->file_listen_path }}" type="audio/mpeg">
+            </audio>
         </div>
     </div>
     <div class="learning-word full-width clearfix">

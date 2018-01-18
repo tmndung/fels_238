@@ -1200,15 +1200,15 @@ h3.title-edit-profile {
     padding: 0;
 }
 
-.course-detail-left ul {
+.course-detail-left .course-main-content ul {
     list-style-type: none;
 }
 
-.course-detail-left li {
+.course-detail-left .course-main-content li {
     padding: 0 1% 2% 1%;
 }
 
-.course-detail-left li a {
+.course-detail-left .course-main-content li a {
     display: block;
     padding: 10%;
     background-color: #fff;
@@ -1217,18 +1217,18 @@ h3.title-edit-profile {
     border: 1px solid #e4e4e4;
 }
 
-.course-detail-left li a:hover {
+.course-detail-left .course-main-content li a:hover {
     text-decoration: none;
 }
     
-.course-detail-left li .lesson-title, .course-detail-left li .lesson-name {
+.course-detail-left .course-main-content li .lesson-title, .course-detail-left .course-main-content li .lesson-name {
     font-size: 16px;
     margin: 5px 0 5px 0;
     text-align: center;
     font-weight: bold;
 }
 
-.course-detail-left li .lesson-content {
+.course-detail-left .course-main-content li .lesson-content {
     background-color: #f1f1f1;
     padding: 10% 0;
     border-radius: 20px;
@@ -1407,6 +1407,93 @@ h3.title-edit-profile {
 
 .btn-progress a {
     margin: 0 0.5%;
+}
+
+.btn-option {
+    background-color: #f3f3f3;
+    color: #666;
+    text-shadow: 0;
+    text-align: center;
+}
+
+.btn-option .option-icon {
+    font-size: 18px;
+    margin-right: 5px;
+}
+
+.progress-course-content .option-menu {
+    width: 160px;
+    padding: 0;
+    left: 4.5%;
+    background-color: #fff;
+}
+
+.progress-wordlist-content .option-menu {
+    width: 160px;
+    padding: 0;
+    left: 3.2%;
+    background-color: #fff;
+}
+
+.option-menu .option-icon {
+    font-size: 17px;
+    margin-right: 7px;
+    margin-left: 15%;
+}
+
+.option-menu li {
+    font-size: 16px;
+}
+
+.option-menu li a {
+    height: 35px;
+    line-height: 30px;
+    opacity: 0.8;
+}
+
+.option-menu li a:hover {
+    color: #fff;
+    opacity: 1;
+    background-color: #888585;
+}
+
+.progress-wordlist-content .review-menu {
+    padding: 0;
+    width: 160px;
+    left: 45.3%;
+    background-color: #fff;
+}
+
+.lesson-center-main .review-menu {
+    padding: 0;
+    width: 160px;
+    left: 27.8%;
+    background-color: #fff;
+}
+
+.progress-course-content .review-menu {
+    padding: 0;
+    width: 160px;
+    left: 26.5%;
+    background-color: #fff;
+}
+
+.review-menu li {
+    text-align: left;
+    font-size: 16px;
+    opacity: 0.8;
+}
+
+.review-menu li a:hover {
+    margin: 0;
+    color: #fff;
+    opacity: 1;
+    background-color: #888585;
+}
+
+.review-menu li a {
+    height: 35px;
+    line-height: 30px;  
 }
 
 /*===word-list*/
@@ -2021,13 +2108,34 @@ h3.h3-item-search {
     margin: 2% 0;
 }
 
-.learning-content .learning-word-content{
+.learning-content .learning-word-content {
     font-family: Times-new-Roman;
     font-size: 90px;
     color: #333;
     font-weight: bold;
-    margin-top: 25px;
+    margin-top: 13px;
     padding-left: 50px;
+}
+
+.learning-content .listen-word {
+    height: 40px;
+    font-size: 40px;
+    margin-left: 4%;
+    margin-bottom: 4%;
+    text-align: left;
+    display: inline-block;
+    position: relative;
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.learning-content .listen-word > i {
+    position: absolute;
+    bottom: 0;
+}
+
+.learning-content .listen-word:hover {
+    opacity: 0.8;
 }
 
 .learning-content .learning-pronunciation-content {
@@ -2065,11 +2173,10 @@ h3.h3-item-search {
     display: inline-block;
     line-height: 40px;
     width: 30%;
-    border: 2px solid #539a2f;
+    border: 2px solid #7a7a7b;
     border-radius: 2em;
-    color: #fff;
+    color: #7a7a7b;
     font-size: 18px;
-    background-color: #8dd232;
     font-weight: bold;
     opacity: 0.8;
 }
@@ -2084,6 +2191,12 @@ h3.h3-item-search {
 
 .btn-learning-next {
     margin-top: 1%;
+}
+
+.btn-learning-next a {
+    color: #fff;
+    border: 2px solid #539a2f;
+    background-color: #8dd232;
 }
 
 .endlearning-header {
@@ -2164,4 +2277,8 @@ h2.title-follow-user {
 
 .bg-index {
     background: #f1efef !important;
+}
+
+.listent-audio {
+    display: none;
 }

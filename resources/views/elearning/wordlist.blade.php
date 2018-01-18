@@ -9,7 +9,9 @@
                 <ol class="breadcrumb">
                     <li><a href="{{ route('home') }}">@lang('lang.homeLow')</a></li>
                     @foreach ($data['categoriesParent'] as $category)
-                        <li><a href="">{{ $category->name }}</a></li>
+                        <li>
+                            <a href="{{ route('elearning.category.show', $category->id) }}">{{ ucfirst($category->name) }}</a>
+                        </li>
                     @endforeach
                     <li>@lang('lang.wordlist')</li>
                 </ol>
@@ -24,7 +26,7 @@
                     <div class="teachersPhoto">
                         <img src="{{ $data['course']->picture_path }}" alt="image" class="img-rounded img-responsive">
                         @if (!$data['isActiveCourse'])
-                            <a class="btn-learn" href="{{ route('elearning.courses.lesson.show', [$data['course']->id, 0]) }}">
+                            <a class="btn-learn" href="{{ route('elearning.courses.lesson.show', [$data['course']->id, config('setting.lessonStart')]) }}">
                                 @lang('lang.btnLearn')
                             </a>
                         @endif
@@ -42,7 +44,7 @@
 
         <div class="full-width clearfix course-detail-content" id="x">
             @if ($data['isActiveCourse'])   
-                <div class="progress-content progress-wordlist">
+                <div class="progress-content progress-wordlist progress-wordlist-content">
                     @include('templates.elearning.progress')
                 </div>
             @endif

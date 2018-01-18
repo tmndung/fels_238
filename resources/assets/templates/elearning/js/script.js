@@ -327,3 +327,31 @@ $(document).ready(function () {
         return false;
     });
 });
+
+$(document).ready(function () {
+    $('#option-quit').click(function () {
+        var msg = $(this).attr('message');
+        if (confirm(msg)) {
+            $('#quit-course-form').submit();
+        }
+
+        return false;
+    });
+
+    $('#option-restart').click(function () {
+        var msg = $(this).attr('message');
+        if (confirm(msg)) {
+            $('#restart-course-form').submit();
+        }
+
+        return false;
+    });
+});
+
+$(document).ready(function () {
+    $('#play-word-audio').click(function () {
+        var audio = document.getElementById("listent-audio");
+        audio.autoplay = true;
+        audio.load();
+    });
+});
