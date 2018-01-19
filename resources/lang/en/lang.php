@@ -187,5 +187,12 @@
         'wordlist' => 'Word list',
         'totalWord' => 'Total word:',
         'skip' => 'Skip',
+        'option' => 'Option',
+        'restart' => 'Restart',
+        'quit' => 'Quit',
+        'easy' => 'Easy - ',
+        'medium' => 'Medium - ',
+        'hard' => 'Hard - ',
+        'minute' => ' min',
     ];
 ?>

@@ -18,7 +18,7 @@ $factory->define(App\Models\User::class, function (Faker $faker) {
 
     return [
         'name' => $faker->name,
-        'password' => $password ?: $password = bcrypt('secret'),
+        'password' => $password ?: $password = 'secret',
         'remember_token' => str_random(10),
         'description' => $faker->paragraph(1),
         'email' => $faker->unique()->safeEmail,
@@ -70,6 +70,7 @@ $factory->define(App\Models\WordList::class, function (Faker $faker) {
         'name' => implode(' ', $faker->words(1)),
         'pronunciation' => implode(' ', $faker->words(1)),
         'explain' => $faker->paragraph(1),
+        'file_listen' => implode(' ', $faker->words(3)) . '.mp3',
     ];
 });
 

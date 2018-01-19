@@ -29,6 +29,7 @@ mix.js('resources/assets/js/app.js', 'public/js')
    .styles('resources/assets/templates/admin/css/animate.min.css', 'public/templates/admin/css/animate.min.css');
 mix.copyDirectory('resources/assets/templates/elearning/images', 'public/templates/elearning/images');
 mix.copyDirectory('resources/assets/templates/admin/images', 'public/templates/admin/images');
+mix.copyDirectory('resources/assets/templates/elearning/audio', 'public/templates/elearning/audio');
 mix.copy('resources/assets/templates/admin/js/moment.min.js', 'public/templates/admin/js/moment.min.js');
 mix.copy('resources/assets/templates/elearning/js/jquery.themepunch.tools.min.js', 'public/templates/elearning/js/jquery.themepunch.tools.min.js');
 mix.copy('resources/assets/templates/elearning/js/jquery-min.js', 'public/templates/elearning/js/jquery-min.js');

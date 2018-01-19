@@ -20,7 +20,7 @@
                 <img src="{{ config('setting.checkIcon') }}" class="check-icon-lesson">
             @endif
         </div>
-        <div class="col-sm-9 col-xs-12 lesson-center-main teachersInfo">
+        <div class="col-sm-9 col-xs-12 lesson-center-main teachersInfo progress-wordlist-content">
             <h3>{{ trans('lang.lesson') . ' ' . $data['numOfLesson'] . ' - ' .  $data['lesson']->name }}</h3>
             <p>{{ $data['lesson']->content }}</p>
             <a class="btn btn-learn btn-wordlist" href="{{ route('elearning.courses.wordlist.show', [$data['course']->id, $data['lesson']->id]) }}">
@@ -34,16 +34,38 @@
                     @lang('lang.test')
                 </a>
             @elseif ($data['roleShowBtn'] == config('setting.learnedButNotFinished'))
-                <a class="btn btn-learn bg-color-1" href="">
+                <a class="btn btn-learn bg-color-1" href="" data-toggle="dropdown">
                     @lang('lang.review') ({{ count($data['lesson']->wordLists) }})
                 </a>
+                <ul class="dropdown-menu review-menu">
+                    <li>
+                        <a href="">{{ trans('lang.easy') . config('setting.easyMode') . trans('lang.minute') }}</a>
+                    </li>
+                    <li>
+                        <a href="">{{ trans('lang.medium') . config('setting.mediumMode') . trans('lang.minute') }}</a>
+                    </li>
+                    <li>
+                        <a href="">{{ trans('lang.hard') . config('setting.hardMode') . trans('lang.minute') }}</a>
+                    </li>
+                </ul>
                 <a class="btn btn-learn bg-color-3" href="">
                     @lang('lang.test')
                 </a>
             @elseif ($data['roleShowBtn'] == config('setting.finishedLesson'))
-                <a class="btn btn-learn bg-color-1" href="">
+                <a class="btn btn-learn bg-color-1" href="" data-toggle="dropdown">
                     @lang('lang.review') ({{ count($data['lesson']->wordLists) }})
                 </a>
+                <ul class="dropdown-menu review-menu">
+                    <li>
+                        <a href="">{{ trans('lang.easy') . config('setting.easyMode') . trans('lang.minute') }}</a>
+                    </li>
+                    <li>
+                        <a href="">{{ trans('lang.medium') . config('setting.mediumMode') . trans('lang.minute') }}</a>
+                    </li>
+                    <li>
+                        <a href="">{{ trans('lang.hard') . config('setting.hardMode') . trans('lang.minute') }}</a>
+                    </li>
+                </ul>
             @endif
         </div>
 

@@ -9,7 +9,9 @@
                 <ol class="breadcrumb">
                     <li><a href="{{ route('home') }}">@lang('lang.homeLow')</a></li>
                     @foreach ($data['categoriesParent'] as $category)
-                        <li><a href="">{{ $category->name }}</a></li>
+                        <li>
+                            <a href="{{ route('elearning.category.show', $category->id) }}">{{ ucfirst($category->name) }}</a>
+                        </li>
                     @endforeach
                 </ol>
             </div>
@@ -23,7 +25,7 @@
                     <div class="teachersPhoto">
                         <img src="{{ $data['course']->picture_path }}" alt="image" class="img-rounded img-responsive">
                         @if (!$data['isActiveCourse'])
-                            <a class="btn-learn" href="{{ route('elearning.courses.lesson.show', [$data['course']->id, 1]) }}">
+                            <a class="btn-learn" href="{{ route('elearning.courses.lesson.show', [$data['course']->id, config('setting.lessonStart')]) }}">
                                 @lang('lang.btnLearn')
                             </a>
                         @endif
@@ -44,11 +46,11 @@
         <div class="full-width clearfix course-detail-content" id="x">
             <div class="course-detail-left col-sm-9 col-xs-12">
                 @if ($data['isActiveCourse'])   
-                    <div class="progress-content">
+                    <div class="progress-content progress-course-content">
                         @include('templates.elearning.progress')
                     </div>
                 @endif
-                <div>
+                <div class="course-main-content">
                     <ul class="full-width clearfix">
                         @foreach ($data['course']->lessons as $lesson)
                             <li class="col-sm-3 col-xs-12 block">
@@ -84,15 +86,26 @@
                                 @else
                                     <li>
                                 @endauth
-                                    <a href="">
+                                    <a href="{{ route('elearning.profile.show', $study->user->id) }}">
                                         <img src="{{ config('setting.rank' . $loop->iteration) }}" class="rank-icon">
-                                        <span class="rank-position">{{ $loop->iteration . '. '}}</span>
+                                        <span class="rank-position">{{ $loop->iteration . '. ' }}</span>
                                         <img src="{{ $study->user->avatar_path }}" class="avatar-leader">
                                         <span class="user-leader">{{ str_limit($study->user->name, 7) }}</span>
                                         <span class="score-leader">{{ $study->score }}</span>
                                     </a>
                                 </li>
                             @endforeach
+                            @if ($data['isActiveCourse'] && ($data['myRank'] > config('setting.topUser')))
+                                <li class="my-leader">
+                                    <a href="{{ route('elearning.profile.show', Auth::user()->id) }}">
+                                        <img src="{{ config('setting.rank0') }}" class="rank-icon">
+                                        <span class="rank-position">{{ $data['myRank'] . '. ' }}</span>
+                                        <img src="{{ Auth::user()->avatar_path }}" class="avatar-leader">
+                                        <span class="user-leader">{{ str_limit(Auth::user()->name, 7) }}</span>
+                                        <span class="score-leader">{{ $data['myScore'] }}</span>
+                                    </a>
+                                </li>
+                            @endif
                             <li>
                                 <a href="">@lang('lang.more')</a>
                             </li>

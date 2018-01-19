@@ -65,13 +65,13 @@ class LessonController extends Controller
             ]);
 
             $idLessonsFinished = $studyOfUser->lessons()->where('is_finish', true)->pluck('lesson_id')->all();
-
             // if current lesson dont finished
             if (!in_array($lesson->id, $idLessonsFinished)) {
                 $data = $this->getLessonLearnedRecentOrCreate($data, $studyOfUser, $idLessonsFinished);
             }
 
             $data = $this->processLesson($data, $studyOfUser, $idLessonsFinished);
+            $this->updateRankOfCourses();
 
             return view('elearning.lesson', compact('data'));
         } catch (Exception $e) {
@@ -124,8 +124,13 @@ class LessonController extends Controller
             $course = Course::findOrFail($dataRequest['course_id']);
             $data['course'] = $course;
             $data['lesson'] = $course->lessons()->where('id', $dataRequest['lesson_id'])->first();
+            
             $studyOfUser = $course->studies()->where('user_id', Auth::user()->id)->first();
-            $idLessonsFinished = $studyOfUser->lessons()->where('is_learned', true)->pluck('lesson_id')->all();
+            $idLessonsFinished = $studyOfUser->lessons()->where('is_finish', true)->pluck('lesson_id')->all();
+            // if current lesson dont finished
+            if (!in_array($data['lesson']->id, $idLessonsFinished)) {
+                $data = $this->getLessonLearnedRecentOrCreate($data, $studyOfUser, $idLessonsFinished);
+            }
 
             $data = $this->processLesson($data, $studyOfUser, $idLessonsFinished);
 
