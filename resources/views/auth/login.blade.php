@@ -11,8 +11,24 @@
                 <h3 class="inner-tittle t-inner">@lang('lang.login')</h3>
                 <div class="buttons login">
                     <ul>
-                        <li><a href="#" class="hvr-sweep-to-right">@lang('lang.facebook')</a></li>
-                        <li class="lost"><a href="#" class="hvr-sweep-to-left">@lang('lang.twitter')</a> </li>
+                        <li>
+                            <a href="{{ route('authenticate', 'facebook') }}" class="facebook-login">
+                                <i class="fa fa-facebook fb-tw-gg-icon" aria-hidden="true"></i>
+                                @lang('lang.facebook')
+                            </a>
+                        </li>
+                        <li class="lost">
+                            <a href="{{ route('authenticate', 'google') }}" class="google-login">
+                                <i class="fa fa-google-plus fb-tw-gg-icon" aria-hidden="true"></i>
+                                @lang('lang.google')
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="{{ route('authenticate', 'twitter') }}" class="hvr-sweep-to-left twitter-login">
+                                <i class="fa fa-twitter fb-tw-gg-icon" aria-hidden="true"></i>
+                                @lang('lang.twitter')
+                            </a>
+                        </li>
                         <div class="clearfix"></div>
                     </ul>
                 </div>
