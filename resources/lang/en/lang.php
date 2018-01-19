@@ -194,5 +194,10 @@
         'medium' => 'Medium - ',
         'hard' => 'Hard - ',
         'minute' => ' min',
+        'view' => 'View',
+        'finish_practice' => 'Finished Practice !',
+        'number_of_correct' => 'Number of correct sentences:',
+        'accuracy' => 'Accuracy:',
+        'time' => 'Time:',
     ];
 ?>

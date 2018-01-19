@@ -18,12 +18,8 @@
                 <a href="#follower">@lang('lang.follower')</a>
             </div>
             <div class="div-info-bg col-sm-3">
-                <span class="span-info-bg">0</span>
-                <a href="">@lang('lang.word')</a>
-            </div>
-            <div class="div-info-bg col-sm-3">
-                <span class="span-info-bg">0</span>
-                <a href="">@lang('lang.point')</a>
+                <span class="span-info-bg">{{ $user->studies()->count() }}</span>
+                <a href="#courses">@lang('lang.course')</a>
             </div>
         </div>
         @if ($user == Auth::user())
@@ -50,10 +46,10 @@
                                       @foreach ($courses as $course)
                                           <li class="media">
                                             <div class="media-left">
-                                                <a href="#">{{ Html::image($course->picture_path, 'images', ['class' => 'img-rounded']) }}</a>
+                                                <a href="{{ route('elearning.courses.show', $course->id) }}">{{ Html::image($course->picture_path, 'images', ['class' => 'img-rounded']) }}</a>
                                             </div>
                                             <div class="media-body">
-                                                <h4 class="media-heading"><a href="#">{{ $course->name }}</a></h4>
+                                                <h4 class="media-heading"><a href="{{ route('elearning.courses.show', $course->id) }}">{{ $course->name }}</a></h4>
                                             </div>
                                           </li>
                                       @endforeach
@@ -75,26 +71,29 @@
                             <li><a href="#" class="bg-color-3"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
                         </ul>
                     </div> 
-                    <div class="teachersInfo bg-color-gray-border">
+                    <div class="teachersInfo bg-color-gray-border" id="courses">
                         <h3>@lang('lang.course_is_learning')</h3>
-                        <div class="row padding-10" id="#ourcourses">
+                        <div class="row padding-10 ourcourses" id="#ourcourses">
                             @if (count($studies))
-                                @foreach ($studies as $study)
-                                    <div class="col-sm-4 col-xs-12 block">
+                                @foreach ($studies as $key => $study)
+                                    <div class="col-sm-4 col-xs-12 block {{ $key < config('setting.max_course') ? '' : 'displaynone' }}">
                                         <div class="thumbnail thumbnailContent">
                                             <div class="caption border-color-1">
-                                                <h3><a href="" class="color-1">{{ $study->course->name }}</a></h3>
+                                                <h3><a href="{{ route('elearning.courses.show', $study->course->id) }}" class="color-1">{{ $study->course->name }}</a></h3>
                                                 <ul class="list-unstyled">
-                                                    <li><i class="fa fa-list" aria-hidden="true"></i>@lang('lang.course')</li>
+                                                    <li><i class="fa fa-list" aria-hidden="true"></i><a href="{{ route('elearning.category.show', $study->course->category->id) }}">{{ str_limit($study->course->category->name, 20) }}</a></li>
                                                 </ul>
                                                 <p></p>
-                                                <ul class="list-inline btn-yellow">
-                                                    <li><a href="" class="btn btn-link"><i class="fa fa-angle-double-right" aria-hidden="true"></i>@lang('lang.viewmore')</a></li>
+                                                <ul class="list-inline btn-yellow margin-bottom-none">
+                                                    <li><a href="{{ route('elearning.courses.show', $study->course->id) }}" class="btn btn-link"><i class="fa fa-angle-double-right" aria-hidden="true"></i>@lang('lang.view')</a></li>
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
                                 @endforeach
+                                @if (count($studies) > config('setting.max_course'))
+                                    <a href="" class="show-more"><i name="fa fa-angle-double-up" id="icon-more" class="fa fa-angle-double-down" aria-hidden="true"></i><span> </span>@lang('lang.more')</a>
+                                @endif
                             @else
                                 <h4>@lang('lang.not_study_any_course')</h4>
                             @endif
@@ -103,47 +102,52 @@
                     <div class="teachersInfo bg-color-gray-border" id="following">
                         <h3>@lang('lang.following')</h3>
                         <div>
-                        <ul>
-                            @if (count($followings))
-                                @foreach ($followings as $following)
-                                    <li class="view-follow top-user top-user-small" id="li{{ $following->id }}">
-                                        <img src="/templates/admin/images/avatar.jpg" alt="img" class="img-border img-circle-small">
-                                        <h3 class="name-small h3-small"><a href="{{ route('elearning.profile.show', $following->id) }}">{{ str_limit($following->userFollow->name, 10, '...') }}</a></h3>
-                                        @if ($user == Auth::user())
-                                            <a href="javascript:void(0)" class="btn btn-xs btn-primary btn-unfollow" id="{{ $following->id }}">@lang('lang.unfollow')</a>
-                                        @endif
-                                    </li>
-                                @endforeach
-
-                            @else
-                                <h4>@lang('lang.not_following_anyone')</h4>
-                            @endif
-                        </ul>
+                            <ul class="row user-follow">
+                                @if (count($followings))
+                                    @foreach ($followings as $key => $following)
+                                        <li class="{{ $key < config('setting.max_user') ? '' : 'displaynone' }} col-sm-3 col-xs-12 view-follow top-user top-user-small" id="li{{ $following->id }}">
+                                            {{ Html::image($following->user->avatar_path, '', ['class' => 'img-border img-circle-small']) }}
+                                            <h3 class="name-small h3-small"><a href="{{ route('elearning.profile.show', $following->id) }}">{{ str_limit($following->userFollow->name, 10, '...') }}</a></h3>
+                                            @if ($user == Auth::user())
+                                                <a href="javascript:void(0)" class="btn btn-xs btn-primary btn-unfollow" id="{{ $following->id }}">@lang('lang.unfollow')</a>
+                                            @endif
+                                        </li>
+                                    @endforeach
+                                    @if (count($followings) > config('setting.max_user'))
+                                        <li class="btn-user-follow-li"><a href="" class="show-more-follow"><i name="fa fa-angle-double-up" id="icon-more-li" class="fa fa-angle-double-down" aria-hidden="true"></i><span> </span>@lang('lang.more')</a></li>
+                                    @endif
+                                @else
+                                    <h4>@lang('lang.not_following_anyone')</h4>
+                                @endif
+                            </ul>
                         </div>
                     </div>
 
                     <div class="teachersInfo bg-color-gray-border margin-top-50px" id="follower">
                         <h3>@lang('lang.follower')</h3>
                         <div>
-                        <ul>
-                            @if (count($followers))
-                                @foreach ($followers as $follower)
-                                    <li class="view-follow top-user top-user-small">
-                                        <img src="/templates/admin/images/avatar.jpg" alt="img" class="img-border img-circle-small">
-                                        <h3 class="name-small h3-small"><a href="{{ route('elearning.profile.show', $follower->user_id) }}">{{ str_limit($follower->user->name, 10, '...') }}</a></h3>
-                                        @if ($user == Auth::user())
-                                            @if ($follower->status)
-                                                <a href="javascript:void(0)" class="btn-follow btn-follow-small btn-block-follow" id="{{ $follower->id }}">@lang('lang.block')</a>
-                                            @else
-                                                <a href="javascript:void(0)" class="btn-follow btn-block-follow" id="{{ $follower->id }}">@lang('lang.unblock')</a>
+                            <ul class="row user-follow">
+                                @if (count($followers))
+                                    @foreach ($followers as $key => $follower)
+                                        <li class="{{ $key < config('setting.max_user') ? '' : 'displaynone' }} col-sm-3 col-xs-12 view-follow top-user top-user-small">
+                                            {{ Html::image($follower->user->avatar_path, '', ['class' => 'img-border img-circle-small']) }}
+                                            <h3 class="name-small h3-small"><a href="{{ route('elearning.profile.show', $follower->user_id) }}">{{ str_limit($follower->user->name, 10, '...') }}</a></h3>
+                                            @if ($user == Auth::user())
+                                                @if ($follower->status)
+                                                    <a href="javascript:void(0)" class="btn-follow btn-follow-small btn-block-follow" id="{{ $follower->id }}">@lang('lang.block')</a>
+                                                @else
+                                                    <a href="javascript:void(0)" class="btn-follow btn-block-follow" id="{{ $follower->id }}">@lang('lang.unblock')</a>
+                                                @endif
                                             @endif
-                                        @endif
-                                    </li>
-                                @endforeach
-                            @else
-                                <h4>@lang('lang.not_follower')</h4>
-                            @endif
-                        </ul>
+                                        </li>
+                                    @endforeach
+                                    @if (count($followers) > config('setting.max_user'))
+                                        <li class="btn-user-follow-li"><a href="" class="show-more-follow"><i name="fa fa-angle-double-up" id="icon-more-li" class="fa fa-angle-double-down" aria-hidden="true"></i><span> </span>@lang('lang.more')</a></li>
+                                    @endif
+                                @else
+                                    <h4>@lang('lang.not_follower')</h4>
+                                @endif
+                            </ul>
                         </div>
                     </div>
                 </div>

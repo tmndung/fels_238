@@ -355,3 +355,99 @@ $(document).ready(function () {
         audio.load();
     });
 });
+
+$(document).ready(function() {
+    $('.show-more').click(function(event) {
+        var nameOld = $('#icon-more').attr('name');
+        var classOld = $('#icon-more').attr('class');
+        $(this).parent().find('.displaynone').toggle(500, function() {
+            $('#icon-more').attr('name', classOld);
+            $('#icon-more').attr('class', nameOld);
+        });
+        
+        return false;
+    });
+    $('.show-more-follow').click(function(event) {
+        var nameOld = $(this).children('#icon-more-li').attr('name');
+        var classOld = $(this).children('#icon-more-li').attr('class');
+        $(this).children('#icon-more-li').attr('name', classOld);
+        $(this).children('#icon-more-li').attr('class', nameOld);
+        $(this).parent().parent().find('.displaynone').toggle(500);
+        
+        return false;
+    });
+});
+
+
+$(document).ready(function() {
+    $('.btn-next-practice').click(function (event) {
+        var answered = $('.btn-next-practice').attr('actived') ? 1 : 0;
+        var testId = $('.content-test').attr('tid');
+        var questionId = $('.content-question').attr('qid');
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: route('elearning.practice.show', testId),
+            type: 'POST',
+            data: {
+                answered: answered,
+                questionId: questionId
+            },
+            success: function success(data) {
+                $('.btn-next-practice').removeAttr('actived');
+                $('.wrapper-all').html(data);
+            }
+        });
+
+        return false;
+    });
+    $('.choose-answer-practice').click(function(event) {
+        $('.btn-next-practice').attr('actived', 'actived');
+        $('.choose-answer-practice').off("click");
+        var id = $('.answer-test').attr('id'); //lay id question
+        var answerId = $(this).attr('id'); // lay id answer nguoi dung chon
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: route('elearning.test.answercorrect'),
+            type: 'POST',
+            dataType: "json",
+            data: {
+                id: id,
+                answerId: answerId
+            },
+            success: function( data ) {
+                if (answerId == data.correctId) {
+                    $('.wrapper-action-test').css('background', '#bff199');
+                    $('.btn-next-practice a').css({
+                        'background': '#65ab00',
+                        'color': '#FFF',
+                        'border': '2px solid #FFF'
+                    });
+                    $('.btn-next-practice a').text('Next');
+                    $('li#' + answerId).addClass('correct');
+                    $('#wrong-answer').css('display', 'none');
+                    $('#right-answer').css('display', 'block');
+                } else {
+                    $('.wrapper-action-test').css('background', '#ffd3d1');
+                    $('.btn-next-practice a').css({
+                        'background': '#e70800',
+                        'color': '#FFF',
+                        'border': '2px solid #FFF'
+                    });
+                    $('li#' + answerId).addClass('wrong');
+                    $('li#' + data.correctId).addClass('correct');
+                    $('#wrong-answer').css('display', 'block');
+                    $('#right-answer').css('display', 'none');
+                    $('.btn-next-practice a').text('Next');
+                }
+            }
+        })
+    });
+});

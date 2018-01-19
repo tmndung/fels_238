@@ -59,10 +59,47 @@ Route::group(['namespace' => 'Elearning'], function () {
         'uses' => 'WordListController@ajaxFilterWordlist',
         'as' => 'filterWordlist',
     ]);
-    Route::resource('courses.lesson', 'LessonController', [
-        'as' => 'elearning',
-        'middleware' => 'auth',
-    ]);
+    Route::group(['middleware' => 'auth'], function() {
+        Route::resource('courses.lesson', 'LessonController', [
+            'as' => 'elearning',
+        ]);
+        Route::get('/test/{id}', [
+            'uses' => 'TestController@index',
+            'as' => 'elearning.test.index',
+        ]);
+        Route::post('/show/{id}', [
+            'uses' => 'TestController@show',
+            'as' => 'elearning.test.show',
+        ]);
+        Route::get('test/result/{id}', [
+            'uses' => 'TestController@result',
+            'as' => 'elearning.test.result',
+        ]);
+
+        Route::get('/practice/{id}', [
+            'uses' => 'PracticeController@practiceLesson',
+            'as' => 'elearning.practice.index',
+        ]);
+
+        Route::get('/practicecourse/{id}', [
+            'uses' => 'PracticeController@practiceCourse',
+            'as' => 'elearning.practice.index',
+        ]);
+
+        Route::post('/practice/show/{id}', [
+            'uses' => 'PracticeController@show',
+            'as' => 'elearning.practice.show',
+        ]);
+
+        Route::get('practice/result/{id}', [
+            'uses' => 'PracticeController@result',
+            'as' => 'elearning.practice.result',
+        ]);
+
+        Route::resource('courses.lesson.learn', 'LearnController', [
+            'as' => 'elearning'
+        ]);
+    });
     Route::resource('/profile', 'ProfileController', [
         'as' => 'elearning',
     ]);
@@ -70,31 +107,14 @@ Route::group(['namespace' => 'Elearning'], function () {
         'uses' => 'ProfileController@updatePassword',
         'as' => 'elearning.profile.updatepassword',
     ]);
-    Route::get('/test/{id}', [
-        'middleware' => 'auth',
-        'uses' => 'TestController@index',
-        'as' => 'elearning.test.index',
-    ]);
-    Route::post('/show/{id}', [
-        'middleware' => 'auth',
-        'uses' => 'TestController@show',
-        'as' => 'elearning.test.show',
-    ]);
-    Route::get('test/result/{id}', [
-        'middleware' => 'auth',
-        'uses' => 'TestController@result',
-        'as' => 'elearning.test.result',
-    ]);
+    
+
     Route::resource('/category', 'CategoryController', [
         'as' => 'elearning',
     ]);
     Route::post('/ajax/lesson/changeLesson', [
         'uses' => 'LessonController@ajaxChangeLesson',
         'as' => 'changeLesson',
-    ]);
-    Route::resource('courses.lesson.learn', 'LearnController', [
-        'middleware' => 'auth',
-        'as' => 'elearning'
     ]);
     Route::post('/ajax/learning', [
         'uses' => 'LearnController@ajaxLearning',

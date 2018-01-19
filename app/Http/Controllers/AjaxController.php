@@ -46,6 +46,7 @@ class AjaxController extends Controller
             $messages['correctId'] = Answer::where('question_id', $request->id)->where('is_correct', config('setting.is_correct_answer'))->first()->id;
             if ($request->answerId == $messages['correctId']) {
                 $request->session()->put('score', $request->session()->get('score') + config('setting.increase_score'));
+                $request->session()->put('numberCorrect', $request->session()->get('numberCorrect') + config('setting.increase_correct'));
             }
         } catch (Exception $e) {
             $messages['error'] = trans('lang.error');

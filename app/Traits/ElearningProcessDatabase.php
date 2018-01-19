@@ -137,10 +137,10 @@ trait ElearningProcessDatabase
         }
     }
 
-    public function checkPassTest(Lesson $lesson) 
+    public function checkPassTest(Course $course, Lesson $lesson) 
     {
         try {
-            $studyOfUser = $lesson->course->studies()->where('user_id', Auth::user()->id)->first();
+            $studyOfUser = $course->studies()->where('user_id', Auth::user()->id)->first();
             $isFinish = $studyOfUser->lessons()->where('lesson_id', $lesson->id)->first()->pivot->is_finish;
             if ($isFinish) {
                 return true;

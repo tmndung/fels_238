@@ -22,10 +22,13 @@ class TestController extends Controller
         try {
             $request->session()->forget('score');
             $lesson = Lesson::findOrFail($id);
-            if ($this->checkPassTest($lesson)) {
+            $course = $lesson->course;
+            if ($this->checkPassTest($course, $lesson)) {
                 return redirect()->route('elearning.courses.lesson.show', [$lesson->course->id, $lesson->id]);
             }
-            $test = $lesson->tests()->inRandomOrder()->first();
+            if (!$test = $lesson->tests()->inRandomOrder()->first()) {
+                throw new Exception();
+            }
             if (!$questions = $test->questions()->get()) {
                 throw new Exception();                
             }

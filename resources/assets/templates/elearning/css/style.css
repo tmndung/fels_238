@@ -235,7 +235,7 @@ h5 {
     padding: 0px 10px 20px;
 }
 li.top-user {
-    display:  inline-block;
+    /*display:  inline-block;*/
     text-align:  center;
     padding: 15px 50px;
 }
@@ -310,10 +310,6 @@ img.top-user a {
 }
 li.view-follow-more {
     display: none;
-}
-
-li.view-follow{
-    display:  inline-block;
 }
 
 h3.h3-small {
@@ -1796,8 +1792,10 @@ h3.title-edit-profile {
 .content-test > h2 {
     font-weight: bold;
     color: #2b2828;
+    font-family: Times-new-Roman;
+    font-size: 32px;
 }
-.choose-answer-test {
+.choose-answer-test , .choose-answer-practice {
     list-style-type: none;
     width: 90%;
     margin: 2%;
@@ -1815,10 +1813,10 @@ h3.title-edit-profile {
 .answer-test {
     margin-top: 4em;
 }
-.choose-answer-test > span {
+.choose-answer-test > span .choose-answer-practice > span {
     display: block;
 }
-.choose-answer-test:hover {
+.choose-answer-test:hover, .choose-answer-practice:hover {
     color: #3399ff;
     border: 2px solid #3399ff;
     text-decoration: none;
@@ -2349,4 +2347,64 @@ h2.title-follow-user {
 
 .listent-audio {
     display: none;
+}
+
+.margin-bottom-none {
+    margin-bottom: 0 !important;
+}
+
+.displaynone {
+    display: none;
+}
+
+.ourcourses {
+    position: relative;
+}
+.show-more {
+    position: absolute;
+    bottom: 5px;
+    right: 30px;
+    color: #333;
+}
+
+.btn-user-follow-li {
+    position: absolute;
+    bottom: -25px;
+    right: 30px;
+    color: #333;
+    padding-bottom: 10px;
+}
+
+.user-follow {
+    position: relative;
+    padding-bottom: 20px;
+}
+
+.show-more-follow {
+    color: #333;
+}
+
+ul.result-practice {
+    margin:  0 auto;
+    display:  block;
+    width: 40%;
+}
+
+.result-practice li {
+    font-size: 20px;
+    line-height: 30px;
+    color: #02350b;
+    font-family:  arial !important;
+}
+
+.color-green {
+    color: #1e8208 !important;
+    font-family: Times-new-Roman !important;
+    font-size: 45px !important;
+}
+
+.result-practice > li > i {
+    padding: 5px !important;
+    width: 36px !important;
+    color: #696969 !important;
 }
