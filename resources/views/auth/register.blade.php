@@ -42,9 +42,26 @@
                     <div class="clearfix"></div>
                     <div class="buttons">
                         <ul>
-                            <li><a href="#" class="hvr-sweep-to-right">@lang('lang.signUp')</a></li>
+                            <li>
+                                <a href="{{ route('authenticate', 'facebook') }}" class="facebook-login">
+                                    <i class="fa fa-facebook fb-tw-gg-icon" aria-hidden="true"></i>
+                                    @lang('lang.signUp')
+                                </a>
+                            </li>
                             <li class="or"><h6>@lang('lang.or')</h6></li>
-                            <li class="lost"><a href="#" class="hvr-sweep-to-left">@lang('lang.signUp')</a></li>
+                            <li >
+                                <a href="{{ route('authenticate', 'google') }}" class="google-login">
+                                    <i class="fa fa-google-plus fb-tw-gg-icon" aria-hidden="true"></i>
+                                    @lang('lang.signUp')
+                                </a>
+                            </li>
+                            <li class="or"><h6>@lang('lang.or')</h6></li>
+                            <li class="lost">
+                                <a href="{{ route('authenticate', 'twitter') }}" class="twitter-login">
+                                    <i class="fa fa-twitter fb-tw-gg-icon" aria-hidden="true"></i>
+                                    @lang('lang.signUp')
+                                </a>
+                            </li>
                             <div class="clearfix"></div>
                         </ul>
                     </div>

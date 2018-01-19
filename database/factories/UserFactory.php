@@ -22,8 +22,6 @@ $factory->define(App\Models\User::class, function (Faker $faker) {
         'remember_token' => str_random(10),
         'description' => $faker->paragraph(1),
         'email' => $faker->unique()->safeEmail,
-        'facebook' => implode(' ', $faker->words(2)),
-        'twitter' => implode(' ', $faker->words(2)),
         'avatar' => $faker->image($dir = '/tmp', $width = 320, $height = 240),
         'background' => $faker->image($dir = '/tmp', $width = 640, $height = 480),
         'is_admin' => false,

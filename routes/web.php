@@ -123,3 +123,6 @@ Route::post('/answercorrect', [
 ]);
 
 Auth::routes();
+
+Route::get('/auth/{provider}', 'SocialAuthController@redirectToProvider')->name('authenticate');
+Route::get('/auth/{provide}/callback', 'SocialAuthController@handleProviderCallback');

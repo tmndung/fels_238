@@ -63,4 +63,5 @@ return [
     'hardMode' => 30,
     'scoreDefaultVal' => 0,
     'lessonStart' => 1,
+    'avatarExtension' => '.jpg',
 ];

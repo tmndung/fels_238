@@ -21,11 +21,11 @@ class User extends Authenticatable
         'email',
         'password',
         'description',
-        'facebook',
-        'twitter',
         'avatar',
         'background',
         'is_admin',
+        'provider',
+        'provider_id'
     ];
 
     /**
@@ -62,7 +62,6 @@ class User extends Authenticatable
     {
         $pathFile = config('setting.pathUpload') . $this->attributes['avatar'];
         if (!File::exists(public_path($pathFile)) || empty($this->attributes['avatar'])) {
-
             return config('setting.userAvatarDefault');
         }
 
@@ -73,7 +72,6 @@ class User extends Authenticatable
     {
         $pathFile = config('setting.pathUpload') . $this->attributes['background'];
         if (!File::exists(public_path($pathFile)) || empty($this->attributes['background'])) {
-
             return config('setting.userBackgroundDefault');
         }
 
