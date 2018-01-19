@@ -2,7 +2,7 @@
 <div class="wrapper-test">
     <div class="include-test" id="include-test">
         <div class="content-test animated fadeInRight" tid='{{ $question->test_id }}'>
-            <h2 class="1">{{ $question->content }}</h2>
+            <h2 class="content-question" qid={{ $question->id }}>{{ $question->content }}</h2>
 
             <div class="answer-test" id="{{ $question->id }}">
                 <ul>
@@ -26,6 +26,6 @@
         </div>
     </div>
     <div class="col-sm-6 action-test btn-next">
-        <a href="#">@lang('lang.next')</a>
+        <a href="#">@lang('lang.skip')</a>
     </div>
 </div>

@@ -168,7 +168,7 @@
         'test' => 'Test',
         'right' => 'Correct',
         'wrong' => 'Wrong',
-        'bai_lam_ket_thuc' => 'End test',
+        'end_test' => 'End test',
         'score_end' => 'Score : ',
         'past_test' => 'Congratulations! You passed the test.',
         'not_past_test' => 'Oh! You have not passed the test.',
@@ -186,5 +186,6 @@
         'learning' => 'Learning',
         'wordlist' => 'Word list',
         'totalWord' => 'Total word:',
+        'skip' => 'Skip',
     ];
 ?>
