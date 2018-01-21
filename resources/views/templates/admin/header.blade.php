@@ -29,25 +29,27 @@
                 <a href="index.html" class="navbar-brand"> 
                     <b>@lang('lang.admin')</b>
                 </a>
-
-                <ul class="nav navbar-nav search-nav">
-                    <li>
-                        <div class="search">
-                            <span class="fa fa-search icon-search" style="font-size:23px;"></span>
-                            <div class="form-group form-animate-text">
-                                <input type="text" id='search' class="form-text" required>
-                                <span class="bar"></span>
-                                <label class="label-search">@lang('lang.type_to_search')</label>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-
-                <ul class="nav navbar-nav navbar-right user-nav">
-                    <li class="user-name"><span>@lang('lang.users')</span></li>
-                    <li class="dropdown avatar-dropdown">
-                        <a href="#" class="user-image"><img src="/templates/admin/images/avatar.jpg" class="img-circle avatar" alt="user name" /></a></li>
-                    <li class="logout-admin"><a href=""><span class="fa fa-power-off "></span></a></li>
+                <ul class="nav navbar-nav navbar-right user-nav user-login-admin">
+                    @auth
+                        <a href="#" class="dropdown-toggle username-menu" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                            <span><img src="{{ Auth::user()->avatar_path }}" class="img-circle avatar"></span>
+                            {{ Auth::user()->name }} <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu user-login-admin-menu">
+                            <li>
+                                <a href="{{ route('elearning.profile.index') }}">@lang('lang.my_profile')</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('logout') }}" class="logout-admin" 
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    @lang('lang.logout')
+                                    <span class="fa fa-power-off "></span></a></li>
+                                </a>
+                                {{ Form::open(['route' => 'logout', 'id' => 'logout-form']) }}
+                                {{ Form::close() }}
+                            </li>
+                        </ul>
+                    @endauth
                 </ul>
             </div>
         </div>

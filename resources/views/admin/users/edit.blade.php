@@ -35,23 +35,9 @@
             </div>
             <div class="clr"></div>
 
-            {{ Form::label('left', trans('lang.facebook') . ': (*)', ['class' => 'left-login']) }}
-            <div class="right-login">
-                {{ Form::text('facebook', $user->facebook, ['class' => 'input-right']) }}
-                <br/><br/>
-            </div>
-            <div class="clr"></div>
-
-            {{ Form::label('left', trans('lang.twitter') . ': (*)', ['class' => 'left-login']) }}
-            <div class="right-login">
-                {{ Form::text('twitter', $user->twitter, ['class' => 'input-right']) }}
-                <br/><br/>
-            </div>
-            <div class="clr"></div>
-
             {{ Form::label('left', trans('lang.oldAvatar'), ['class' => 'left-login']) }}
             <div class="right-login">
-                <img src="{{ $user->avatar_path }}" class="picture">
+                <img src="{{ $user->avatar_path }}" class="old-avatar">
             </div>
             <div class="clr"></div>
 
@@ -64,7 +50,7 @@
 
             {{ Form::label('left', trans('lang.oldBg'), ['class' => 'left-login']) }}
             <div class="right-login">
-                <img src="{{ $user->background_path }}" class="picture">
+                <img src="{{ $user->background_path }}" class="old-bg">
             </div>
             <div class="clr"></div>
 

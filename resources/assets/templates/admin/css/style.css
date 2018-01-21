@@ -6535,7 +6535,6 @@ ul li a:focus {
 .input-right {
     width: 400px;
     height:  35px;
-    border-radius: 10px;
 }
 
 .button-form {
@@ -6579,4 +6578,65 @@ ul li a:focus {
     color: #333;
     border-bottom: 2px solid #2196f3;
     margin-bottom: 30px; 
+}
+
+.picture {
+    width: 45px;
+    height: 45px;
+}
+
+th,td {
+    text-align: center;
+}      
+
+.check-icon {
+    height: 25px;
+    width: 25px;
+}
+
+.old-bg {
+    width: 100px;
+    height: 60px;
+}
+
+.old-avatar {
+    width: 50px;
+    height: 50px;
+}
+
+.search-user {
+    padding: 0;
+    margin-left: 15%;
+}
+
+.search-user .form-text {
+    width: 250px;
+}
+
+.search-user .icon-search {
+    font-size: 20px;
+    line-height: 20px;
+}
+
+.user-login-admin {
+    margin-right: 35px !important;
+}
+
+.user-login-admin-menu {
+    min-width: 120px;
+    right: 4% !important;
+    background-color: #2196f3;
+    border-top: none;
+}
+.navbar-header .dropdown-menu a {
+    color: #fff !important;
+}
+
+.navbar-header .dropdown-menu a:hover {
+    color: #333 !important;
+}
+
+.username-menu {
+    display: inline-block;
+    line-height: 20px;
 }

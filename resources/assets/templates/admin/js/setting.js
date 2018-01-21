@@ -108,3 +108,61 @@ $(document).ready(function() {
         });
     }
 });
+
+$(document).ready(function () {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+});
+
+$(document).ready(function () {
+    $('.admin-active').click(function () {
+        var isAdmin = $(this).prop('checked') ? 1 : 0;
+        var idUser = $(this).attr('user');
+        $.ajax({
+            method: 'POST',
+            url: route('adminActive'),
+            data: {
+                is_admin: isAdmin,
+                user_id: idUser,
+            },
+            success: function (data) {},
+        });
+    });
+
+    $('#checkAllUser').click(function () {
+        var val = $(this).prop('checked');
+        $('.user-check').prop('checked', val);
+    });
+
+    $('#btnDelUser').click(function(event) {
+        var idUsers = [];
+        $('.user-check:checked').each ( function(i) {
+            idUsers[i] = $(this).attr('userId');
+        });
+        $.ajax({
+            url: route('admin.users.deleteAll'),
+            type: 'POST',
+            data: {
+                idUsers: idUsers,
+            },
+            success: function( data ) {},
+        });
+    });
+
+    $('#search-user-btn').click(function () {
+        var searchVal = $('#search-user-input').val();
+        $.ajax({
+            url: route('admin.users.searchUser'),
+            type: 'POST',
+            data: {
+                searchVal: searchVal,
+            },
+            success: function( data ) {
+                $('.content-users').html(data);
+            },
+        });
+    });
+});

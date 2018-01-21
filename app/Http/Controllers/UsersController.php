@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Follow;
 use Session;
 use App\Http\Requests\EditUserRequest;
 use App\Http\Requests\AddUserRequest;
 use App\Traits\ProcessFiles;
 use Exception;
+use DB;
 
 class UsersController extends Controller
 {
@@ -48,7 +50,7 @@ class UsersController extends Controller
             $data = $request->only(['name', 'password', 'email']);
             User::create($data);
 
-            Session::flash('messages', trans('lang.addSuccess'));
+            Session::flash('success', trans('lang.addSuccess'));
         } catch (Exception $e) {
             Session::flash('messages', trans('lang.errorAdd'));
         }
@@ -88,7 +90,7 @@ class UsersController extends Controller
     public function update(EditUserRequest $request, User $user)
     {
         try {
-            $data = $request->only(['name', 'email', 'description', 'facebook', 'twitter']);
+            $data = $request->only(['name', 'email', 'description']);
             $data['password'] = $user->password;
 
             if ($request->has('password')) {
@@ -100,7 +102,7 @@ class UsersController extends Controller
             
             $user->update($data);
 
-            Session::flash('messages', trans('lang.editSuccess'));         
+            Session::flash('success', trans('lang.editSuccess'));         
         } catch (Exception $e) {
             Session::flash('messages', trans('lang.errorEdit'));
         }
@@ -117,12 +119,65 @@ class UsersController extends Controller
     public function destroy(User $user)
     {
         try {
-            $user->delete();
-            Session::flash('messages', trans('lang.delSuccess'));
+            DB::transaction(function () use ($user) {
+                foreach($user->studies as $study) {
+                    $study->lessons()->detach();
+                    $study->delete();
+                }
+                $user->follows()->delete();
+                Follow::where('user_follow_id', $user->id)->delete();
+                $user->delete();
+            });
+            
+            Session::flash('success', trans('lang.delSuccess'));
         } catch (Exception $e) {
             Session::flash('messages', trans('lang.errorDel'));
         }
 
         return redirect()->route('admin.users.index');
+    }
+
+    public function adminActive(Request $request)
+    {
+        try {
+            $data = $request->only('is_admin', 'user_id');
+            $user = User::findOrFail($data['user_id']);
+            $user->update([
+                'is_admin' => (bool) $data['is_admin'],
+            ]);
+        } catch (Exception $e) {
+            return redirect('admin.404');
+        }
+    }
+
+    public function deleteAll(Request $request)
+    {
+        $idUsers = $request->idUsers;
+        try {
+            DB::transaction(function () use ($idUsers) {
+                $users = User::whereIn('id', $idUsers)->get();
+                foreach ($users as $user) {
+                    foreach($user->studies as $study) {
+                        $study->lessons()->detach();
+                        $study->delete();
+                    }
+                    $user->follows()->delete();
+                    Follow::where('user_follow_id', $user->id)->delete();
+                    $user->delete();
+                }
+            });
+
+            Session::flash('success', trans('lang.delSuccess'));
+        } catch (Exception $e) {
+            Session::flash('messages', trans('lang.errorDel'));
+        }
+    }
+
+    public function searchUser(Request $request)
+    {
+        $searchVal = '%' . $request->searchVal . '%';
+        $users = User::where('name', 'like', $searchVal)->orWhere('email', 'like', $searchVal)->paginate(config('setting.paginate'));
+
+        return view('admin.users.search', compact('users'));
     }
 }
