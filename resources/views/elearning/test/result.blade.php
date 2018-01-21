@@ -15,6 +15,9 @@
         <p class="{{ ($score >= $scorePass) ? 'pass-test' : 'not-pass-test' }}">
             {{ ($score >= $scorePass) ? trans('lang.past_test') : trans('lang.not_past_test') }}
         </p>
+        <div class="bonus-point">
+            {{ $msgPointBonus or '' }}
+        </div>
     </div>
     <div class="wrapper-action-test row">
         @if ($score < $scorePass)

@@ -451,3 +451,46 @@ $(document).ready(function() {
         })
     });
 });
+
+$(document).ready(function () {
+    var audio = document.getElementById("listent-audio");
+    if (audio) {
+        audio.autoplay = true;
+        audio.load();
+    }
+});
+
+$(document).ready(function () {
+    $('#review-word').click(function () {
+        var msg = $(this).attr('message');
+        if (confirm(msg)) {
+            $('#form-review-word').submit();
+        }
+        
+        return false;
+    });
+
+    $('#review-next-word').click(function () {
+        var lessonId = $(this).attr('lesson');
+        var courseId = $(this).attr('course');
+        var progress = $('#progress-learning').attr('progress') 
+        var offsetProgress = $(this).attr('offsetProgress');
+        var role = $(this).attr('role');
+        $.ajax({
+            method: 'POST',
+            url: route('reviewing.word'),
+            data: {
+                course_id: courseId,
+                lesson_id: lessonId,
+                progress: progress,
+                offsetProgress: offsetProgress,
+                role: role,
+            },
+            success: function (data) {
+                $('.learning-container').html(data);
+            },
+        });
+        
+        return false;
+    });
+});

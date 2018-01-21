@@ -9,6 +9,7 @@ use App\Models\WordList;
 use App\Traits\ElearningProcessDatabase;
 use Illuminate\Support\Facades\Auth;
 use DB;
+use Exception;
 
 class CoursesController extends Controller
 {

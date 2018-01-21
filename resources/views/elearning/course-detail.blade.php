@@ -106,9 +106,7 @@
                                     </a>
                                 </li>
                             @endif
-                            <li>
-                                <a href="">@lang('lang.more')</a>
-                            </li>
+                            <li></li>
                         </ul>
                     </div>
                 </div>

@@ -4,14 +4,17 @@
         <img src="{{ config('setting.congratIcon') }}">
     </div>
     <div class="endlearning-message">
-        @lang('lang.messageLearned')
+        {{ $msg or trans('lang.messageLearned') }}
     </div>
     <div class="endlearning-totalword">
-        @lang('lang.totalWord') {{ count($lesson->wordLists) }}
+        @lang('lang.totalWord') {{ $totalWord }}
+    </div>
+    <div class="bonus-point">
+        {{ $msgPointBonus or '' }}
     </div>
 </div>
 <div class="progress-content learning-footer endlearning-footers">
     <div class="action-test btn-text btn-learning-next">
-        <a href="{{ route('elearning.courses.lesson.show', [$course->id, $lesson->id]) }}">@lang('lang.ok')</a>
+        <a href="{{ $routeRedirect }}">@lang('lang.ok')</a>
     </div>
 </div>
