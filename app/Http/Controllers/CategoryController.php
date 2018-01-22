@@ -10,6 +10,7 @@ use App\Models\Test;
 use App\Models\Question;
 use App\Models\Answer;
 use App\Models\WordList;
+use App\Models\Study;
 use App\Http\Requests\CategoryRequest;
 use App\Traits\AdminProcessDatabase;
 use Exception;
@@ -126,7 +127,12 @@ class CategoryController extends Controller
                 Question::whereIn('test_id',  $idTests)->delete();
                 Test::whereIn('lesson_id',  $idLessons)->delete();
                 WordList::whereIn('lesson_id',  $idLessons)->delete();
-                Lesson::whereIn('course_id',  $idCourses)->delete();
+                $studies = Study::whereIn('course_id', $idCourses)->get();
+                foreach($studies as $study) {
+                    $study->lessons()->detach();
+                    $study->delete();
+                }
+                Lesson::whereIn('course_id', $idCourses)->delete();
                 Course::whereIn('category_id', $idCategories)->delete();
                 $category->courses()->delete();
                 $category->categories()->delete();

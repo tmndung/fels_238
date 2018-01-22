@@ -15,6 +15,14 @@
                     {{ Form::close() }}
                 </div>
                 <div class="col-md-6">
+                    <div class="col-lg-12">
+                        <div class="input-group">
+                            <input type="text" class="form-control search-category" aria-label="...">
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@lang('lang.search')</button>
+                            </div><!-- /btn-group -->
+                        </div><!-- /input-group -->
+                    </div>
                 </div><!-- /input-group -->
             </div><!-- /.col-lg-6 -->
         </div>
@@ -75,8 +83,8 @@
                 @endif
             </tbody>
         </table>
-    </div>
-    <div class="col-md-6">
-        {{ $objCategories->links() }}
+        <div class="col-md-6">
+            {{ $objCategories->links() }}
+        </div>
     </div>
 @endsection

@@ -15,7 +15,7 @@
             @if (count($objWordLists))
                 @foreach ($objWordLists as $objWordList)
                     <tr>
-                        <td><input type="checkbox" class="icheck checkbox-input" name="checkbox1" /></td>
+                        <td><input type="checkbox" class="checkwordlist icheck checkbox-input" name="checkbox1" id="{{ $objWordList->id }}"/></td>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ str_limit($objWordList->name, 25, '...') }}</td>
                         <td>{{ str_limit($objWordList->pronunciation, 20, '...') }}</td>

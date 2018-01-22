@@ -47,7 +47,7 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
     }
@@ -159,6 +159,41 @@ class ProfileController extends Controller
             return redirect()->route('elearning.profile.index');
         } catch (Exception $e) {
             Session::flash('messages', trans('lang.errorEdit'));
+
+            return redirect()->back();
+        }
+    }
+
+    public function addFollow(Request $request, $id)
+    {
+        try {
+            $user = Auth::user();
+            $data = [
+                'user_id' => $user->id,
+                'user_follow_id' => $id,
+                'status' => config('setting.status_default')
+            ];
+            Follow::create($data);
+            Session::flash('success', trans('lang.followSuccess'));
+
+            return redirect()->back();
+        } catch (Exception $e) {
+            Session::flash('messages', trans('lang.followFail'));
+
+            return redirect()->back();
+        }
+    }
+
+    public function unFollow(Request $request, $id)
+    {
+        try {
+            $user = Auth::user();
+            Follow::where('user_id', $user->id)->where('user_follow_id', $id)->delete();
+            Session::flash('success', trans('lang.unfollowSuccess'));
+
+            return redirect()->back();
+        } catch (Exception $e) {
+            Session::flash('messages', trans('lang.unfollowFail'));
 
             return redirect()->back();
         }

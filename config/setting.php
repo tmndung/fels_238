@@ -78,4 +78,5 @@ return [
     'all_wordlist' => 0,
     'errorImg' => '/templates/elearning/images/error.png',
     'idBossAdmin' => 1,
+    'status_default' => 1,
 ];

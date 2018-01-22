@@ -1,10 +1,10 @@
-function tokenAjax() {
+$(document).ready(function () {
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-}
+});
 $(document).ready(function() {
     $('#checkAll').click(function(event) {
         if ($(this).prop('checked') == true){
@@ -18,7 +18,6 @@ $(document).ready(function() {
         $('input[name=checkboxWordlist]:checked').each ( function(i) {
             idWordlists[i] = $(this).attr('id');
         });
-        tokenAjax();
         $.ajax({
             url: route('admin.wordlist.delete'),
             type: 'post',
@@ -32,7 +31,6 @@ $(document).ready(function() {
     });
     $('#selectLesson').change(function(event) {
         var id = $(this).val();
-        tokenAjax();
         $.ajax({
             url: route('admin.wordlist.content'),
             type: 'post',
@@ -72,7 +70,6 @@ $(document).ready(function() {
         $('input[name=checkboxCategory]:checked').each ( function(i) {
             idCategories[i] = $(this).attr('id');
         });
-        tokenAjax()
         $.ajax({
             url: route('admin.category.delete'),
             type: 'post',
@@ -96,7 +93,6 @@ $(document).ready(function() {
         getData(page);
     });
     function getData(page){
-        tokenAjax();
         $.ajax({
             url: route('admin.wordlist.content') +'?page=' + page,
             type: 'post',
@@ -107,14 +103,6 @@ $(document).ready(function() {
             }
         });
     }
-});
-
-$(document).ready(function () {
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
 });
 
 $(document).ready(function () {
@@ -163,6 +151,37 @@ $(document).ready(function () {
             success: function( data ) {
                 $('.content-users').html(data);
             },
+        });
+    });
+});
+$(document).ready(function() {
+    $('.search-category').keyup(function(event) {
+        var search = $(this).val();
+        $.ajax({
+            url: route('admin.search.category'),
+            type: 'POST',
+            data: {
+                search:search
+            },
+            success: function( data ) {
+                $('.responsive-table').html(data);
+            }
+        });
+    });
+});
+
+$(document).ready(function() {
+    $('.search-wordlist').keyup(function(event) {
+        var search = $(this).val();
+        $.ajax({
+            url: route('admin.search.wordlist'),
+            type: 'POST',
+            data: {
+                search:search
+            },
+            success: function( data ) {
+                $('.content-wordlist').html(data);
+            }
         });
     });
 });
