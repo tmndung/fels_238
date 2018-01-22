@@ -53,7 +53,7 @@
                             </ul>
                         </div>
                         <div class="col-sm-4">
-                            {!! Form::open() !!}
+                            {!! Form::open(['class' => 'search-public']) !!}
                                 <div class="input-group button-search">
                                     {!! Form::text('text', '', ['class' => 'form-control', 'id' => 'search-text']) !!}
                                     <span class="input-group-btn">
@@ -75,7 +75,7 @@
                                         <li class="dropdown">
                                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
                                                 <span><img src="{{ Auth::user()->avatar_path }}" class="avatar"></span>
-                                                {{ str_limit(Auth::user()->name, 10) }} <span class="caret"></span>
+                                                {{ str_limit(Auth::user()->name, 7) }} <span class="caret"></span>
                                             </a>
                                             <ul class="dropdown-menu">
                                                 <li>

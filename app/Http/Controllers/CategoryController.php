@@ -26,9 +26,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $objCategories = Category::paginate(config('setting.paginate'));
+        $objCategories = Category::where('parent_id', config('setting.default_parent_id'))->paginate(config('setting.paginate_category'));
+        $title = trans('lang.categories');
 
-        return view('admin.category.index', compact('objCategories'));
+        return view('admin.category.index', compact('objCategories', 'title'));
     }
 
     /**
@@ -54,12 +55,11 @@ class CategoryController extends Controller
         try {
             $columns = $request->only('name', 'parent_id');
             Category::create($columns);
-            $message = trans('lang.addSuccess');
-        } catch (Exception $e) {
-            $message = trans('lang.errorAdd');
-        }
 
-        return redirect()->action('CategoryController@index')->with('messages', $message);
+            return redirect()->route('admin.category.index')->with('success', trans('lang.addSuccess'));
+        } catch (Exception $e) {
+            return redirect()->route('admin.category.index')->with('messages', trans('lang.errorAdd'));
+        }
     }
 
     /**
@@ -98,12 +98,11 @@ class CategoryController extends Controller
         try {
             $columns = $request->only('name', 'parent_id');
             $category->update($columns);
-            $message = trans('lang.editSuccess');
-        } catch (Exception $e) {
-            $message = trans('lang.errorEdit');
-        }
 
-        return redirect()->action('CategoryController@index')->with('messages', $message);
+            return redirect()->route('admin.category.index')->with('success', trans('lang.editSuccess'));
+        } catch (Exception $e) {
+            return redirect()->route('admin.category.index')->with('messages', trans('lang.errorEdit'));
+        }
     }
 
     /**
@@ -133,11 +132,11 @@ class CategoryController extends Controller
                 $category->categories()->delete();
                 $category->delete();
             });
-            $message = trans('lang.delSuccess');
+
+            return redirect()->route('admin.category.index')->with('success', trans('lang.delSuccess'));
         } catch (Exception $e) {
-            $message = trans('lang.errorDel');
+            return redirect()->route('admin.category.index')->with('messages', $message = trans('lang.errorDel'));
         }
 
-        return redirect()->back()->with('messages', $message);
     }
 }

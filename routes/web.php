@@ -37,6 +37,10 @@ Route::group(['prefix' => '/admin'], function () {
     Route::resource('/courses', 'CoursesController', [
         'as' => 'admin',
     ]);
+    Route::get('/404', [
+        'uses' => 'NotFoundController@index',
+        'as' => 'admin.404',
+    ]);
 });
 
 Route::get('/', 'HomeController@index')->name('home');
@@ -150,6 +154,21 @@ Route::group(['prefix' => '/profile'], function () {
 Route::post('/answercorrect', [
     'uses' => 'AjaxController@answerCorrect',
     'as' => 'elearning.test.answercorrect',
+]);
+
+Route::post('/wordlist/content', [
+    'uses' => 'AjaxController@contentWordlist',
+    'as' => 'admin.wordlist.content',
+]);
+
+Route::post('/wordlist/delete', [
+    'uses' => 'AjaxController@deleteWordlist',
+    'as' => 'admin.wordlist.delete',
+]);
+
+Route::post('/category/delete', [
+    'uses' => 'AjaxController@deleteCategory',
+    'as' => 'admin.category.delete',
 ]);
 
 Auth::routes();

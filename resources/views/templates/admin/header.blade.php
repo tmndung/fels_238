@@ -3,10 +3,13 @@
 <head>
     <meta charset="utf-8">
     <title>@lang('lang.admin')</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    @routes()
     {{ Html::favicon( '/templates/admin/images/favicon.ico' ) }}
     {{ Html::style('/css/app.css') }}
     {{ Html::script('/js/app.js') }}
     {{ Html::script('/templates/admin/js/script.js') }}
+    {{ Html::script('/templates/admin/js/setting.js') }}
     {{ Html::script('/templates/admin/js/moment.min.js') }}
     {{ Html::script('/templates/admin/js/jquery.nicescroll.js') }}
     {{ Html::style('/templates/admin/css/style.css') }}
@@ -62,7 +65,7 @@
             <div class="panel box-shadow-none content-header">
                 <div class="panel-body">
                     <div class="col-md-12">
-                        <h3 class="animated fadeInLeft">@lang('lang.manage')</h3>
+                        <h3 class="animated fadeInLeft">{{ isset($title) ? $title : trans('lang.manage') }}</h3>
                     </div>
                 </div>
-        </div>
+            </div>

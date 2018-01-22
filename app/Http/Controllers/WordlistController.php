@@ -18,8 +18,11 @@ class WordlistController extends Controller
     public function index()
     {
         $objWordLists = WordList::orderBy('created_at', 'DESC')->paginate(config('setting.paginate'));
+        $lessons = Lesson::pluck('name', 'id');
+        $lessons[config('setting.all_wordlist')] = trans('lang.all');
+        $title = trans('lang.wordlists');
 
-        return view('admin.wordlist.index', compact('objWordLists'));
+        return view('admin.wordlist.index', compact('objWordLists', 'lessons', 'title'));
     }
 
     /**
@@ -45,12 +48,14 @@ class WordlistController extends Controller
         try {
             $columns = $request->only('name', 'pronunciation', 'explain', 'lesson_id');
             WordList::create($columns);
-            $message = trans('lang.addSuccess');
+
+            return redirect()->action('WordlistController@index')->with('success', trans('lang.addSuccess'));
         } catch (Exception $e) {
-            $message = trans('lang.errorAdd');
+
+            return redirect()->action('WordlistController@index')->with('messages', trans('lang.errorAdd'));
         }
 
-        return redirect()->action('WordlistController@index')->with('messages', $message);
+        
     }
 
     /**
@@ -89,12 +94,11 @@ class WordlistController extends Controller
         try {
             $columns = $request->only('name', 'pronunciation', 'explain', 'lesson_id');
             $wordlist->update($columns);
-            $message = trans('lang.editSuccess');
-        } catch (Exception $e) {
-            $message = trans('lang.errorEdit');
-        }
 
-        return redirect()->action('WordlistController@index')->with('messages', $message);
+            return redirect()->action('WordlistController@index')->with('success', trans('lang.editSuccess'));
+        } catch (Exception $e) {
+            return redirect()->action('WordlistController@index')->with('messages', trans('lang.errorEdit'));
+        }
     }
 
     /**
@@ -107,11 +111,10 @@ class WordlistController extends Controller
     {
         try {
             $wordlist->delete();
-            $message = trans('lang.delSuccess');
-        } catch (Exception $e) {
-            $message = trans('lang.errorDel');
-        }
 
-        return redirect()->back()->with('messages', $message);
+            return redirect()->action('WordlistController@index')->with('success', trans('lang.delSuccess'));
+        } catch (Exception $e) {
+            return redirect()->action('WordlistController@index')->with('messages', trans('lang.errorDel'));
+        }
     }
 }

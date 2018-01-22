@@ -26,7 +26,7 @@
         <div class="clr"></div>
         {{ Form::label('left', trans('lang.lesson'), ['class' => 'left-login']) }}
         <div class="right-login">
-            {{ Form::select('lesson_id', $lessons, '0', ['class' => 'input-right']) }}
+            {{ Form::select('lesson_id', $lessons, config('setting.all_wordlist'), ['class' => 'input-right']) }}
             <br/><br/>
         </div>
         <div class="clr"></div> 

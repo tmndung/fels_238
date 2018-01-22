@@ -200,5 +200,10 @@
         'messageReviewed' => 'Review word finish !',
         'msgReady' => 'Are you ready !',
         'bonus' => 'Bonus',
+        'easy' => 'Easy - ',
+        'medium' => 'Medium - ',
+        'hard' => 'Hard - ',
+        'minute' => ' min',
+        'choose' => 'Choose',
     ];
 ?>
