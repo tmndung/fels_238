@@ -11,6 +11,7 @@
               <h2>@lang('lang.editprofile')</h2>
               <ol class="breadcrumb">
                 <li><a href="{{ route('home') }}">@lang('lang.home')</a></li>
+                <li><a href="{{ route('elearning.profile.show', $user->id) }}">@lang('lang.profile')</a></li>
                 <li class="active">@lang('lang.editprofile')</li>
               </ol>
             </div>
@@ -30,10 +31,10 @@
                                       @foreach ($courses as $course)
                                           <li class="media">
                                             <div class="media-left">
-                                                <a href="#">{{ Html::image($course->picture_path, 'image', ['class' => 'img-rounded']) }}</a>
+                                                <a href="{{ route('elearning.courses.show', $course->id) }}">{{ Html::image($course->picture_path, 'images', ['class' => 'img-rounded']) }}</a>
                                             </div>
                                             <div class="media-body">
-                                                <h4 class="media-heading"><a href="#">{{ $course->name }}</a></h4>
+                                                <h4 class="media-heading"><a href="{{ route('elearning.courses.show', $course->id) }}">{{ $course->name }}</a></h4>
                                             </div>
                                           </li>
                                       @endforeach

@@ -1,6 +1,7 @@
 @extends('templates.elearning.master')
 
 @section('content')
+{{ Html::script('templates/elearning/js/custom.js') }}
 <div>
     <img class="bg-index-fixed" src="/templates/elearning/images/bg-index-fixed.jpg">
 </div>

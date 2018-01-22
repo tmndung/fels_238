@@ -73,7 +73,7 @@
                             <a class="btn btn-learn" href="{{ route('elearning.courses.lesson.learn.index', [$data['course']->id, $data['lesson']->id]) }}">
                                 @lang('lang.learn')
                             </a>
-                            <a class="btn btn-learn bg-color-3" href="">
+                            <a class="btn btn-learn bg-color-3" href="{{ route('elearning.test.index', $data['lesson']->id) }}">
                                 @lang('lang.test')
                             </a>
                         @elseif ($data['roleShowBtn'] == config('setting.learnedButNotFinished'))

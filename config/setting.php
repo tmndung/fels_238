@@ -64,4 +64,9 @@ return [
     'scoreDefaultVal' => 0,
     'lessonStart' => 1,
     'avatarExtension' => '.jpg',
+    'increase_correct' => 1,
+    'numberCorrect' => 0,
+    'default_question' => 20,
+    'max_course' => 3,
+    'max_user' => 4,
 ];
