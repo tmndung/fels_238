@@ -7,6 +7,7 @@ use App\Models\Lesson;
 use App\Models\WordList;
 use Illuminate\Support\Facades\Auth;
 use Exception;
+use DB;
 
 trait ElearningProcessDatabase
 {
@@ -50,7 +51,9 @@ trait ElearningProcessDatabase
                 $data['myRank'] = count($course->studies()->where('score', '>=', $studyOfUser->score)->get());
                 $data['myScore'] = $studyOfUser->score;
 
-                $data = $this->getLessonLearnedRecentOrCreate($data, $studyOfUser, $data['idLessonsFinished']);
+                if (count($data['idLessonsFinished']) < count($course->lessons)) {
+                    $data = $this->getLessonLearnedRecentOrCreate($data, $studyOfUser, $data['idLessonsFinished']);
+                }
             }
         }
 
@@ -95,7 +98,7 @@ trait ElearningProcessDatabase
         } elseif (!$isLearned && !$isFinished) {
             $data['roleShowBtn'] = config('setting.notFinished');
         } else {
-            throw new Exception("Error Processing Request", 1);
+            throw new Exception();
         }
 
         $data['preLesson'] = $data['course']->lessons()->where('id', '<', $data['lesson']->id)->orderBy('id', 'desc')->first();
@@ -122,7 +125,7 @@ trait ElearningProcessDatabase
             $idLessons = $course->lessons()->pluck('id')->all();
             
             if (!in_array($lesson->id, $idLessons) || !in_array($lesson->id, $idLessonsLearn)) {
-                throw new Exception("Error Processing Request", 1);
+                throw new Exception();
             }
 
             // if user has been learned this lesson, rediect to lesson-detail
@@ -155,14 +158,27 @@ trait ElearningProcessDatabase
     public function updateStudyLesson(Course $course, Lesson $lesson)
     {
         try {
-            $studyOfUser = $course->studies()->where('user_id', Auth::user()->id)->first();
-            $studyOfUser->lessons()->updateExistingPivot($lesson->id ,[
-                'is_learned' => true,
-            ]);
-            
+            $pointBonusLearned = $lesson->point * config('setting.ratioPointLearned');
+            DB::transaction(function () use ($course, $lesson, $pointBonusLearned) {
+                $studyOfUser = $course->studies()->where('user_id', Auth::user()->id)->first();
+                $studyOfUser->lessons()->updateExistingPivot($lesson->id ,[
+                    'is_learned' => true,
+                ]);
+                $studyOfUser->update([
+                    'score' => $studyOfUser->score + $pointBonusLearned,
+                ]);
+            });
+
+            $totalWord = count($lesson->wordLists);
+            $routeRedirect = route('elearning.courses.lesson.show', [$course->id, $lesson->id]);
+            $msgPointBonus = trans('lang.bonus') . ': +' . $pointBonusLearned;
+
             return view('templates.ajax.endlearning', compact([
                 'course',
                 'lesson',
+                'totalWord',
+                'routeRedirect',
+                'msgPointBonus',
             ]));
         } catch (Exception $e) {
             return redirect()->route('404');

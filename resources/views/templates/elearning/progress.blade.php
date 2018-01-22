@@ -43,18 +43,19 @@
             </a>
             <ul class="dropdown-menu review-menu">
                 <li>
-                    <a href="">{{ trans('lang.easy') . config('setting.easyMode') . trans('lang.minute') }}</a>
+                    <a href="" id="review-word" message="{{ trans('lang.msgReady') }}">{{ trans('lang.reviewWord') }}</a>
+                    {{ Form::open(['route' => ['elearning.review.word.course', $data['course']], 'method' => 'GET', 'id' => 'form-review-word']) }}
+                    {{ Form::close() }}
                 </li>
                 <li>
-                    <a href="">{{ trans('lang.medium') . config('setting.mediumMode') . trans('lang.minute') }}</a>
-                </li>
-                <li>
-                    <a href="">{{ trans('lang.hard') . config('setting.hardMode') . trans('lang.minute') }}</a>
+                    <a href="">{{ trans('lang.practice') }}</a>
                 </li>
             </ul>
         @endif
-        <a class="btn-learn " href="{{ route('elearning.courses.lesson.show', [$data['course']->id, $data['lesson']->id]) }}">
-            @lang('lang.learn')
-        </a>
+        @if (count($data['idLessonsFinished']) < count($data['course']->lessons))
+            <a class="btn-learn " href="{{ route('elearning.courses.lesson.show', [$data['course']->id, $data['lesson']->id]) }}">
+                @lang('lang.learn')
+            </a>
+        @endif
     </div>
 </div>

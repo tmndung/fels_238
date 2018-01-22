@@ -12,6 +12,7 @@ use App\Models\Answer;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use App\Traits\ElearningProcessDatabase;
+use DB;
 
 class TestController extends Controller
 {
@@ -77,17 +78,37 @@ class TestController extends Controller
             $test = Test::findOrFail($id);
             $scorePass = $test->point_need_pass;
             if ($score >= $scorePass) {
-                $data = [
-                    'is_finish' => config('setting.is_finish'),
-                    'is_learned' => config('setting.is_learned'),
-                ];
                 $studyOfUser = $test->lesson->course->studies()->where('user_id', Auth::user()->id)->first();
-                if (!$studyOfUser->lessons()->updateExistingPivot($test->lesson->id ,$data)){
-                    throw new Exception();
+                $pointBonusPassed = $test->lesson->point;
+                $isLearned = $studyOfUser->lessons()->where('lesson_id', $test->lesson->id)->first()->pivot->is_learned;
+                if (!$isLearned) {
+                    $pointBonusPassed *= config('setting.ratioPointPassedButDontLearned');
                 }
+
+                DB::transaction(function () use ($test, $studyOfUser, $pointBonusPassed) {
+                    $data = [
+                        'is_finish' => config('setting.is_finish'),
+                        'is_learned' => config('setting.is_learned'),
+                    ];
+                    if (!$studyOfUser->lessons()->updateExistingPivot($test->lesson->id ,$data)){
+                        throw new Exception();
+                    }
+
+                    $studyOfUser->update([
+                        'score' => $studyOfUser->score + $pointBonusPassed,
+                    ]);
+                });
             }
+            
             $idLesson = $test->lesson->id;
-            return view('elearning.test.result', compact('score', 'scorePass', 'idLesson'));
+            $msgPointBonus = isset($pointBonusPassed) ? trans('lang.bonus') . ': +' . $pointBonusPassed : '';
+
+            return view('elearning.test.result', compact([
+                'score',
+                'scorePass',
+                'idLesson',
+                'msgPointBonus'
+            ]));
         } catch (Exception $e) {
             return redirect()->route('404');
         }

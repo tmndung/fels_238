@@ -23,14 +23,21 @@
         <div class="col-sm-9 col-xs-12 lesson-center-main teachersInfo progress-wordlist-content">
             <h3>{{ trans('lang.lesson') . ' ' . $data['numOfLesson'] . ' - ' .  $data['lesson']->name }}</h3>
             <p>{{ $data['lesson']->content }}</p>
+            <p class="info-word-point">
+                @lang('lang.word'): 
+                <span class="color-4-bold">{{ count($data['lesson']->wordLists) }}</span>
+                <br/>
+                @lang('lang.point'): 
+                <span class="color-1-bold">{{ $data['lesson']->point }}</span>
+            </p>
             <a class="btn btn-learn btn-wordlist" href="{{ route('elearning.courses.wordlist.show', [$data['course']->id, $data['lesson']->id]) }}">
                 @lang('lang.wordList')
             </a>
             @if ($data['roleShowBtn'] == config('setting.notFinished'))
-                <a class="btn btn-learn" href="{{ route('elearning.courses.lesson.learn.index', [$data['course']->id, $data['lesson']->id]) }}">
+                <a class="btn btn-learn" href="{{ route('elearning.courses.lesson.learn.index', [$data['course']->id, $data['lesson']->id]) }}" onclick="return confirm('{{ trans('lang.msgReady') }}')">
                     @lang('lang.learn')
                 </a>
-                <a class="btn btn-learn bg-color-3" href="">
+                <a class="btn btn-learn bg-color-3" href="{{ route('elearning.test.index', $data['lesson']->id) }}" onclick="return confirm('{{ trans('lang.msgReady') }}')">
                     @lang('lang.test')
                 </a>
             @elseif ($data['roleShowBtn'] == config('setting.learnedButNotFinished'))
@@ -39,16 +46,15 @@
                 </a>
                 <ul class="dropdown-menu review-menu">
                     <li>
-                        <a href="">{{ trans('lang.easy') . config('setting.easyMode') . trans('lang.minute') }}</a>
+                        <a href="" id="review-word" message="{{ trans('lang.msgReady') }}">{{ trans('lang.reviewWord') }}</a>
+                        {{ Form::open(['route' => ['elearning.review.word.lesson', $data['course'], $data['lesson']->id], 'method' => 'GET', 'id' => 'form-review-word']) }}
+                        {{ Form::close() }}
                     </li>
                     <li>
-                        <a href="">{{ trans('lang.medium') . config('setting.mediumMode') . trans('lang.minute') }}</a>
-                    </li>
-                    <li>
-                        <a href="">{{ trans('lang.hard') . config('setting.hardMode') . trans('lang.minute') }}</a>
+                        <a href="">{{ trans('lang.practice') }}</a>
                     </li>
                 </ul>
-                <a class="btn btn-learn bg-color-3" href="">
+                <a class="btn btn-learn bg-color-3" href="{{ route('elearning.test.index', $data['lesson']->id) }}" onclick="return confirm('{{ trans('lang.msgReady') }}')">
                     @lang('lang.test')
                 </a>
             @elseif ($data['roleShowBtn'] == config('setting.finishedLesson'))
@@ -57,13 +63,12 @@
                 </a>
                 <ul class="dropdown-menu review-menu">
                     <li>
-                        <a href="">{{ trans('lang.easy') . config('setting.easyMode') . trans('lang.minute') }}</a>
+                        <a href="" id="review-word" message="{{ trans('lang.msgReady') }}">{{ trans('lang.reviewWord') }}</a>
+                        {{ Form::open(['route' => ['elearning.review.word.lesson', $data['course'], $data['lesson']->id], 'method' => 'GET', 'id' => 'form-review-word']) }}
+                        {{ Form::close() }}
                     </li>
                     <li>
-                        <a href="">{{ trans('lang.medium') . config('setting.mediumMode') . trans('lang.minute') }}</a>
-                    </li>
-                    <li>
-                        <a href="">{{ trans('lang.hard') . config('setting.hardMode') . trans('lang.minute') }}</a>
+                        <a href="">{{ trans('lang.practice') }}</a>
                     </li>
                 </ul>
             @endif

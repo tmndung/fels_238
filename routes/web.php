@@ -99,6 +99,14 @@ Route::group(['namespace' => 'Elearning'], function () {
         Route::resource('courses.lesson.learn', 'LearnController', [
             'as' => 'elearning'
         ]);
+        Route::get('/review/word/{course}/lesson/{lesson}', [
+            'uses' => 'ReviewController@reviewWordLesson',
+            'as' => 'elearning.review.word.lesson',
+        ]);
+        Route::get('/review/word/{course}', [
+            'uses' => 'ReviewController@reviewWordCourse',
+            'as' => 'elearning.review.word.course',
+        ]);
     });
     Route::resource('/profile', 'ProfileController', [
         'as' => 'elearning',
@@ -107,8 +115,6 @@ Route::group(['namespace' => 'Elearning'], function () {
         'uses' => 'ProfileController@updatePassword',
         'as' => 'elearning.profile.updatepassword',
     ]);
-    
-
     Route::resource('/category', 'CategoryController', [
         'as' => 'elearning',
     ]);
@@ -119,6 +125,10 @@ Route::group(['namespace' => 'Elearning'], function () {
     Route::post('/ajax/learning', [
         'uses' => 'LearnController@ajaxLearning',
         'as' => 'learning',
+    ]);
+    Route::post('/ajax/reviewing', [
+        'uses' => 'ReviewController@ajaxreviewWord',
+        'as' => 'reviewing.word',
     ]);
 });
 Route::post('/search', [
