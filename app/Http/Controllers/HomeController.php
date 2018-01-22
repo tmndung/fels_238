@@ -8,6 +8,7 @@ use App\Models\Course;
 use App\Models\Lesson;
 use App\Models\Study;
 use Exception;
+use Session;
 
 class HomeController extends Controller
 {
@@ -31,5 +32,15 @@ class HomeController extends Controller
         } catch (Exception $e) {
             return redirect()->route('404');
         }
+    }
+
+    public function errorPage()
+    {
+        return view('elearning.404');
+    }
+
+    public function changeLanguage(Request $request) 
+    {
+        Session::put('webLanguage', $request->lang);
     }
 }

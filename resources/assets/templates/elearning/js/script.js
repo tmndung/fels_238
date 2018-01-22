@@ -500,3 +500,19 @@ $(document).ready(function() {
         return false;
     });
 });
+
+$(document).ready(function () {
+    $('#select-language').change(function () {
+        var lang = $(this).children('option:selected').val()
+        $.ajax({
+            method: 'POST',
+            url: route('changeLanguage'),
+            data: {
+                lang: lang,
+            },
+            success: function(data) {
+                location.reload();
+            },
+        });
+    });
+});

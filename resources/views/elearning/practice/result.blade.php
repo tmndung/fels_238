@@ -13,7 +13,7 @@
     </div>
     <div class="wrapper-action-test row">
         <div class="col-sm-6 col-sm-offset-6 action-test btn-continue">
-            <a href="{{ route('elearning.courses.lesson.show', [$course->id, $lesson->id]) }}">@lang('lang.continue')</a>
+            <a href="{{ $routeRedirect }}">@lang('lang.continue')</a>
         </div>
     </div>
 </div>

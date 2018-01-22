@@ -67,8 +67,8 @@
                             <ul class="list-inline functionList">
                                 <li><i class="fa fa-globe bg-color-4" aria-hidden="true"></i></li>
                                 <li class="LanguageList">
-                                    {!! Form::open(array('url' => '', 'class' => 'bg-color-4')) !!}
-                                        {!! Form::select('select-language', ['English' => trans('lang.english'), 'Vietnamese' => trans('lang.vietnamese')], null, array('id' => 'select-language', 'class' => 'select-language')); !!}
+                                    {!! Form::open(['url' => '', 'class' => 'bg-color-4', 'id' => 'language-form']) !!}
+                                        {!! Form::select('select-language', ['en' => trans('lang.english'), 'vi' => trans('lang.vietnamese')], config('app.locale'), ['id' => 'select-language', 'class' => 'select-language']); !!}
                                     {!! Form::close() !!}
                                 </li>
                                     @auth

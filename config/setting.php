@@ -72,6 +72,9 @@ return [
     'numberOfWordReview' => 10,
     'ajaxReviewWordLesson' => 1,
     'ajaxReviewWordCourse' => 2,
+    'ajaxPracticeLesson' => 1,
+    'ajaxPracticeCourse' => 2,
     'paginate_category' => 3,
     'all_wordlist' => 0,
+    'errorImg' => '/templates/elearning/images/error.png',
 ];

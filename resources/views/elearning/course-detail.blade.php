@@ -65,7 +65,7 @@
                                             <div class="lock"><i class="fa fa-lock"></i></div>
                                         @endif
                                     </div>
-                                    <div class="lesson-name">{{ ucfirst(str_limit($lesson->name, 15)) }}</div>
+                                    <div class="lesson-name">{{ ucfirst(str_limit($lesson->name, 10)) }}</div>
                                 </a>
                             </li>
                         @endforeach
