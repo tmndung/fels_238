@@ -490,7 +490,13 @@ $(document).ready(function () {
                 $('.learning-container').html(data);
             },
         });
-        
+
+        return false;
+    });
+});
+
+$(document).ready(function() {
+    $('.search-public').submit(function() {
         return false;
     });
 });

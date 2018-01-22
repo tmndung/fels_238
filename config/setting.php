@@ -10,6 +10,7 @@ return [
     'paginate' => 10,
     'default_parent_id' => 0,
     'lessonPictureDefault' => '/templates/admin/images/lesson_picture_default.png',
+    'admin_404' => '/templates/admin/images/404.png',
     'picture' => 'picture',
     'number_course' => 4,
     'status_follow_default' => 1,
@@ -71,4 +72,6 @@ return [
     'numberOfWordReview' => 10,
     'ajaxReviewWordLesson' => 1,
     'ajaxReviewWordCourse' => 2,
+    'paginate_category' => 3,
+    'all_wordlist' => 0,
 ];

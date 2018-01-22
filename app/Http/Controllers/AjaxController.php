@@ -9,6 +9,9 @@ use App\Models\Test;
 use App\Models\Question;
 use App\Models\Answer;
 use App\Models\Course;
+use App\Models\WordList;
+use App\Models\Category;
+use Session;
 
 class AjaxController extends Controller
 {
@@ -67,6 +70,35 @@ class AjaxController extends Controller
             $error['error'] = trans('lang.not_found');
 
             return response()->json($error);
+        }
+    }
+
+    public function contentWordlist(Request $request)
+    {
+        if ($request->id) {
+            $objWordLists = WordList::where('lesson_id', $request->id)->orderBy('created_at', 'DESC')->paginate(config('setting.paginate'));
+        } else {
+            $objWordLists = WordList::orderBy('created_at', 'DESC')->paginate(config('setting.paginate'));
+        }
+
+        return view('admin.wordlist.content', compact('objWordLists'));
+    }
+
+    public function deleteWordlist(Request $request)
+    {
+        if (WordList::whereIn('id', $request->idWordlists)->delete()) {
+            Session::flash('success', trans('lang.delSuccess'));
+        } else {
+            Session::flash('messages', trans('lang.errorDel'));
+        }
+    }
+
+    public function deleteCategory(Request $request)
+    {
+        if (Category::whereIn('id', $request->idCategories)->delete()) {
+            Session::flash('success', trans('lang.delSuccess'));
+        } else {
+            Session::flash('messages', trans('lang.errorDel'));
         }
     }
 }
