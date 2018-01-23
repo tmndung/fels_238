@@ -13,7 +13,7 @@
 Route::pattern('id', '[0-9]+');
 
 Route::group(['middleware' => 'lang'], function () {
-    Route::group(['prefix' => '/admin'], function () {
+    Route::group(['prefix' => '/admin', 'middleware' => ['auth', 'adminRole']], function () {
     	Route::resource('/users', 'UsersController', [
     		'as' => 'admin'
     	]);
@@ -172,15 +172,32 @@ Route::group(['middleware' => 'lang'], function () {
         'as' => 'admin.category.delete',
     ]);
 
-    Route::get('/error/404', 'HomeController@errorPage')->name('404');
+    Route::post('/ajax/adminActive', [
+        'uses' => 'UsersController@adminActive',
+        'as' => 'adminActive',
+    ]);
 
-    Auth::routes();
+    Route::post('/ajax/users/deleteAll', [
+        'uses' => 'UsersController@deleteAll',
+        'as' => 'admin.users.deleteAll',
+    ]);
+
+    Route::post('/ajax/users/searchUser', [
+        'uses' => 'UsersController@searchUser',
+        'as' => 'admin.users.searchUser',
+    ]);
 
     Route::post('/changelanguage', [
         'uses' => 'HomeController@changeLanguage',
         'as' => 'changeLanguage',
     ]);
+    
+    Route::get('/error/404', 'HomeController@errorPage')->name('404');
 
-    Route::get('/auth/{provider}', 'SocialAuthController@redirectToProvider')->name('authenticate');
-    Route::get('/auth/{provide}/callback', 'SocialAuthController@handleProviderCallback');
+    Auth::routes();
+
+    Route::group(['middleware' => 'adminAuth'], function () {
+        Route::get('/auth/{provider}', 'SocialAuthController@redirectToProvider')->name('authenticate');
+        Route::get('/auth/{provide}/callback', 'SocialAuthController@handleProviderCallback');
+    });
 });

@@ -77,4 +77,5 @@ return [
     'paginate_category' => 3,
     'all_wordlist' => 0,
     'errorImg' => '/templates/elearning/images/error.png',
+    'idBossAdmin' => 1,
 ];

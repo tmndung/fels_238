@@ -26,9 +26,6 @@ class EditUserRequest extends FormRequest
         return [
             'name' => 'required|max:50',
             'email' => 'required|email',
-            'facebook' => 'required|max:50',
-            'twitter' => 'required|max:50',
-            'description' => 'required',
             'password-confirmation' => 'same:password',
         ];
     }
@@ -40,11 +37,6 @@ class EditUserRequest extends FormRequest
             'name.max' => trans('lang.usernameMaxVali'),
             'email.required' => trans('lang.emailRequiredVali'),
             'email.email' => trans('lang.emailVali'),
-            'facebook.required' => trans('lang.facebookRequiredVali'),
-            'facebook.max' => trans('lang.facebookMaxVali'),
-            'twitter.required' => trans('lang.twitterRequiredVali'),
-            'twitter.max' => trans('lang.twitterMaxVali'),
-            'description.required' => trans('lang.descriptionRequiredVali'),
             'password-confirmation.same' => trans('lang.passConfirmVali'),
         ];
     }
