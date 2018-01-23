@@ -5,20 +5,28 @@
     <div class="panel">
         <div class="panel-body">
             <div class="col-md-12 padding-0" style="padding-bottom:20px;">
-                <div class="col-md-3" style="padding-left:10px;">
+                <div class="col-md-2" style="padding-left:10px;">
                     <input type="checkbox" id="checkAll" class="icheck pull-left checkbox-input" name="checkbox1"/>
                     <a href="" id="btnDelWordList" onclick="return confirm('{{ trans('lang.msgDel') }}')" class="btn btn-danger">@lang('lang.deleteBtn')</a>
                 </div>
-                <div class="header-content row col-md-3">
+                <div class="header-content row col-md-2">
                     {{ Form::open(['route' => 'admin.wordlist.create', 'method' => 'GET', 'class' => 'col-xs-7']) }}
                         {{ Form::button('<i class="fa fa-plus"></i> ' . trans('lang.addBtn'), array('type' => 'submit', 'class' => 'btn btn-default')) }}
                     {{ Form::close() }}
                 </div>
-                <div class="col-md-6">
-                    <div class="col-sm-12 padding-0">
+                <div class="col-md-8">
+                    <div class="col-sm-6 padding-0">
                         {{ Form::open() }}
                             {{ Form::select('lessons', $lessons, config('setting.all_wordlist'), ['class' => 'form-control', 'id' => 'selectLesson']) }}
                         {{ Form::close() }}
+                    </div>
+                    <div class="col-sm-6 padding-0">
+                        <div class="input-group">
+                            <input type="text" class="form-control search-wordlist" aria-label="...">
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@lang('lang.search')</button>
+                            </div><!-- /btn-group -->
+                        </div><!-- /input-group -->
                     </div>
                 </div><!-- /input-group -->
             </div><!-- /.col-lg-6 -->

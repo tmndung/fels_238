@@ -22,13 +22,23 @@
                 <a href="#courses">@lang('lang.course')</a>
             </div>
         </div>
-        @if ($user == Auth::user())
-            <div class="div-edit">
+        <div class="div-edit">
+            @if ($user == Auth::user())
                 <a href="{{ route('elearning.profile.edit', $user->id) }}" class="button-edit">
-                <span class="fa fa-pencil"></span>@lang('lang.editprofile')
+                    <span class="fa fa-pencil">&nbsp;</span>@lang('lang.editprofile')
                 </a>
-            </div>
-        @endif
+            @else
+                @if (Auth::user()->follows->contains('user_follow_id', $user->id))
+                    <a href="{{ route('elearning.profile.unfollow', $user->id) }}" class="button-edit">
+                        <span class="fa fa-user-times">&nbsp;</span>@lang('lang.unfollow')
+                    </a>
+                @else
+                    <a href="{{ route('elearning.profile.addfollow', $user->id) }}" class="button-edit">
+                        <span class="fa fa-user-plus">&nbsp;</span>@lang('lang.follow')
+                    </a>
+                @endif
+            @endif
+        </div>
     </div>
     
     <section class="mainContent full-width clearfix bg-color-gray">
@@ -107,7 +117,7 @@
                                     @foreach ($followings as $key => $following)
                                         <li class="{{ $key < config('setting.max_user') ? '' : 'displaynone' }} col-sm-3 col-xs-12 view-follow top-user top-user-small" id="li{{ $following->id }}">
                                             {{ Html::image($following->user->avatar_path, '', ['class' => 'img-border img-circle-small']) }}
-                                            <h3 class="name-small h3-small"><a href="{{ route('elearning.profile.show', $following->id) }}">{{ str_limit($following->userFollow->name, 10, '...') }}</a></h3>
+                                            <h3 class="name-small h3-small"><a href="{{ route('elearning.profile.show', $following->userFollow->id) }}">{{ str_limit($following->userFollow->name, 10, '...') }}</a></h3>
                                             @if ($user == Auth::user())
                                                 <a href="javascript:void(0)" class="btn btn-xs btn-primary btn-unfollow" id="{{ $following->id }}">@lang('lang.unfollow')</a>
                                             @endif

@@ -11,18 +11,17 @@
 |
 */
 Route::pattern('id', '[0-9]+');
-
 Route::group(['middleware' => 'lang'], function () {
     Route::group(['prefix' => '/admin', 'middleware' => ['auth', 'adminRole']], function () {
-    	Route::resource('/users', 'UsersController', [
-    		'as' => 'admin'
-    	]);
-    	Route::resource('/wordlist', 'WordlistController', [
-    		'as' => 'admin'
-    	]);
-    	Route::resource('/category', 'CategoryController', [
-    		'as' => 'admin'
-    	]);
+        Route::resource('/users', 'UsersController', [
+            'as' => 'admin'
+        ]);
+        Route::resource('/wordlist', 'WordlistController', [
+            'as' => 'admin'
+        ]);
+        Route::resource('/category', 'CategoryController', [
+            'as' => 'admin'
+        ]);
         Route::resource('/users', 'UsersController', [
             'as' => 'admin',
         ]);
@@ -42,18 +41,32 @@ Route::group(['middleware' => 'lang'], function () {
             'uses' => 'NotFoundController@index',
             'as' => 'admin.404',
         ]);
+        Route::post('/searchcategory', [
+            'uses' => 'AjaxController@searchCategory',
+            'as' => 'admin.search.category',
+        ]);
+        Route::post('/searchwordlist', [
+            'uses' => 'AjaxController@searchWordlist',
+            'as' => 'admin.search.wordlist',
+        ]);
     });
-
     Route::get('/', 'HomeController@index')->name('home');
-
     Route::group(['namespace' => 'Elearning'], function () {
-    	Route::resource('/profile', 'ProfileController', [
-    		'as' => 'elearning',
-    	]);
-    	Route::post('/profile/editpassword', [
-    		'uses' => 'ProfileController@updatePassword',
-    		'as' => 'elearning.profile.updatepassword',
-    	]);
+        Route::resource('/profile', 'ProfileController', [
+            'as' => 'elearning',
+        ]);
+        Route::get('/profile/addfollow/{id}', [
+            'uses' => 'ProfileController@addFollow',
+            'as' => 'elearning.profile.addfollow',
+        ]);
+        Route::get('/profile/unfollow/{id}', [
+            'uses' => 'ProfileController@unFollow',
+            'as' => 'elearning.profile.unfollow',
+        ]);
+        Route::post('/profile/editpassword', [
+            'uses' => 'ProfileController@updatePassword',
+            'as' => 'elearning.profile.updatepassword',
+        ]);
         Route::resource('/courses', 'CoursesController', [
             'as' => 'elearning',
         ]);
@@ -80,27 +93,22 @@ Route::group(['middleware' => 'lang'], function () {
                 'uses' => 'TestController@result',
                 'as' => 'elearning.test.result',
             ]);
-
             Route::get('/practice/{id}', [
                 'uses' => 'PracticeController@practiceLesson',
                 'as' => 'elearning.practice.index',
             ]);
-
             Route::get('/practicecourse/{id}', [
                 'uses' => 'PracticeController@practiceCourse',
                 'as' => 'elearning.practicecourse.index',
             ]);
-
             Route::post('/practice/show/{id}', [
                 'uses' => 'PracticeController@show',
                 'as' => 'elearning.practice.show',
             ]);
-
             Route::get('practice/result/{id}', [
                 'uses' => 'PracticeController@result',
                 'as' => 'elearning.practice.result',
             ]);
-
             Route::resource('courses.lesson.learn', 'LearnController', [
                 'as' => 'elearning'
             ]);
@@ -140,7 +148,6 @@ Route::group(['middleware' => 'lang'], function () {
         'uses' => 'AjaxController@search',
         'as' => 'elearning.search',
     ]);
-
     Route::group(['prefix' => '/profile'], function () {
         Route::post('/blockfollow', [
             'uses' => 'AjaxController@blockFollow',
@@ -151,51 +158,41 @@ Route::group(['middleware' => 'lang'], function () {
             'as' => 'profile.follow.unfollow',
         ]);
     });
-
     Route::post('/answercorrect', [
         'uses' => 'AjaxController@answerCorrect',
         'as' => 'elearning.test.answercorrect',
     ]);
-
     Route::post('/wordlist/content', [
         'uses' => 'AjaxController@contentWordlist',
         'as' => 'admin.wordlist.content',
     ]);
-
     Route::post('/wordlist/delete', [
         'uses' => 'AjaxController@deleteWordlist',
         'as' => 'admin.wordlist.delete',
     ]);
-
     Route::post('/category/delete', [
         'uses' => 'AjaxController@deleteCategory',
         'as' => 'admin.category.delete',
     ]);
-
     Route::post('/ajax/adminActive', [
         'uses' => 'UsersController@adminActive',
         'as' => 'adminActive',
     ]);
-
     Route::post('/ajax/users/deleteAll', [
         'uses' => 'UsersController@deleteAll',
         'as' => 'admin.users.deleteAll',
     ]);
-
     Route::post('/ajax/users/searchUser', [
         'uses' => 'UsersController@searchUser',
         'as' => 'admin.users.searchUser',
     ]);
-
     Route::post('/changelanguage', [
         'uses' => 'HomeController@changeLanguage',
         'as' => 'changeLanguage',
     ]);
     
     Route::get('/error/404', 'HomeController@errorPage')->name('404');
-
     Auth::routes();
-
     Route::group(['middleware' => 'adminAuth'], function () {
         Route::get('/auth/{provider}', 'SocialAuthController@redirectToProvider')->name('authenticate');
         Route::get('/auth/{provide}/callback', 'SocialAuthController@handleProviderCallback');

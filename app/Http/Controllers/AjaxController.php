@@ -11,7 +11,10 @@ use App\Models\Answer;
 use App\Models\Course;
 use App\Models\WordList;
 use App\Models\Category;
+use App\Models\Lesson;
+use App\Models\Study;
 use Session;
+use DB;
 
 class AjaxController extends Controller
 {
@@ -95,10 +98,69 @@ class AjaxController extends Controller
 
     public function deleteCategory(Request $request)
     {
-        if (Category::whereIn('id', $request->idCategories)->delete()) {
+        try {
+            DB::transaction(function () use ($request) {
+                $categories = Category::whereIn('id', $request->idCategories)->get();
+                foreach ($categories as $category) {
+                    $idCategories = $category->categories()->pluck('id');
+                    $idCourses = Course::whereIn('category_id', $idCategories)->pluck('id');
+                    $idLessons = Lesson::whereIn('course_id', $idCourses)->pluck('id');
+                    $idWourdlists = WordList::whereIn('lesson_id', $idLessons)->pluck('id');
+                    $idTests = Test::whereIn('lesson_id', $idLessons)->pluck('id');
+                    $idQuestions = Question::whereIn('test_id', $idTests)->pluck('id');
+
+                    Answer::whereIn('question_id',  $idQuestions)->delete();
+                    Question::whereIn('test_id',  $idTests)->delete();
+                    Test::whereIn('lesson_id',  $idLessons)->delete();
+                    WordList::whereIn('lesson_id',  $idLessons)->delete();
+                    $studies = Study::whereIn('course_id', $idCourses)->get();
+                    foreach($studies as $study) {
+                        $study->lessons()->detach();
+                        $study->delete();
+                    }
+                    Lesson::whereIn('course_id',  $idCourses)->delete();
+                    Course::whereIn('category_id', $idCategories)->delete();
+                    $category->courses()->delete();
+                    $category->categories()->delete();
+                    $category->delete();
+                }
+            });
+
             Session::flash('success', trans('lang.delSuccess'));
-        } else {
+        } catch (Exception $e) {
             Session::flash('messages', trans('lang.errorDel'));
+        }
+    }
+
+    public function searchCategory(Request $request)
+    {
+        try {
+            if (!$request->search) {
+                throw new Exception();
+            }
+            $categories = Category::where('name', 'LIKE', '%' . $request->search . '%')->limit(config('setting.paginate'))->get();
+
+            return view('admin.category.search', compact('categories'));
+        } catch (Exception $e) {
+            $error['error'] = trans('lang.not_found');
+
+            return response()->json($error);
+        }
+    }
+
+    public function searchWordlist(Request $request)
+    {
+        try {
+            if (!$request->search) {
+                throw new Exception();
+            }
+            $wordlists = WordList::where('name', 'LIKE', '%' . $request->search . '%')->limit(config('setting.paginate'))->get();
+
+            return view('admin.wordlist.search', compact('wordlists'));
+        } catch (Exception $e) {
+            $error['error'] = trans('lang.not_found');
+
+            return response()->json($error);
         }
     }
 }
