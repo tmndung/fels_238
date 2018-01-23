@@ -63,7 +63,7 @@ class CoursesController extends Controller
             $data['picture'] = $this->storePicture($request, config('setting.picture'), '');
             Course::create($data);
             
-            Session::flash('messages', trans('lang.addSuccess'));
+            Session::flash('success', trans('lang.addSuccess'));
         } catch (Exception $e) {
             Session::flash('messages', trans('lang.errorAdd'));
         }
@@ -115,7 +115,7 @@ class CoursesController extends Controller
             $data['picture'] = $this->storePicture($request, config('setting.picture'), $course->picture);
             $course->update($data);
 
-            Session::flash('messages', trans('lang.editSuccess'));
+            Session::flash('success', trans('lang.editSuccess'));
         } catch (Exception $e) {
             Session::flash('messages', trans('lang.errorEdit'));
         }
@@ -140,6 +140,11 @@ class CoursesController extends Controller
                 $idQuestions = Question::whereIn('test_id', $idTests)->pluck('id');
                 $idAnswers = Answer::whereIn('question_id', $idQuestions)->pluck('id');
 
+                foreach ($course->studies as $study) {
+                    $study->lessons()->detach();
+                    $study->delete();
+                }
+
                 Answer::whereIn('id', $idAnswers)->delete();
                 Question::whereIn('id', $idQuestions)->delete();
                 Test::whereIn('id', $idTests)->delete();
@@ -150,11 +155,54 @@ class CoursesController extends Controller
 
             });
             
-            Session::flash('messages', trans('lang.delSuccess'));
+            Session::flash('success', trans('lang.delSuccess'));
         } catch (Exception $e) {
             Session::flash('messages', trans('lang.errorDel'));
         }
 
         return redirect()->route('admin.courses.index');
+    }
+
+    public function deleteAll(Request $request)
+    {
+        $idCourses = $request->idCourses;
+        try {
+            DB::transaction(function () use ($idCourses) {
+                $courses = Course::whereIn('id', $idCourses)->get();
+                foreach ($courses as $course) {
+                    $idLessons = $course->lessons()->pluck('id');
+                    $idWordLists = WordList::whereIn('lesson_id', $idLessons)->pluck('id');
+                    $idTests = Test::whereIn('lesson_id', $idLessons)->pluck('id');
+                    $idQuestions = Question::whereIn('test_id', $idTests)->pluck('id');
+                    $idAnswers = Answer::whereIn('question_id', $idQuestions)->pluck('id');
+
+                    foreach ($course->studies as $study) {
+                        $study->lessons()->detach();
+                        $study->delete();
+                    }
+
+                    Answer::whereIn('id', $idAnswers)->delete();
+                    Question::whereIn('id', $idQuestions)->delete();
+                    Test::whereIn('id', $idTests)->delete();
+                    WordList::whereIn('id', $idWordLists)->delete();
+                    
+                    $course->lessons()->delete();
+                    $course->delete();
+                }
+            });
+
+            Session::flash('success', trans('lang.delSuccess'));
+        } catch (Exception $e) {
+            Session::flash('messages', trans('lang.errorDel'));
+        }
+    }
+
+    public function searchCourse(Request $request)
+    {
+        $searchVal = '%' . $request->searchVal . '%';
+        $idCategoriesSearch = Category::where('name', 'like', $searchVal)->pluck('id');
+        $courses = Course::where('name', 'like', $searchVal)->orWhereIn('category_id', $idCategoriesSearch)->paginate(config('setting.paginate'));
+
+        return view('admin.courses.search', compact('courses'));
     }
 }

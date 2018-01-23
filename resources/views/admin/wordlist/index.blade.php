@@ -2,7 +2,7 @@
 
 @section ('content')
     @include ('common.errors')
-    <div class="panel">
+    <div class="panel top-admin-panel">
         <div class="panel-body">
             <div class="col-md-12 padding-0" style="padding-bottom:20px;">
                 <div class="col-md-2" style="padding-left:10px;">

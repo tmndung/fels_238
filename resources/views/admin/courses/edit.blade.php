@@ -38,7 +38,7 @@
 
             {{ Form::label('left', trans('lang.oldPicture'), ['class' => 'left-login']) }}
             <div class="right-login">
-                <img src="{{ $course->picture_path }}" class="picture">
+                <img src="{{ $course->picture_path }}" class="old-bg">
             </div>
             <div class="clr"></div>
 

@@ -6640,3 +6640,12 @@ th,td {
     display: inline-block;
     line-height: 20px;
 }
+
+.img-lesson {
+    width: 60px;
+    height: 30px;
+}
+
+.top-admin-panel {
+    background-color: #f6f8f8 !important;
+}
