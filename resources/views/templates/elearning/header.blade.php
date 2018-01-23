@@ -114,34 +114,25 @@
                             <ul class="category-menu">
                                 <li>
                                     <a href="{{ route('home') }}">
-                                        <i class="fa fa-home home-icon orange-background" aria-hidden="true"></i>
-                                        <span class="orange-text">@lang('lang.home')</span>
+                                        <i class="fa fa-home home-icon bg-color-4" aria-hidden="true"></i>
+                                        <span class="color-4">@lang('lang.home')</span>
                                     </a>
                                 </li>
-                                <li class="category-li">
-                                    <a href="" class="category">
-                                        <i class="fa fa-bars blue-background" aria-hidden="true"></i>
-                                        <span class="blue-text">@lang('lang.categories')</span>
-                                    </a>
-                                    <ul class="category-subcategory">
-                                        <li><a href="">@lang('lang.categories')</a></li>
-                                        <li><a href="">@lang('lang.categories')</a></li>
-                                        <li><a href="">@lang('lang.categories')</a></li>
-                                        <li><a href="">@lang('lang.categories')</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="">
-                                        <i class="fa fa-user-circle-o pink-background" aria-hidden="true"></i>
-                                        <span class="pink-text">@lang('lang.profile')</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="">
-                                        <i class="fa fa-list-ol green-background" aria-hidden="true"></i>
-                                        <span class="green-text">@lang('lang.rank')</span>
-                                    </a>
-                                </li>
+                                @foreach ($shareCategories as $category)
+                                    <li class="category-li">
+                                        <a href="{{ route('elearning.category.show', $category->id) }}" class="category">
+                                            <i class="fa fa-list-ol bg-color-{{ $loop->iteration }}" aria-hidden="true"></i>
+                                            <span class="color-{{ $loop->iteration }}">{{ $category->name }}</span>
+                                        </a>
+                                        <ul class="category-subcategory category-subcategory-{{ $loop->iteration }}">
+                                            @foreach ($category->categories as $subCategory)
+                                                <li>
+                                                    <a href="{{ route('elearning.category.show', $subCategory->id) }}">{{ $subCategory->name }}</a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>

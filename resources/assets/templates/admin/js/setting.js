@@ -154,6 +154,7 @@ $(document).ready(function () {
         });
     });
 });
+
 $(document).ready(function() {
     $('.search-category').keyup(function(event) {
         var search = $(this).val();
@@ -182,6 +183,42 @@ $(document).ready(function() {
             success: function( data ) {
                 $('.content-wordlist').html(data);
             }
+        });
+    });
+});
+
+$(document).ready(function () {
+    $('#checkAllCourse').click(function () {
+        var val = $(this).prop('checked');
+        $('.course-check').prop('checked', val);
+    });
+ 
+    $('#btnDelCourse').click(function(event) {
+        var idCourses = [];
+        $('.course-check:checked').each ( function(i) {
+            idCourses[i] = $(this).attr('courseId');
+        });
+        $.ajax({
+            url: route('admin.courses.deleteAll'),
+            type: 'POST',
+            data: {
+                 idCourses: idCourses,
+            },
+            success: function( data ) {},
+        });
+    });
+ 
+    $('#search-course-btn').click(function () {
+        var searchVal = $('#search-course-input').val();
+        $.ajax({
+            url: route('admin.courses.searchCourse'),
+            type: 'POST',
+            data: {
+                searchVal: searchVal,
+            },
+            success: function( data ) {
+                $('.content-course').html(data);
+            },
         });
     });
 });

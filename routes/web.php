@@ -186,6 +186,17 @@ Route::group(['middleware' => 'lang'], function () {
         'uses' => 'UsersController@searchUser',
         'as' => 'admin.users.searchUser',
     ]);
+
+    Route::post('/ajax/courses/deleteAll', [
+        'uses' => 'CoursesController@deleteAll',
+        'as' => 'admin.courses.deleteAll',
+    ]);
+
+    Route::post('/ajax/courses/searchCourse', [
+        'uses' => 'CoursesController@searchCourse',
+        'as' => 'admin.courses.searchCourse',
+    ]);
+    
     Route::post('/changelanguage', [
         'uses' => 'HomeController@changeLanguage',
         'as' => 'changeLanguage',

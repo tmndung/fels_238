@@ -202,7 +202,64 @@ h5 {
     padding: 5px 20px;
     width: 15em;
 }
+
 .category-subcategory li > a:hover{
+    background: #2d93c5;
+    color: #fff;
+    text-decoration: none;
+}
+
+.category-subcategory-1 {
+    border-top: 5px solid #f0c24b!important;
+}
+
+.category-subcategory-1 li > a{
+    color: #f0c24b!important;
+}
+
+.category-subcategory-1 li > a:hover{
+    background: #f0c24b;
+    color: #fff !important;
+    text-decoration: none;
+}
+
+.category-subcategory-2 {
+    border-top: 5px solid #b5d56a!important;
+}
+
+.category-subcategory-2 li > a{
+    color: #b5d56a!important;
+}
+
+.category-subcategory-2 li > a:hover{
+    background: #b5d56a;
+    color: #fff !important;
+    text-decoration: none;
+}
+
+.category-subcategory-3 {
+    border-top: 5px solid #ea7066!important;
+}
+
+.category-subcategory-3 li > a{
+    color: #ea7066!important;
+}
+
+.category-subcategory-3 li > a:hover{
+    background: #ea7066;
+    color: #fff !important;
+    text-decoration: none;
+}
+
+.category-subcategory-4 {
+    border-top: 5px solid #2d93c5!important;
+}
+
+.category-subcategory-4 li > a{
+    color: #2d93c5;
+}
+
+.category-subcategory-4 li > a:hover{
     background: #2d93c5;
     color: #fff;
     text-decoration: none;
