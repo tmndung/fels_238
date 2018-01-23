@@ -205,5 +205,8 @@
         'hard' => 'Hard - ',
         'minute' => ' min',
         'choose' => 'Choose',
+        'errorPage' => 'Error Page',
+        'oop' => 'Oops!',
+        'msgErrorPage' => 'We are sorry, This page could not found!',
     ];
 ?>

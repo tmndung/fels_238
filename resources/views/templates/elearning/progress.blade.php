@@ -48,7 +48,7 @@
                     {{ Form::close() }}
                 </li>
                 <li>
-                    <a href="">{{ trans('lang.practice') }}</a>
+                    <a href="{{ route('elearning.practicecourse.index', $data['course']->id) }}">{{ trans('lang.practice') }}</a>
                 </li>
             </ul>
         @endif

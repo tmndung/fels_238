@@ -94,7 +94,7 @@
                                     {{ Form::close() }}
                                 </li>
                                 <li>
-                                    <a href="">{{ trans('lang.practice') }}</a>
+                                    <a href="{{ route('elearning.practice.index', $data['lesson']->id) }}">{{ trans('lang.practice') }}</a>
                                 </li>
                             </ul>
                             <a class="btn btn-learn bg-color-3" href="{{ route('elearning.test.index', $data['lesson']->id) }}" onclick="return confirm('{{ trans('lang.msgReady') }}')">
@@ -111,7 +111,7 @@
                                     {{ Form::close() }}
                                 </li>
                                 <li>
-                                    <a href="">{{ trans('lang.practice') }}</a>
+                                    <a href="{{ route('elearning.practice.index', $data['lesson']->id) }}">{{ trans('lang.practice') }}</a>
                                 </li>
                             </ul>
                         @endif

@@ -31,7 +31,8 @@ class PracticeController extends Controller
             $answers = $question->answers()->get();
             $request->session()->put('questionsPractice', $questions);
             $request->session()->put('numberCorrect', config('setting.numberCorrect'));
-            
+            $request->session()->put('ajaxPracticeRole', config('setting.ajaxPracticeLesson'));
+
             return view('elearning.practice.index', compact('question', 'answers', 'time', 'lesson'));
         } catch (Exception $e) {
             return redirect()->route('404');
@@ -55,6 +56,7 @@ class PracticeController extends Controller
             $answers = $question->answers()->get();
             $request->session()->put('questionsPractice', $questions);
             $request->session()->put('numberCorrect', config('setting.numberCorrect'));
+            $request->session()->put('ajaxPracticeRole', config('setting.ajaxPracticeCourse'));
 
             return view('elearning.practice.index', compact('question', 'answers', 'time', 'lesson'));
         } catch (Exception $e) {
@@ -97,7 +99,13 @@ class PracticeController extends Controller
             $request->session()->forget('numberCorrect');
             $request->session()->forget('numberQuestion');
 
-            return view('elearning.practice.result', compact('numberCorrect', 'numberQuestion', 'course', 'lesson'));
+            $routeRedirect = route('elearning.courses.lesson.show', [$course->id, $lesson->id]);
+            if ($request->session()->get('ajaxPracticeRole') == config('setting.ajaxPracticeCourse')) {
+                $routeRedirect = route('elearning.courses.show', [$course->id]);
+            }
+            $request->session()->forget('ajaxPracticeRole');
+
+            return view('elearning.practice.result', compact('numberCorrect', 'numberQuestion', 'course', 'lesson', 'routeRedirect'));
         } catch (Exception $e) {
             return redirect()->route('404');
         }
