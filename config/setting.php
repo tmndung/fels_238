@@ -64,7 +64,7 @@ return [
     'avatarExtension' => '.jpg',
     'increase_correct' => 1,
     'numberCorrect' => 0,
-    'default_question' => 20,
+    'default_question' => 10,
     'max_course' => 3,
     'max_user' => 4,
     'ratioPointLearned' => 0.5,
@@ -79,4 +79,8 @@ return [
     'errorImg' => '/templates/elearning/images/error.png',
     'idBossAdmin' => 1,
     'status_default' => 1,
+    'status1' => 1,
+    'status2' => 2,
+    'status3' => 3,
+    'logo' => '/templates/elearning/images/logo.png',
 ];

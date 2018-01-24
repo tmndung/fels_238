@@ -1,7 +1,7 @@
         <!--footer-->
         <div class="footer">
             <div class="left-footer">
-                <img src="" class="logo-left-footer">
+                <img src="{{ config('setting.logo') }}" class="logo-left-footer">
                 <h3>@lang('lang.follow_by_us')</h3>
                 <div class="icon-left-footer">
                     <a href="" class="bg-color-1"><i class="fa fa-facebook" aria-hidden="true"></i></a>

@@ -19,10 +19,10 @@
                                         'class' => 'img-responsive',
                                     ]) }}
                             </a>
-                            <div class="caption border-color-2">
+                            <div class="caption border-color-{{ $loop->iteration }}">
                                 <h3><a href="{{ route('elearning.courses.show', [
                                         'id' => $allCourse->id
-                                    ]) }}" class="color-2">{{ $allCourse->name }}</a></h3>
+                                    ]) }}" class="color-{{ $loop->iteration }}">{{ $allCourse->name }}</a></h3>
                                 <ul class="list-unstyled">
                                     <li>
                                         <a href="{{ route('elearning.category.show', [ 'id' => $allCourse->category->id ]) }}"><i class="fa fa-list" aria-hidden="true"></i>{{ $allCourse->category->name }}</a>

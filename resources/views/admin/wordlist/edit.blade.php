@@ -31,6 +31,11 @@
                 {{ Form::select('lesson_id', $lessons, $wordlist->lesson_id, ['class' => 'input-right']) }}
                 <br/><br/>
             </div>
+            <div class="clr"></div>
+            {{ Form::label('left', trans('lang.audio'), ['class' => 'left-login']) }}
+            <div class="right-login">
+                {{ Form::file('file_listen', ['class' => 'input-right']) }}
+            </div>
             <div class="clr"></div> 
             {{ Form::submit(trans('lang.editBtn'), ['class' => 'button']) }}
         {{ Form::close() }}

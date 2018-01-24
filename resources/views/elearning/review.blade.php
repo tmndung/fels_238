@@ -10,7 +10,7 @@
                 </div>
             </div>
             <div class="col-sm-2 col-xs-12">
-                <a href="{{ route('elearning.courses.lesson.show', [$course->id, $lesson->id]) }}" class="btn-learn exit-learning" onclick="return confirm('{{ trans('lang.msgDel') }}')">
+                <a href="{{ $routeRedirect }}" class="btn-learn exit-learning" onclick="return confirm('{{ trans('lang.msgDel') }}')">
                     <i class="fa fa-times" aria-hidden="true"></i>
                 </a>
             </div>

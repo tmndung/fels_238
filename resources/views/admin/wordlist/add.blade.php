@@ -5,7 +5,7 @@
     
     @include ('common.errors')
 
-    {{ Form::open(['route' => 'admin.wordlist.store']) }}
+    {{ Form::open(['route' => 'admin.wordlist.store', 'files' => true]) }}
         {{ Form::label('left', trans('lang.word') . ': (*)', ['class' => 'left-login']) }}
         <div class="right-login">
             {{ Form::text('name', '', ['class' => 'input-right']) }}
@@ -28,6 +28,11 @@
         <div class="right-login">
             {{ Form::select('lesson_id', $lessons, config('setting.all_wordlist'), ['class' => 'input-right']) }}
             <br/><br/>
+        </div>
+        <div class="clr"></div>
+        {{ Form::label('left', trans('lang.audio'), ['class' => 'left-login']) }}
+        <div class="right-login">
+            {{ Form::file('file_listen', ['class' => 'input-right']) }}
         </div>
         <div class="clr"></div> 
         {{ Form::submit(trans('lang.addBtn'), ['class' => 'button']) }}

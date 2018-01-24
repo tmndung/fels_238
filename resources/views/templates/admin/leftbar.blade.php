@@ -7,7 +7,7 @@
                 <h1 class="animated fadeInLeft"></h1>
                 <p class="animated fadeInRight"></p>
             </li>
-            <li class="active ripple animated fadeInLeft">
+            <li class="ripple animated fadeInLeft">
                 <a class="nav-header" href="{{ route('admin.users.index') }}">
                     <span class="fa-user fa"></span>@lang('lang.users')
                     <span class="text-right"></span>

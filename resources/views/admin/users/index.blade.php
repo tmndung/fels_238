@@ -45,7 +45,9 @@
                         @foreach ($users as $user)
                             <tr>
                                 <td>
-                                    <input type="checkbox" class="icheck checkbox-input user-check" name="checkbox1" userId="{{ $user->id }}"/>
+                                    @if (Auth::user()->id != $user->id && $user->id != config('setting.idBossAdmin'))
+                                        <input type="checkbox" class="icheck checkbox-input user-check" name="checkbox1" userId="{{ $user->id }}"/>
+                                    @endif
                                 </td>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $user->name }}</td>
@@ -66,11 +68,12 @@
                                         {{ Form::open(['route' => ['admin.users.edit', $user->id], 'method' => 'GET', 'class' => 'button-form']) }}
                                             {{ Form::button('<i class="fa fa-pencil"></i> ' . trans('lang.editBtn'), ['type' => 'submit', 'class' => 'btn btn-info']) }}
                                         {{ Form::close() }}
-
-                                        {{ Form::open(['route' => ['admin.users.destroy', $user->id], 'class' => 'button-form']) }}
-                                            {{ method_field('DELETE') }}
-                                            {{ Form::button('<i class="fa fa-trash"></i> ' . trans('lang.deleteBtn'), ['type' => 'submit', 'onclick' => 'return confirm("' . trans('lang.msgDel') . '")', 'class' => 'btn btn-danger']) }}
-                                        {{ Form::close() }}
+                                        @if (Auth::user()->id != $user->id)
+                                            {{ Form::open(['route' => ['admin.users.destroy', $user->id], 'class' => 'button-form']) }}
+                                                {{ method_field('DELETE') }}
+                                                {{ Form::button('<i class="fa fa-trash"></i> ' . trans('lang.deleteBtn'), ['type' => 'submit', 'onclick' => 'return confirm("' . trans('lang.msgDel') . '")', 'class' => 'btn btn-danger']) }}
+                                            {{ Form::close() }}
+                                        @endif
                                     @endif
                                 </td>
                             </tr>
