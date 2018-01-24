@@ -6,10 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\WordList;
 use App\Models\Lesson;
 use App\Http\Requests\WordlistRequest;
+use App\Traits\ProcessFiles;
 use Exception;
 
 class WordlistController extends Controller
 {
+    use ProcessFiles;
     /**
      * Display a listing of the resource.
      *
@@ -47,14 +49,13 @@ class WordlistController extends Controller
     {
         try {
             $columns = $request->only('name', 'pronunciation', 'explain', 'lesson_id');
+            $columns['file_listen'] = $this->storePicture($request, 'file_listen', '');
             WordList::create($columns);
 
             return redirect()->action('WordlistController@index')->with('success', trans('lang.addSuccess'));
         } catch (Exception $e) {
-
             return redirect()->action('WordlistController@index')->with('messages', trans('lang.errorAdd'));
         }
-
         
     }
 
@@ -93,10 +94,12 @@ class WordlistController extends Controller
     {
         try {
             $columns = $request->only('name', 'pronunciation', 'explain', 'lesson_id');
+            $columns['file_listen'] = $this->storePicture($request, 'file_listen', $wordlist->file_listen);
             $wordlist->update($columns);
 
             return redirect()->action('WordlistController@index')->with('success', trans('lang.editSuccess'));
         } catch (Exception $e) {
+
             return redirect()->action('WordlistController@index')->with('messages', trans('lang.errorEdit'));
         }
     }
@@ -114,6 +117,7 @@ class WordlistController extends Controller
 
             return redirect()->action('WordlistController@index')->with('success', trans('lang.delSuccess'));
         } catch (Exception $e) {
+            
             return redirect()->action('WordlistController@index')->with('messages', trans('lang.errorDel'));
         }
     }

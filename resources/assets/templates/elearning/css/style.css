@@ -1,3 +1,9 @@
+@font-face {
+    font-family: 'Tangerine';
+    src: url('Tangerine/Tangerine-Bold.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
 * {
     outline: 0;
     margin: 0;
@@ -96,7 +102,7 @@ h5 {
 .functionList > li {
     color: rgb(255, 255, 255);
     float: left;
-    font-size: 1.1em;
+    font-size: 1em;
 }
 .functionList > li i {
     width: 21px;
@@ -391,8 +397,10 @@ h3.h3-small {
 .footer .left-footer .logo-left-footer {
     width: 350px;
     height: 120px;
-    background: #7F7F7F;
+    background: #FFFFFF;
     margin-bottom: 20px;
+    border-radius: 8px;
+    padding: 10px;
 }
 
 .footer .left-footer h3 {
@@ -1068,6 +1076,7 @@ h3.inner-tittle.t-inner {
 
 .media-left > a > img {
     height: 40px;
+    width: 80px;
 }
 
 .div-info {
@@ -1848,7 +1857,8 @@ h3.title-edit-profile {
 }
 .content-test > h2 {
     font-weight: bold;
-    color: #2b2828;
+    color: #2b2828;    
+    text-transform: none;
     font-family: Times-new-Roman;
     font-size: 32px;
 }
@@ -1866,6 +1876,7 @@ h3.title-edit-profile {
     border-radius: 20px;
     text-decoration: none;
     min-height: 2em;
+    cursor: pointer;
 }
 .answer-test {
     margin-top: 4em;
@@ -2487,4 +2498,42 @@ ul.result-practice {
 .info-word-point span {
     margin-left: 10px;
     margin-bottom: 10px;
+}
+
+.border-images {
+    height: 160px;
+    text-align: center;
+    color: #FFF;
+    font-size: 4em;
+    line-height: 64px;
+    padding: 5px 50px;
+    font-family: 'Tangerine', cursive;
+}
+
+.pd-page-top-15 {
+    padding: 15px 0 0 0;
+}
+
+.title-course-slider {
+    text-shadow: 2px 2px 0 #444 !important;
+}
+
+.tp-caption {
+    text-shadow: 1px 1px 0 #444 !important;
+}
+
+.color-8 {
+    color: #6ed898!important;
+}
+
+.border-color-8 {
+    border-color: #6ed898!important;
+}
+
+.color-7 {
+    color: #739ae2!important;
+}
+
+.border-color-7 {
+    border-color: #739ae2!important;
 }

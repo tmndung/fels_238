@@ -32,8 +32,9 @@ class PracticeController extends Controller
             $request->session()->put('questionsPractice', $questions);
             $request->session()->put('numberCorrect', config('setting.numberCorrect'));
             $request->session()->put('ajaxPracticeRole', config('setting.ajaxPracticeLesson'));
+            $routeRedirect = route('elearning.courses.lesson.show', [$lesson->course->id, $lesson->id]);
 
-            return view('elearning.practice.index', compact('question', 'answers', 'time', 'lesson'));
+            return view('elearning.practice.index', compact('question', 'answers', 'time', 'routeRedirect'));
         } catch (Exception $e) {
             return redirect()->route('404');
         }
@@ -43,10 +44,9 @@ class PracticeController extends Controller
     {
         try {
             $course = Course::findOrFail($id);
-            $lessons = $course->lessons;
-            foreach ($lessons as $key => $lesson) {
-                $idTest[$key] = $lesson->tests()->pluck('id');
-            }
+            $studyOfUser = $course->studies()->where('user_id', Auth::user()->id)->first();
+            $lessons = $studyOfUser->lessons()->pluck('lesson_id');
+            $idTest = Test::whereIn('lesson_id', $lessons)->pluck('id');
             $questions = Question::whereIn('test_id', $idTest)->get();
             if ($questions->count() > config('setting.default_question')) {
                 $questions = $questions->random(config('setting.default_question'));
@@ -57,8 +57,9 @@ class PracticeController extends Controller
             $request->session()->put('questionsPractice', $questions);
             $request->session()->put('numberCorrect', config('setting.numberCorrect'));
             $request->session()->put('ajaxPracticeRole', config('setting.ajaxPracticeCourse'));
+            $routeRedirect = route('elearning.courses.show', [$course->id]);
 
-            return view('elearning.practice.index', compact('question', 'answers', 'time', 'lesson'));
+            return view('elearning.practice.index', compact('question', 'answers', 'time', 'routeRedirect'));
         } catch (Exception $e) {
             return redirect()->route('404');
         }

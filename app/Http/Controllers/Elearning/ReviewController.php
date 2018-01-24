@@ -40,6 +40,7 @@ class ReviewController extends Controller
             Session::put('numberOfWordReview', $numberOfWordReview);
             $progressVal = config('setting.progressValDefault');
             $roleAjax = config('setting.ajaxReviewWordLesson');
+            $routeRedirect = route('elearning.courses.lesson.show', [$course->id, $lesson->id]);
 
             return view('elearning.review', compact([
                 'word',
@@ -48,6 +49,7 @@ class ReviewController extends Controller
                 'offsetProgress',
                 'course',
                 'roleAjax',
+                'routeRedirect',
             ]));
         } catch (Exception $e) {
             return redirect()->route('404');
@@ -86,6 +88,7 @@ class ReviewController extends Controller
             Session::put('numberOfWordReview', $numberOfWordReview);
             $progressVal = config('setting.progressValDefault');
             $roleAjax = config('setting.ajaxReviewWordCourse');
+            $routeRedirect = route('elearning.courses.show', [$course->id]);
 
             return view('elearning.review', compact([
                 'word',
@@ -94,6 +97,7 @@ class ReviewController extends Controller
                 'offsetProgress',
                 'course',
                 'roleAjax',
+                'routeRedirect',
             ]));
         } catch (Exception $e) {
             return redirect()->route('404');
@@ -124,6 +128,11 @@ class ReviewController extends Controller
             $progressVal = $dataRequest['progress'] + $offsetProgress;
             $wordReview = [];
 
+            $routeRedirect = route('elearning.courses.lesson.show', [$course->id, $lesson->id]);
+            if ($roleAjax == config('setting.ajaxReviewWordCourse')) {
+                $routeRedirect = route('elearning.courses.show', [$course->id]);
+            }
+
             if (Session::has('wordReview')) {
                 $wordReview = Session::get('wordReview');
                 if (count($wordReview) == Session::get('numberOfWordReview')) {
@@ -131,11 +140,6 @@ class ReviewController extends Controller
                     Session::forget('numberOfWordReview');
                     $totalWord = count($wordReview);
                     $msg = trans('lang.messageReviewed');
-
-                    $routeRedirect = route('elearning.courses.lesson.show', [$course->id, $lesson->id]);
-                    if ($roleAjax == config('setting.ajaxReviewWordCourse')) {
-                        $routeRedirect = route('elearning.courses.show', [$course->id]);
-                    }
 
                     return view('templates.ajax.endlearning', compact([
                         'course',
@@ -165,6 +169,7 @@ class ReviewController extends Controller
                 'offsetProgress',
                 'course',
                 'roleAjax',
+                'routeRedirect',
             ]));
         } catch (Exception $e) {
             return redirect()->route('404');

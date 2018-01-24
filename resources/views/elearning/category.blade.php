@@ -30,14 +30,14 @@
                         <a href="{{ route('elearning.courses.show', ['id' => $course->id]) }}">
                             {{ Html::image($course->picture_path, 'image', ['class' => 'img-responsive']) }}
                         </a>
-                        <div class="caption border-color-2">
-                            <h3><a href="{{ route('elearning.courses.show', ['id' => $course->id]) }}" class="color-2">{{ $course->name }}</a></h3>
+                        <div class="caption border-color-{{ $loop->iteration }}">
+                            <h3><a href="{{ route('elearning.courses.show', ['id' => $course->id]) }}" class="color-{{ $loop->iteration }}">{{ $course->name }}</a></h3>
                             <ul class="list-unstyled">
                                 <li>
                                     <a href="{{ route('elearning.category.show', ['id' => $course->category->id]) }}"><i class="fa fa-list" aria-hidden="true"></i>{{ $course->category->name }}</a>
                                 </li>
                             </ul>
-                            <p>{{ str_limit($course->information, 50) }}</p>
+                            <p>{{ str_limit($course->information, 45) }}</p>
                             <ul class="list-inline btn-green">
                                 <li><a href="{{ route('elearning.courses.show', ['id' => $course->id]) }}" class="btn btn-link"><i class="fa fa-angle-double-right" aria-hidden="true"></i>@lang('lang.more')</a></li>
                             </ul>

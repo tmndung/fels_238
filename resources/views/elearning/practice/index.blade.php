@@ -14,7 +14,7 @@
             
         </div>
         <div class="btn-exit-test col-sm-2 col-xs-12">
-            <a class="btn-learn exit-learning" href="{{ route('elearning.courses.lesson.show', [$lesson->course->id, $lesson->id]) }}" onclick="return confirm('Are you sure ? ')">
+            <a class="btn-learn exit-learning" href="{{ $routeRedirect }}" onclick="return confirm('Are you sure ? ')">
                 <i class="fa fa-times" aria-hidden="true"></i>
             </a>
         </div>

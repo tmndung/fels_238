@@ -93,8 +93,7 @@
                                         </li>
                                     @else
                                         <li class="login-register"><i class="fa fa-unlock-alt bg-color-5" aria-hidden="true"></i>
-                                        <a href="{{ route('login') }}">@lang('lang.login')</a>
-                                        /
+                                        <a href="{{ route('login') }}">@lang('lang.login')</a>|
                                         <a href="{{ route('register') }}">@lang('lang.register')</a>
                                     @endauth
                                 </li>
@@ -108,7 +107,7 @@
                 <nav id="menuBar" class="menuBar-fix navbar navbar-default lightHeader" role="navigation">
                     <div class="row">
                         <div class="col-sm-4 img-logo">
-                            <a href="{{ route('home') }}"><img src="/templates/elearning/images/logo.png"></a>
+                            <a href="{{ route('home') }}"><img src="{{ config('setting.logo') }}"></a>
                         </div>
                         <div class="col-sm-6 menuBar-header">
                             <ul class="category-menu">

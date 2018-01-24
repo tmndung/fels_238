@@ -135,10 +135,11 @@ class AjaxController extends Controller
     public function searchCategory(Request $request)
     {
         try {
-            if (!$request->search) {
-                throw new Exception();
+            if ($request->search) {
+                $categories = Category::where('name', 'LIKE', '%' . $request->search . '%')->limit(config('setting.paginate'))->get();
+            } else {
+                $categories = Category::limit(config('setting.paginate'))->get();
             }
-            $categories = Category::where('name', 'LIKE', '%' . $request->search . '%')->limit(config('setting.paginate'))->get();
 
             return view('admin.category.search', compact('categories'));
         } catch (Exception $e) {
@@ -151,10 +152,11 @@ class AjaxController extends Controller
     public function searchWordlist(Request $request)
     {
         try {
-            if (!$request->search) {
-                throw new Exception();
+            if ($request->search) {
+                $wordlists = WordList::where('name', 'LIKE', '%' . $request->search . '%')->limit(config('setting.paginate'))->get();
+            } else {
+                $wordlists = WordList::limit(config('setting.paginate'))->get();
             }
-            $wordlists = WordList::where('name', 'LIKE', '%' . $request->search . '%')->limit(config('setting.paginate'))->get();
 
             return view('admin.wordlist.search', compact('wordlists'));
         } catch (Exception $e) {

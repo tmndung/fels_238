@@ -27,7 +27,7 @@
                           data-endspeed="300"
                           data-endeasing="Power1.easeIn"
                           data-captionhidden="off">
-                          {{ $featuredCourse->information }}
+                          {{ str_limit($featuredCourse->information, 150) }}
                         </div>
                     </div>
                 </li>
@@ -43,7 +43,7 @@
                 <div class="col-sm-3">
                     <a href="#{{ $category->name }}" class="sectionLink bg-color-{{ $category->id }}" id="coursesLink">
                         <i class="fa fa-file-text-o linkIcon border-color-{{ $category->id }}" aria-hidden="true"></i>
-                        <span class="linkText">{{ str_limit($category->name, 7) }}</span>
+                        <span class="linkText">{{ str_limit($category->name, 12) }}</span>
                         <i class="fa fa-chevron-down locateArrow" aria-hidden="true"></i>
                     </a>
                 </div>

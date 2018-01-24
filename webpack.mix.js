@@ -35,3 +35,4 @@ mix.copyDirectory('resources/assets/templates/elearning/audio', 'public/template
 mix.copy('resources/assets/templates/admin/js/moment.min.js', 'public/templates/admin/js/moment.min.js');
 mix.copy('resources/assets/templates/elearning/js/jquery.themepunch.tools.min.js', 'public/templates/elearning/js/jquery.themepunch.tools.min.js');
 mix.copy('resources/assets/templates/elearning/js/jquery-min.js', 'public/templates/elearning/js/jquery-min.js');
+mix.copyDirectory('resources/assets/templates/elearning/css/Tangerine', 'public/templates/elearning/css/Tangerine');
